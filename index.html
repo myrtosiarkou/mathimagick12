@@ -2,6 +2,8 @@
 <html lang="el" class="light">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Μυρτώ Σιάρκου">
+    <meta name="copyright" content="© 2026 Μυρτώ Σιάρκου. Με επιφύλαξη παντός δικαιώματος.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mathimagika</title>
     <script>(function () { /* σε προβολές όπως η προεπισκόπηση του claude.ai η αλλαγή διεύθυνσης απαγορεύεται: την αγνοούμε χωρίς σφάλμα */ if (typeof history === 'undefined') return;
@@ -327,8 +329,41 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
 @media print { .bk-meth, .bk-tip, .bk-meth-tag, .tc-vt th, .tc-wrap svg { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 .tc-wrap.blank { max-width: 92mm; }
 .tc-n { position: absolute; transform: translate(-50%, -50%); font-weight: 800; font-size: .8rem; color: #4338ca; }
-.tc-fill { width: 100%; } .tc-fill td { height: 7.6mm; padding: 0 .4rem; } .tc-fill td:first-child { font-weight: 800; color: #4338ca; width: 10mm; }
+.tc-fill { width: 100%; } .tc-fill td { height: 6.9mm; padding: 0 .4rem; } .tc-fill td:first-child { font-weight: 800; color: #4338ca; width: 10mm; }
 .bk-part:not(:first-of-type) { margin-top: 1.4rem; }
+
+/* ένδειξη πνευματικών δικαιωμάτων σε κάθε φύλλο */
+.sheet::after { content: "© 2026 Mathimagika, Μυρτώ Σιάρκου. Με επιφύλαξη παντός δικαιώματος."; display: block; margin-top: 1.2rem; padding-top: .3rem; border-top: 1px solid #e5e7eb; font-size: .7rem; color: #6b7280; text-align: center; }
+
+/* ---------- Πίνακας (✓ ή πρόσημα) ---------- */
+.mm-gridwrap { overflow-x: auto; }
+.mm-grid { border-collapse: collapse; margin: 0 auto; font-weight: 700; }
+.mm-grid th, .mm-grid td { border: 2px solid var(--mm-line); padding: 0; text-align: center; min-width: 3rem; }
+.mm-grid th { padding: .45rem .6rem; background: rgba(99,102,241,.08); white-space: nowrap; }
+.mm-grid tr.tot th, .mm-grid tr.tot td { border-top: 3px solid currentColor; }
+.mm-cell { width: 100%; min-width: 3rem; height: 2.6rem; font-size: 1.35rem; font-weight: 800; background: transparent; border: 0; cursor: pointer; color: #4f46e5; }
+.mm-grid.sign .mm-cell { font-size: 1.55rem; }
+.mm-cell:hover { background: rgba(99,102,241,.08); }
+.mm-cell.ok { background: rgba(22,163,74,.16); color: #15803d; }
+.mm-cell.bad { background: rgba(220,38,38,.16); color: #b91c1c; }
+.mm-cell.miss { background: rgba(234,179,8,.25); }
+.ptable { border-collapse: collapse; } .ptable th, .ptable td { border: 1.5px solid #374151; padding: .2rem .45rem; text-align: center; }
+
+/* ---------- Επιπλέον φυλλάδια ---------- */
+.xb-tab { width: 100%; } .xb-tab th { background: #eef2ff; text-align: center !important; } .xb-tab td { text-align: center !important; }
+.xb-sign { width: auto; margin: .4rem auto; } .xb-sign td { min-width: 4.2rem; font-weight: 800; font-size: 1.05rem; } .xb-sign tr.tot td, .xb-sign tr.tot th { border-top: 2.5px solid #111827; }
+.xb-ex { margin: .7rem 0; break-inside: avoid; }
+.xb-lines div { border-bottom: 1px dotted #9ca3af; height: 1.7rem; }
+.xb-fig { margin: .3rem auto; } .xb-fig svg { width: 100%; height: auto; }
+.xb-row { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr); gap: 1rem; align-items: center; }
+.xb-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .2rem 1.2rem; }
+.xb-tree { text-align: center; margin: .4rem 0 .8rem; }
+.xb-q { display: inline-block; border: 2px solid #6366f1; border-radius: 10px; padding: .25rem .7rem; font-weight: 800; color: #312e81; background: #eef2ff; margin: .25rem 0; }
+.xb-branches { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.xb-yes, .xb-no { font-weight: 800; font-size: .85rem; margin-top: .2rem; } .xb-yes { color: #15803d; } .xb-no { color: #b91c1c; }
+.xb-res { border: 1.5px solid #cbd5e1; border-radius: 8px; padding: .3rem .4rem; font-size: .9rem; background: #f8fafc; margin-top: .2rem; }
+@media print { .xb-tab th, .xb-q, .xb-res { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+@media (max-width: 640px) { .xb-row, .xb-grid2 { grid-template-columns: 1fr; } }
 
 </style>
 <style>/* assets/tailwind.css: Tailwind CSS 3.4.17, έτοιμο (npx tailwindcss -c tailwind.config.js -i tailwind.input.css -o assets/tailwind.css --minify) */
@@ -391,7 +426,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     </main>
 
     <footer class="w-full py-6 text-center text-slate-400 dark:text-slate-500 text-sm mt-auto relative z-10">
-        &copy; 2026 Mathimagika. Σχεδιασμένο για όλες τις ηλικίες. | 
+        &copy; 2026 Mathimagika, Μυρτώ Σιάρκου. Με επιφύλαξη παντός δικαιώματος. | 
         <button id="more-info-btn" class="underline hover:text-slate-600 dark:hover:text-slate-300 transition-colors font-medium">more info</button>
     </footer>
 
@@ -428,16 +463,28 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
                 <div>
                     <h4 class="text-lg font-bold text-indigo-500 dark:text-indigo-400 mb-2 border-b border-slate-100 dark:border-slate-800 pb-2">Στοιχεία Δημιουργού</h4>
                     <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
-                        Δημιουργός: [Ονοματεπώνυμο]. Το Mathimagika είναι προσωπικό project, σχεδιασμένο για να προσφέρει δωρεάν, οργανωμένο και παιχνιδιάρικο υλικό μαθηματικών σε κάθε μαθητή.
+                        Το Mathimagika δημιουργήθηκε από τη <b>Μυρτώ Σιάρκου</b>. Είναι πτυχιούχος του Τμήματος Στατιστικής του Οικονομικού Πανεπιστημίου Αθηνών και έχει ολοκληρώσει minor στη Διοίκηση Ανθρώπινου Δυναμικού (HR) στο Deree, The American College of Greece. Είναι κάτοχος μεταπτυχιακού τίτλου στην Ηλεκτρονική Μάθηση από το Τμήμα Ψηφιακών Συστημάτων του Πανεπιστημίου Πειραιώς και διδάσκει μαθηματικά στη δευτεροβάθμια ιδιωτική εκπαίδευση.
                     </p>
                     <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-2">
-                        Επικοινωνία: [email]
+                        Το Mathimagika είναι προσωπικό project, σχεδιασμένο για να προσφέρει δωρεάν, οργανωμένο και παιχνιδιάρικο υλικό μαθηματικών σε κάθε μαθητή.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-2">
+                        Επικοινωνία: <a href="mailto:myrtosiarkou@gmail.com" class="underline font-semibold">myrtosiarkou@gmail.com</a>
                     </p>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-teal-500 dark:text-teal-400 mb-2 border-b border-slate-100 dark:border-slate-800 pb-2">Άδεια Χρήσης / License</h4>
+                    <h4 class="text-lg font-bold text-teal-500 dark:text-teal-400 mb-2 border-b border-slate-100 dark:border-slate-800 pb-2">Πνευματικά δικαιώματα και όροι χρήσης</h4>
                     <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
-                        [Προσθέστε εδώ την άδεια χρήσης του εκπαιδευτικού υλικού, π.χ. Creative Commons (CC BY-NC-SA), πνευματικά δικαιώματα και όρους αναδημοσίευσης.]
+                        <b>&copy; 2026 Μυρτώ Σιάρκου. Με επιφύλαξη παντός δικαιώματος (All rights reserved).</b>
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-2">
+                        Το περιεχόμενο, οι ασκήσεις, τα φυλλάδια, τα παιχνίδια, ο σχεδιασμός και ο κώδικας του Mathimagika αποτελούν πνευματική ιδιοκτησία της δημιουργού και προστατεύονται από τον Ν. 2121/1993 και τη διεθνή νομοθεσία για την πνευματική ιδιοκτησία.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-2">
+                        Επιτρέπεται η δωρεάν χρήση του site και η εκτύπωση φύλλων για προσωπική ή σχολική χρήση, χωρίς τροποποίηση και με διατήρηση της ένδειξης των δικαιωμάτων. Απαγορεύεται η αναπαραγωγή, η αναδημοσίευση, η τροποποίηση, η διανομή ή η εμπορική εκμετάλλευση, εν όλω ή εν μέρει, χωρίς την προηγούμενη γραπτή άδεια της δημιουργού.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-2">
+                        Για άδεια χρήσης: <a href="mailto:myrtosiarkou@gmail.com" class="underline font-semibold">myrtosiarkou@gmail.com</a>
                     </p>
                 </div>
             </div>
@@ -469,7 +516,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     <main id="app" class="flex-grow w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <p class="text-center py-20 font-bold opacity-60"><i class="fa-solid fa-spinner fa-spin"></i> Φόρτωση υλικού...</p>
     </main>
-    <footer class="w-full py-6 text-center text-slate-400 dark:text-slate-500 text-sm mt-auto">&copy; 2026 Mathimagika. Σχεδιασμένο για όλες τις ηλικίες.</footer>
+    <footer class="w-full py-6 text-center text-slate-400 dark:text-slate-500 text-sm mt-auto">&copy; 2026 Mathimagika, Μυρτώ Σιάρκου. Με επιφύλαξη παντός δικαιώματος.</footer>
 </template>
 <script type="text/plain" id="home-script">
         /* Τα δεδομένα της πλατφόρμας βρίσκονται στο assets/data.js (κοινά με τις σελίδες υλικού). */
@@ -618,10 +665,10 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
                             </a>
                             <a href="?page=ektyposimo&id=${chapter.id}&doc=ex" class="${data.styles.btnSec} w-full py-3 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors text-sm col-span-2">
                                 <i class="fa-solid fa-print"></i> Ασκήσεις
-                            </a>${chapter.id === 'lb03' ? `
-                            <a href="?page=ektyposimo&id=${chapter.id}&doc=circle" class="${data.styles.btnSec} w-full py-3 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors text-sm col-span-2">
-                                <i class="fa-solid fa-circle-notch"></i> Τριγωνομετρικός κύκλος
-                            </a>` : ''}</div>` : `<a href="${href2}" class="${data.styles.btnSec} w-full py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+                            </a>${((window.EXTRA_DOCS_META || {})[chapter.id] || []).map((x) => `
+                            <a href="?page=ektyposimo&id=${chapter.id}&doc=${x.key}" class="${data.styles.btnSec} w-full py-3 px-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors text-sm col-span-2">
+                                <i class="fa-solid ${x.icon}"></i> ${x.t}
+                            </a>`).join('')}</div>` : `<a href="${href2}" class="${data.styles.btnSec} w-full py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
                                 <i class="fa-solid ${btn2Icon}"></i> ${btn2Text}
                             </a>`}
                         </div>
@@ -922,6 +969,19 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   window.EXAM_MAP = { ex01: 'gym-a', ex02: 'gym-b', ex03: 'gym-g', ex04: 'lyk-a', ex05: 'lyk-b', ex06: 'lyk-g' };
 })();
 
+/* επιπλέον φυλλάδια ανά κεφάλαιο (το περιεχόμενο βρίσκεται στο booklets-extra.js) */
+window.EXTRA_DOCS_META = {
+  ga01: [{ key: 'divis', t: 'Διαιρετότητα και ευκλείδεια διαίρεση', icon: 'fa-table-cells' }],
+  ga02: [{ key: 'fracs', t: 'Φυλλάδιο κλασμάτων', icon: 'fa-chart-pie' }],
+  ga09: [{ key: 'angles', t: 'Φυλλάδιο γωνιών', icon: 'fa-compass-drafting' }],
+  ga10: [{ key: 'parallels', t: 'Παράλληλες και τέμνουσα', icon: 'fa-grip-lines' }],
+  ga11: [{ key: 'triangles', t: 'Γωνίες τριγώνου', icon: 'fa-shapes' }],
+  gb01: [{ key: 'signs', t: 'Πρόσημα', icon: 'fa-plus-minus' }],
+  la02: [{ key: 'abs', t: 'Απόλυτες τιμές', icon: 'fa-arrows-left-right' }],
+  la04: [{ key: 'signtab', t: 'Διπλές ανισώσεις και πίνακες προσήμων', icon: 'fa-table' }],
+  lb03: [{ key: 'circle', t: 'Τριγωνομετρικός κύκλος', icon: 'fa-circle-notch' }],
+};
+
 </script>
 <script>/* assets/core.js */
 /* Mathimagika: βασική βιβλιοθήκη (τυχαιότητα, μορφοποίηση, σχήματα SVG, έλεγχος απαντήσεων) */
@@ -954,7 +1014,8 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* ---------- Αριθμητική ---------- */
   M.gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; };
   M.lcm = (a, b) => Math.abs(a * b) / M.gcd(a, b);
-  M.round = (x, d = 2) => { const f = Math.pow(10, d); return Math.round((x + Number.EPSILON) * f) / f; };
+  /* σχολική στρογγυλοποίηση: το 5 πάει προς τα πάνω (2,135 → 2,14), χωρίς σφάλματα δυαδικής αναπαράστασης */
+  M.round = (x, d = 2) => { if (!isFinite(x)) return x; const s = x < 0 ? -1 : 1, v = Math.abs(x); const t = String(v); if (/e/i.test(t)) { const f = Math.pow(10, d); return (s * Math.round(v * f)) / f; } return s * Number(Math.round(Number(t + 'e' + d)) + 'e-' + d); };
   M.isPrime = (n) => { if (n < 2) return false; for (let i = 2; i * i <= n; i++) if (n % i === 0) return false; return true; };
   M.divisors = (n) => M.range(1, n).filter((d) => n % d === 0);
   M.factorize = (n) => { const f = []; let d = 2; while (n > 1) { while (n % d === 0) { f.push(d); n /= d; } d++; } return f; };
@@ -1048,6 +1109,8 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     if (s == null) return NaN;
     s = String(s).trim().replace(/\s+/g, '').replace(/−/g, '-').replace(/[€%°]/g, '');
     if (s === '') return NaN;
+    const fr = s.match(/^(-?)(\d+(?:[.,]\d+)?)\/(\d+(?:[.,]\d+)?)$/); /* κλάσμα, π.χ. 1/3 ή -3/64 */
+    if (fr) { const n = parseFloat(fr[2].replace(',', '.')), d = parseFloat(fr[3].replace(',', '.')); if (!d) return NaN; return (fr[1] ? -1 : 1) * n / d; }
     if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
     else if (/^-?\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
     if (!/^-?\d*\.?\d+$/.test(s)) return NaN;
@@ -1073,7 +1136,10 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     const at = q.at || (typeof q.a === 'number' ? 'num' : 'text');
     if (at === 'num') {
       const x = M.parseNum(input); if (isNaN(x)) return false;
-      const tol = q.tol != null ? q.tol : 1e-6;
+      let tol = q.tol != null ? q.tol : 1e-6;
+      /* περιοδικός αριθμός (π.χ. 1/3): δεκτή και η στρογγυλοποίηση με 2 ή περισσότερα δεκαδικά */
+      const dec = (String(input).match(/[.,](\d+)\s*$/) || ['', ''])[1].length;
+      if (dec >= 2 && Math.abs(q.a * 1e6 - Math.round(q.a * 1e6)) > 1e-6) tol = Math.max(tol, 0.5 * Math.pow(10, -dec) + 1e-9);
       return Math.abs(x - q.a) <= tol + 1e-9;
     }
     if (at === 'frac' || at === 'fracred') {
@@ -1497,7 +1563,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.double = (p = {}, t) => { const k = M.chance(0.5) || p.only === 'double'; if (p.only === 'half' || !k) { const n = t != null ? t * 2 : ri(1, (p.max || 10) / 2) * 2; return Q('Πόσο είναι το μισό του ' + fmt(n) + ';', n / 2); } const n = t != null ? t / 2 : ri(1, (p.max || 10) / 2); return Q('Πόσο είναι το διπλάσιο του ' + fmt(n) + ';', n * 2); };
 
   /* ---------- Αξία θέσης ---------- */
-  const PV = ['μονάδες', 'δεκάδες', 'εκατοντάδες', 'χιλιάδες', 'δεκάδες χιλιάδες', 'εκατοντάδες χιλιάδες', 'εκατομμύρια'];
+  const PV = ['μονάδες', 'δεκάδες', 'εκατοντάδες', 'μονάδες χιλιάδων', 'δεκάδες χιλιάδων', 'εκατοντάδες χιλιάδων', 'μονάδες εκατομμυρίων', 'δεκάδες εκατομμυρίων', 'εκατοντάδες εκατομμυρίων'];
   G.placeValue = (p = {}) => {
     const d = p.digits || 3; const n = ri(Math.pow(10, d - 1), Math.pow(10, d) - 1); const s = String(n);
     const pos = ri(0, d - 1); const digit = +s[d - 1 - pos];
@@ -1508,7 +1574,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.expand = (p = {}) => {
     const d = p.digits || 3; const n = ri(Math.pow(10, d - 1), Math.pow(10, d) - 1); const parts = String(n).split('').map((c, i) => +c * Math.pow(10, d - 1 - i)).filter((x) => x);
     if (M.chance(0.5)) return Q('Ποιος αριθμός είναι: ' + T(parts.map(tn).join(' + ')) + ';', n);
-    const ch = shuffle([parts.map(tn).join(' + '), shuffle(parts).map((x) => tn(x * (M.chance(0.5) ? 10 : 1))).join(' + '), parts.map((x) => tn(x / (x >= 10 ? 10 : 1))).join(' + '), parts.map((x, i) => tn(i === 0 ? x + Math.pow(10, d - 1) : x)).join(' + ')].map(T));
+    const ch = shuffle([parts.map(tn).join(' + '), shuffle(parts).map((x, i) => tn(x * (i === 0 || M.chance(0.5) ? 10 : 1))).join(' + '), parts.map((x) => tn(x / (x >= 10 ? 10 : 1))).join(' + '), parts.map((x, i) => tn(i === 0 ? x + Math.pow(10, d - 1) : x)).join(' + ')].map(T));
     return Q('Ποια ανάλυση δίνει τον αριθμό ' + fmt(n) + ';', T(parts.map(tn).join(' + ')), { ch: [...new Set(ch)].length === 4 ? ch : shuffle([T(parts.map(tn).join(' + ')), T('0'), T(tn(n * 10)), T(tn(Math.floor(n / 10)))]), at: 'text' });
   };
   G.tensIn = (p = {}) => { const d = ri(1, (p.max || 100) / 10); return M.chance(0.5) ? Q('Πόσες δεκάδες έχει το ' + fmt(d * 10) + ';', d) : Q(d + ' δεκάδες κάνουν πόσες μονάδες;', d * 10); };
@@ -1687,7 +1753,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* ---------- Κλάσματα ---------- */
   G.fracPie = (p = {}) => {
     const d = pick(p.dens || [2, 3, 4]), n = p.unit ? 1 : ri(1, d - (p.proper === false ? -d : 1)); const vis = M.chance(0.5) ? M.pie(n, d) : M.bar(n, d);
-    const ans = T(tf(n, d)); const set = new Set([ans]); let g = 0; while (set.size < 4 && g++ < 30) set.add(T(tf(ri(1, d), pick(p.dens || [2, 3, 4, 5, 6, 8]))));
+    const ans = T(tf(n, d)); const set = new Set([ans]); const vals = new Set([n / d]); let g = 0; while (set.size < 4 && g++ < 60) { const dd = pick(p.dens || [2, 3, 4, 5, 6, 8]), nn = ri(1, dd); if (vals.has(nn / dd)) continue; vals.add(nn / dd); set.add(T(tf(nn, dd))); } /* χωρίς ισοδύναμα της σωστής απάντησης */
     return Q('Τι μέρος είναι χρωματισμένο;', ans, { vis, ch: shuffle([...set]), at: 'text' });
   };
   G.fracOf = (p = {}, t) => { const d = pick(p.dens || [2, 4]), n = p.unit ? 1 : ri(1, d - 1); const k = t != null ? t / n : ri(1, p.maxK || 10); if (!Number.isInteger(k)) return G.fracOf(p); const tot = k * d; const nm = n === 1 && d === 2 ? 'Το μισό' : 'Το ' + T(tf(n, d)); return Q(nm + ' του ' + fmt(tot) + ' είναι ;', n * k, { ex: fmt(tot) + ' : ' + d + ' × ' + n + ' = ' + n * k }); };
@@ -1796,7 +1862,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     const B = [['τετράγωνο', 4, () => M.shape('τετράγωνο')], ['ορθογώνιο', 2, () => M.shape('ορθογώνιο')], ['ισόπλευρο τρίγωνο', 3, () => M.regular(3)], ['κανονικό πεντάγωνο', 5, () => M.regular(5)], ['κανονικό εξάγωνο', 6, () => M.regular(6)], ['ρόμβος', 2, () => M.shape('ρόμβος')], ['παραλληλόγραμμο', 0, () => M.shape('παραλληλόγραμμο')], ['ισοσκελές τραπέζιο', 1, () => M.shape('τραπέζιο')]];
     const [n, k, f] = pick(B); return Q('Πόσους άξονες συμμετρίας έχει το ' + n + ';', k, { vis: f() });
   };
-  G.symLetter = () => { const yes = ['Α', 'Η', 'Θ', 'Μ', 'Ο', 'Τ', 'Υ', 'Χ', 'Ω', 'Δ', 'Λ', 'Ξ', 'Φ', 'Β', 'Ε']; const no = ['Ζ', 'Ν', 'Σ', 'Ρ', 'Γ', 'Κ']; const L = M.chance(0.6) ? pick(yes) : pick(no); return { q: `<span style="font-size:34px;font-weight:800">${L}</span>`, a: yes.includes(L) ? 'Έχει άξονα συμμετρίας' : 'Δεν έχει', cats: ['Έχει άξονα συμμετρίας', 'Δεν έχει'] }; };
+  G.symLetter = () => { const yes = ['Α', 'Η', 'Θ', 'Μ', 'Ο', 'Τ', 'Υ', 'Χ', 'Ω', 'Δ', 'Λ', 'Ξ', 'Φ', 'Β', 'Ε', 'Σ']; const no = ['Ζ', 'Ν', 'Ρ', 'Γ']; const L = M.chance(0.6) ? pick(yes) : pick(no); return { q: `<span style="font-size:34px;font-weight:800">${L}</span>`, a: yes.includes(L) ? 'Έχει άξονα συμμετρίας' : 'Δεν έχει', cats: ['Έχει άξονα συμμετρίας', 'Δεν έχει'] }; };
   G.symComplete = () => { // πόσα κελιά χρειάζονται για συμμετρικό σχήμα
     const left = []; const rows = 5; for (let r = 0; r < rows; r++) { const w = ri(0, 3); for (let c = 4 - w; c < 4; c++) left.push([c, r]); }
     if (!left.length) left.push([3, 2]);
@@ -1814,7 +1880,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.gridArea = () => { const c = poly(); return Q('Κάθε κουτάκι είναι 1 τ.εκ. Πόσο είναι το εμβαδόν του σχήματος;', c.length, { vis: M.gridShape(c, 9, 6), unit: 'τ.εκ.' }); };
   G.gridPerim = () => { const c = poly(); return Q('Κάθε κουτάκι έχει πλευρά 1 εκ. Πόση είναι η περίμετρος του σχήματος;', M.perimeterOf(c), { vis: M.gridShape(c, 9, 6), unit: 'εκ.' }); };
   G.capacity = () => { const B = [['ένα κουταλάκι', '5 ml', ['5 ml', '5 λίτρα', '500 ml', '50 λίτρα']], ['ένα μπουκάλι νερό', '1 λίτρο', ['1 λίτρο', '1 ml', '100 λίτρα', '10 ml']], ['μια μπανιέρα', '150 λίτρα', ['150 λίτρα', '150 ml', '15 ml', '1 λίτρο']], ['ένα ποτήρι', '250 ml', ['250 ml', '250 λίτρα', '25 λίτρα', '2 ml']]]; const [o, a, ch] = pick(B); return M.chance(0.5) ? Q('Περίπου πόσο χωράει ' + o + ';', a, { ch: shuffle(ch), at: 'text' }) : G.units({ pairs: ['l-ml'] }); };
-  G.measureEst = () => { const B = [['το ύψος μιας πόρτας', '2 μέτρα', ['2 μέτρα', '2 εκατοστά', '20 μέτρα', '2 χιλιόμετρα']], ['το μήκος μιας γόμας', '4 εκατοστά', ['4 εκατοστά', '4 μέτρα', '40 μέτρα', '4 χιλιόμετρα']], ['το βάρος ενός μήλου', '200 γραμμάρια', ['200 γραμμάρια', '200 κιλά', '2 τόνοι', '2 γραμμάρια']], ['το βάρος ενός παιδιού', '30 κιλά', ['30 κιλά', '30 γραμμάρια', '3 τόνοι', '300 κιλά']], ['η απόσταση Αθήνα Θεσσαλονίκη', '500 χιλιόμετρα', ['500 χιλιόμετρα', '500 μέτρα', '50 εκατοστά', '5 χιλιόμετρα']]]; const [o, a, ch] = pick(B); return Q('Ποια είναι η καλύτερη εκτίμηση για ' + o + ';', a, { ch: shuffle(ch), at: 'text' }); };
+  G.measureEst = (p = {}) => { if (p.kid) { const K = [['το ύψος μιας πόρτας', '2 μέτρα', ['2 μέτρα', '2 εκατοστά']], ['το μήκος μιας γόμας', '4 εκατοστά', ['4 εκατοστά', '4 μέτρα']], ['το βάρος ενός μήλου', 'λιγότερο από 1 κιλό', ['λιγότερο από 1 κιλό', 'περισσότερο από 10 κιλά']], ['το βάρος ενός παιδιού', '30 κιλά', ['30 κιλά', '3 κιλά']], ['το μήκος ενός μολυβιού', '15 εκατοστά', ['15 εκατοστά', '15 μέτρα']]]; const [w, a, c] = pick(K); return Q('Διάλεξε το πιο λογικό για ' + w + '.', a, { ch: shuffle(c.slice()), at: 'text' }); } const B = [['το ύψος μιας πόρτας', '2 μέτρα', ['2 μέτρα', '2 εκατοστά', '20 μέτρα', '2 χιλιόμετρα']], ['το μήκος μιας γόμας', '4 εκατοστά', ['4 εκατοστά', '4 μέτρα', '40 μέτρα', '4 χιλιόμετρα']], ['το βάρος ενός μήλου', '200 γραμμάρια', ['200 γραμμάρια', '200 κιλά', '2 τόνοι', '2 γραμμάρια']], ['το βάρος ενός παιδιού', '30 κιλά', ['30 κιλά', '30 γραμμάρια', '3 τόνοι', '300 κιλά']], ['η απόσταση Αθήνα Θεσσαλονίκη', '500 χιλιόμετρα', ['500 χιλιόμετρα', '500 μέτρα', '50 εκατοστά', '5 χιλιόμετρα']]]; const [o, a, ch] = pick(B); return Q('Ποια είναι η καλύτερη εκτίμηση για ' + o + ';', a, { ch: shuffle(ch), at: 'text' }); };
   G.netSolid = () => { const B = [['6 ίσα τετράγωνα', 'κύβος'], ['2 κύκλους και ένα ορθογώνιο', 'κύλινδρος'], ['6 ορθογώνια (ανά δύο ίσα)', 'ορθογώνιο παραλληλεπίπεδο'], ['ένα τετράγωνο και 4 ίσα τρίγωνα', 'πυραμίδα'], ['έναν κύκλο και έναν κυκλικό τομέα', 'κώνος']]; const [d, a] = pick(B); return Q('Ποιο στερεό φτιάχνεται από ανάπτυγμα με ' + d + ';', a, { ch: shuffle([a].concat(sample(['κύβος', 'κύλινδρος', 'ορθογώνιο παραλληλεπίπεδο', 'πυραμίδα', 'κώνος'].filter((x) => x !== a), 3))), at: 'text' }); };
   G.tiling = () => { const yes = [['τετράγωνα', 'ναι'], ['ισόπλευρα τρίγωνα', 'ναι'], ['κανονικά εξάγωνα', 'ναι'], ['κανονικά πεντάγωνα', 'όχι'], ['κύκλους', 'όχι'], ['κανονικά οκτάγωνα (μόνα τους)', 'όχι']]; const [s, a] = pick(yes); return { q: 'Πλακόστρωτο μόνο με ' + s, a: a === 'ναι' ? 'Καλύπτει χωρίς κενά' : 'Αφήνει κενά', cats: ['Καλύπτει χωρίς κενά', 'Αφήνει κενά'] }; };
   G.compassRadius = () => { const r = ri(2, 9); return M.chance(0.5) ? Q('Άνοιξα τον διαβήτη ' + r + ' εκ. και χάραξα κύκλο. Πόση είναι η διάμετρός του;', 2 * r, { unit: 'εκ.', vis: M.circleFig('ρ = ' + r) }) : Q('Ένας κύκλος έχει διάμετρο ' + 2 * r + ' εκ. Πόσο πρέπει να ανοίξω τον διαβήτη;', r, { unit: 'εκ.' }); };
@@ -1897,7 +1963,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     const lvl = p.level || 1; const x = t != null ? t : rnz(-9, 9); let tex, ex;
     if (lvl === 1) { const a = rnz(2, 9) * (p.neg ? pick([1, -1]) : 1), b = rnz(-15, 15); tex = lin(a, b) + ' = ' + (a * x + b); ex = T(lin(a, 0) + ' = ' + (a * x + b) + (b < 0 ? ' + ' + -b : ' - ' + b)); }
     else if (lvl === 2) { let a = rnz(-6, 9), c = rnz(-6, 9); while (a === c) c = rnz(-6, 9); const b = rnz(-12, 12), d = (a - c) * x + b; tex = lin(a, b) + ' = ' + lin(c, d); ex = 'Χωρίζουμε γνωστούς από αγνώστους.'; }
-    else { const k = ri(2, 5), m = rnz(-5, 5), c = ri(1, 4), b = rnz(-9, 9); const rhs = k * (x + m) - c * x; tex = k + '(x ' + (m < 0 ? '- ' + -m : '+ ' + m) + ') = ' + M.tlin([[c, 'x'], [rhs, '']]); ex = 'Πρώτα κάνουμε επιμεριστική.'; }
+    else { const k = ri(2, 5), m = rnz(-5, 5), b = rnz(-9, 9); let c = ri(1, 4); while (c === k) c = ri(1, 4); /* αν c = k η εξίσωση είναι ταυτότητα */ const rhs = k * (x + m) - c * x; tex = k + '(x ' + (m < 0 ? '- ' + -m : '+ ' + m) + ') = ' + M.tlin([[c, 'x'], [rhs, '']]); ex = 'Πρώτα κάνουμε επιμεριστική.'; }
     return Q('Λύσε την εξίσωση: ' + T(tex), x, { ex });
   };
   G.eqFrac = () => { const x = ri(1, 6) * 6 * pick([1, 1, -1]); const a = pick([2, 3]), b = pick([3, 6, 4]); if (a === b) return G.eqFrac(); const v = x / a + x / b; if (!Number.isInteger(v)) return G.eqFrac(); return Q('Λύσε την εξίσωση: ' + T('\\frac{x}{' + a + '} + \\frac{x}{' + b + '} = ' + v), x, { ex: 'Πολλαπλασιάζουμε με το Ε.Κ.Π. ' + lcm(a, b) + '.' }); };
@@ -1982,7 +2048,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* ---------- Συναρτήσεις Γυμνασίου ---------- */
   G.linTable = (p = {}) => { const a = rnz(-4, 4), b = p.b ? rnz(-5, 5) : 0; const x = rnz(-5, 5); return Q('Για τη συνάρτηση ' + T('y = ' + M.tlin([[a, 'x'], [b, '']])) + ', πόσο είναι το y όταν ' + T('x = ' + tn(x)) + ';', a * x + b); };
   G.pointOnLine = () => { const a = rnz(-3, 3), b = rnz(-4, 4); const x = rnz(-4, 4); const y = M.chance(0.5) ? a * x + b : a * x + b + rnz(-2, 2); return Q('Ανήκει το σημείο ' + T('(' + tn(x) + ', ' + tn(y) + ')') + ' στην ευθεία ' + T('y = ' + M.tlin([[a, 'x'], [b, '']])) + ';', y === a * x + b ? 'Ναι' : 'Όχι', { ch: ['Ναι', 'Όχι'], at: 'text' }); };
-  G.slopeGraph = () => { const a = pick([-3, -2, -1, 1, 2, 3, 0.5, -0.5]), b = rnz(-3, 3); const ans = tn(a); return Q('Η ευθεία του σχήματος έχει εξίσωση ' + T('y = ax + ' + tp(b).replace(/^\((.*)\)$/, '$1')) + '. Πόση είναι η κλίση α;', a, { vis: M.plot([(x) => a * x + b], { points: [[0, b, '', '#16a34a']] }), ex: 'Κλίση = μεταβολή του y όταν το x αυξάνεται κατά 1.' }); };
+  G.slopeGraph = () => { const a = pick([-3, -2, -1, 1, 2, 3, 0.5, -0.5]), b = rnz(-3, 3); const ans = tn(a); return Q('Η ευθεία του σχήματος έχει εξίσωση ' + T('y = ax ' + (b < 0 ? '- ' + -b : '+ ' + b)) + '. Πόση είναι η κλίση α;', a, { vis: M.plot([(x) => a * x + b], { points: [[0, b, '', '#16a34a']] }), ex: 'Κλίση = μεταβολή του y όταν το x αυξάνεται κατά 1.' }); };
   G.readPoint = () => { const x = rnz(-4, 4), y = rnz(-4, 4); return Q('Ποιες είναι οι συντεταγμένες του σημείου Α; (γράψε π.χ. 2, −3)', [x, y], { at: 'pair', vis: M.plot([], { points: [[x, y, 'Α']] }) }); };
   G.hyperbola = () => { const a = pick([6, 12, 24, -6, -12]); const xs = M.divisors(Math.abs(a)).filter((d) => d <= 12); const x = pick(xs) * pick([1, -1]); return Q('Για τη συνάρτηση ' + T('y = \\frac{' + a + '}{x}') + ', πόσο είναι το y για ' + T('x = ' + tn(x)) + ';', a / x); };
   G.tuneLine = (p = {}) => {
@@ -2002,7 +2068,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.aroundPoint = () => { const a = ri(40, 120), b = ri(40, 120); return Q('Γύρω από ένα σημείο υπάρχουν τρεις γωνίες. Οι δύο είναι ' + a + '° και ' + b + '°. Πόση είναι η τρίτη;', 360 - a - b, { unit: '°' }); };
   G.isoBase = () => { const top = ri(20, 140); if (top % 2) return G.isoBase(); return M.chance(0.5) ? Q('Σε ισοσκελές τρίγωνο η γωνία της κορυφής είναι ' + top + '°. Πόση είναι κάθε γωνία της βάσης;', (180 - top) / 2, { unit: '°' }) : Q('Σε ισοσκελές τρίγωνο κάθε γωνία της βάσης είναι ' + (180 - top) / 2 + '°. Πόση είναι η γωνία της κορυφής;', top, { unit: '°' }); };
   G.paraAngle = () => { const a = ri(40, 140); return Q('Σε παραλληλόγραμμο μια γωνία είναι ' + a + '°. Πόση είναι η διπλανή της;', 180 - a, { unit: '°', ex: 'Οι διαδοχικές γωνίες είναι παραπληρωματικές.' }); };
-  G.quadProp = () => { const B = [['Οι διαγώνιοι διχοτομούνται', 'Όλα τα παραλληλόγραμμα'], ['Οι διαγώνιοι είναι ίσες', 'Ορθογώνιο και τετράγωνο'], ['Οι διαγώνιοι τέμνονται κάθετα', 'Ρόμβος και τετράγωνο'], ['Όλες οι γωνίες είναι ορθές', 'Ορθογώνιο και τετράγωνο'], ['Όλες οι πλευρές είναι ίσες', 'Ρόμβος και τετράγωνο']]; const [d, a] = pick(B); return Q('Σε ποια τετράπλευρα ισχύει: «' + d + '»;', a, { ch: mc(a, ['Όλα τα παραλληλόγραμμα', 'Ορθογώνιο και τετράγωνο', 'Ρόμβος και τετράγωνο', 'Μόνο στο τραπέζιο']), at: 'text' }); };
+  G.quadProp = () => { const B = [['Οι διαγώνιοι διχοτομούνται', 'Όλα τα παραλληλόγραμμα'], ['Οι διαγώνιοι είναι ίσες', 'Ορθογώνιο και τετράγωνο'], ['Οι διαγώνιοι τέμνονται κάθετα', 'Ρόμβος και τετράγωνο'], ['Όλες οι γωνίες είναι ορθές', 'Ορθογώνιο και τετράγωνο'], ['Όλες οι πλευρές είναι ίσες', 'Ρόμβος και τετράγωνο']]; const [d, a] = pick(B); return Q('Σε ποια παραλληλόγραμμα ισχύει: «' + d + '»;', a, { ch: mc(a, ['Όλα τα παραλληλόγραμμα', 'Ορθογώνιο και τετράγωνο', 'Ρόμβος και τετράγωνο', 'Μόνο στο τετράγωνο']), at: 'text' }); };
   G.centralSym = () => { const B = [['παραλληλόγραμμο', 'Έχει κέντρο συμμετρίας'], ['ορθογώνιο', 'Έχει κέντρο συμμετρίας'], ['κύκλος', 'Έχει κέντρο συμμετρίας'], ['ρόμβος', 'Έχει κέντρο συμμετρίας'], ['ισόπλευρο τρίγωνο', 'Δεν έχει'], ['ισοσκελές τραπέζιο', 'Δεν έχει'], ['κανονικό πεντάγωνο', 'Δεν έχει'], ['κανονικό εξάγωνο', 'Έχει κέντρο συμμετρίας']]; const [s, a] = pick(B); return { q: s, a, cats: ['Έχει κέντρο συμμετρίας', 'Δεν έχει'] }; };
   G.midpoint = () => { const a = rnz(-10, 10), b = a + 2 * ri(1, 8); return Q('Σε μια ευθεία τα σημεία Α και Β αντιστοιχούν στους αριθμούς ' + a + ' και ' + b + '. Σε ποιον αριθμό αντιστοιχεί το μέσο Μ του ΑΒ;', (a + b) / 2); };
   G.segLen = () => { const a = ri(2, 9), b = ri(2, 9); return Q('Τα σημεία Α, Β, Γ είναι συνευθειακά με τη σειρά αυτή. Αν ΑΒ = ' + a + ' εκ. και ΒΓ = ' + b + ' εκ., πόσο είναι το ΑΓ;', a + b, { unit: 'εκ.' }); };
@@ -2016,7 +2082,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* Τριγωνομετρία ορθογωνίου */
   G.trigRatio = () => { const [a, b, c] = pick(TR); const k = pick(['ημ', 'συν', 'εφ']); const ans = k === 'ημ' ? [a, c] : k === 'συν' ? [b, c] : [a, b]; return Q('Στο ορθογώνιο τρίγωνο, η γωνία ω είναι απέναντι από την πλευρά ' + a + '. Πόσο είναι το ' + k + 'ω;', ans, { at: 'frac', show: T(tf(ans[0], ans[1], true)), vis: M.rightTri(b, a, c, { angle: 'ω' }).replace(/>(\d+)</g, '>$1<') }); };
   G.trigSide = () => { const ang = pick([30, 45, 60]); const val = { 30: [0.5, 0.87, 0.58], 45: [0.71, 0.71, 1], 60: [0.87, 0.5, 1.73] }[ang]; const hyp = ri(2, 10) * 10; const k = pick(['ημ', 'συν']); const ans = round(hyp * (k === 'ημ' ? val[0] : val[1]), 2); return Q('Σε ορθογώνιο τρίγωνο η υποτείνουσα είναι ' + hyp + ' εκ. και μια οξεία γωνία ω = ' + ang + '°. Πόση είναι η ' + (k === 'ημ' ? 'απέναντι' : 'προσκείμενη') + ' κάθετη; (' + k + ang + '° ≈ ' + fmt(k === 'ημ' ? val[0] : val[1]) + ')', ans, { unit: 'εκ.', tol: 0.05 }); };
-  G.vecSum = () => { const a = [rnz(-3, 3), rnz(-3, 3)], b = [rnz(-3, 3), rnz(-3, 3)]; return Q('Τα διανύσματα α (πράσινο) και β (από το τέλος του α) προστίθενται. Ποιες είναι οι συντεταγμένες του α + β;', [a[0] + b[0], a[1] + b[1]], { at: 'pair', vis: M.plot([], { segs: [[0, 0, a[0], a[1]], [a[0], a[1], a[0] + b[0], a[1] + b[1], '#2563eb']], points: [[0, 0, 'O', '#16a34a']] }) }); };
+  G.vecSum = () => { const a = [rnz(-3, 3), rnz(-3, 3)], b = [rnz(-3, 3), rnz(-3, 3)]; if (Math.abs(a[0] + b[0]) > 4 || Math.abs(a[1] + b[1]) > 4) return G.vecSum(); /* το άκρο μένει μέσα στο πλέγμα */ return Q('Τα διανύσματα α (πράσινο) και β (από το τέλος του α) προστίθενται. Ποιες είναι οι συντεταγμένες του α + β;', [a[0] + b[0], a[1] + b[1]], { at: 'pair', vis: M.plot([], { segs: [[0, 0, a[0], a[1]], [a[0], a[1], a[0] + b[0], a[1] + b[1], '#2563eb']], points: [[0, 0, 'O', '#16a34a']] }) }); };
   /* Κύκλος */
   G.arcLen = () => { const r = ri(2, 10), m = pick([30, 45, 60, 90, 120, 180]); return Q('Βρες το μήκος τόξου ' + m + '° σε κύκλο ακτίνας ' + r + ' εκ. (π = 3,14)', round((2 * 3.14 * r * m) / 360, 2), { unit: 'εκ.', tol: 0.02, ex: 'ℓ = 2πρ × μ / 360' }); };
   G.sectorArea = () => { const r = ri(2, 10), m = pick([30, 45, 60, 90, 120, 180]); return Q('Βρες το εμβαδόν κυκλικού τομέα ' + m + '° σε κύκλο ακτίνας ' + r + ' εκ. (π = 3,14)', round((3.14 * r * r * m) / 360, 2), { unit: 'τ.εκ.', tol: 0.02 }); };
@@ -2028,13 +2094,22 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.pyrVol = () => { const a = ri(2, 9), h = ri(1, 4) * 3; return Q('Τετραγωνική πυραμίδα με πλευρά βάσης ' + a + ' εκ. και ύψος ' + h + ' εκ. Βρες τον όγκο της.', (a * a * h) / 3, { unit: 'κ.εκ.', ex: 'V = (1/3) × Εβάσης × υ' }); };
 
   /* ---------- Άλγεβρα Γ΄ Γυμνασίου ---------- */
-  G.monoOps = () => { const a = rnz(-6, 6), b = rnz(-6, 6), m = ri(1, 4), n = ri(1, 4); const forms = [[tp(a) + 'x^{' + m + '} \\times ' + tp(b) + 'x^{' + n + '}', (a * b === 1 ? '' : a * b === -1 ? '-' : a * b) + 'x^{' + (m + n) + '}'], [a + 'x^{' + m + '} + ' + tp(b) + 'x^{' + m + '}', a + b === 0 ? '0' : (a + b === 1 ? '' : a + b === -1 ? '-' : a + b) + 'x^{' + m + '}']]; const [e, ans] = pick(forms); const w = [ans.replace(/\^\{(\d+)\}/, (s, k) => '^{' + (+k + 1) + '}'), ans.replace(/^(-?\d*)/, (s) => (s.startsWith('-') ? s.slice(1) : '-' + s)), (a + b) + 'x^{' + 2 * m + '}', a * b + 'x^{' + m * n + '}']; return Q('Κάνε την πράξη: ' + T(e), T(ans), { ch: mc(T(ans), w.map(T)), at: 'text' }); };
+  G.monoOps = () => {
+    const a = rnz(-6, 6), b = rnz(-6, 6), m = ri(1, 4), n = ri(1, 4);
+    const pw = (k) => (k === 1 ? 'x' : 'x^{' + k + '}'); const co = (c) => (c === 1 ? '' : c === -1 ? '-' : String(c)); const mono = (c, k) => (c === 0 ? '0' : co(c) + pw(k));
+    const sum = M.chance(0.5);
+    if (sum && a + b === 0) return G.monoOps(); /* άθροισμα 0: οι λάθος επιλογές θα ήταν κι αυτές 0 */
+    const e = sum ? co(a) + pw(m) + ' + ' + (b < 0 ? '(' + co(b) + pw(m) + ')' : co(b) + pw(m)) : (a < 0 ? '(' + co(a) + pw(m) + ')' : co(a) + pw(m)) + ' \\times ' + (b < 0 ? '(' + co(b) + pw(n) + ')' : co(b) + pw(n));
+    const ans = sum ? mono(a + b, m) : mono(a * b, m + n);
+    const w = sum ? [mono(a + b, 2 * m), mono(-(a + b), m), mono(a * b, m), mono(a + b, m + 1)] : [mono(a * b, m * n), mono(-(a * b), m + n), mono(a + b, m + n), mono(a * b, m + n + 1)];
+    return Q('Κάνε την πράξη: ' + T(e), T(ans), { ch: mc(T(ans), [...new Set(w.filter((x) => x !== ans && x !== '0'))].map(T)), at: 'text' });
+  };
   G.polyMul = () => { const a = rnz(-5, 5), b = rnz(-5, 5); const ans = M.tpoly([1, a + b, a * b]); const w = [M.tpoly([1, a * b, a + b]), M.tpoly([1, a + b, -a * b]), M.tpoly([1, 0, a * b]), M.tpoly([1, -(a + b), a * b])]; return Q('Κάνε τον πολλαπλασιασμό: ' + T('(x ' + (a < 0 ? '- ' + -a : '+ ' + a) + ')(x ' + (b < 0 ? '- ' + -b : '+ ' + b) + ')'), T(ans), { ch: mc(T(ans), w.map(T)), at: 'text' }); };
   G.identity = () => { const k = ri(1, 9), c = ri(1, 3); const kind = pick(['sq+', 'sq-', 'diff']); const v = c === 1 ? 'x' : c + 'x'; let e, ans, w; if (kind === 'sq+') { e = '(' + v + ' + ' + k + ')^2'; ans = M.tpoly([c * c, 2 * c * k, k * k]); w = [M.tpoly([c * c, 0, k * k]), M.tpoly([c * c, c * k, k * k]), M.tpoly([c, 2 * c * k, k * k])]; } else if (kind === 'sq-') { e = '(' + v + ' - ' + k + ')^2'; ans = M.tpoly([c * c, -2 * c * k, k * k]); w = [M.tpoly([c * c, 0, -k * k]), M.tpoly([c * c, -2 * c * k, -k * k]), M.tpoly([c * c, 2 * c * k, k * k])]; } else { e = '(' + v + ' - ' + k + ')(' + v + ' + ' + k + ')'; ans = M.tpoly([c * c, 0, -k * k]); w = [M.tpoly([c * c, 0, k * k]), M.tpoly([c * c, -2 * c * k, -k * k]), M.tpoly([c, 0, -k])]; } return Q('Ανάπτυξε με ταυτότητα: ' + T(e), T(ans), { ch: mc(T(ans), w.map(T).concat([T(M.tpoly([c * c, 2 * k, k * k]))])), at: 'text' }); };
   G.identityNum = () => { const n = pick([99, 101, 49, 51, 199, 201, 1001]); return pick([Q('Υπολόγισε έξυπνα με ταυτότητα: ' + T(n + '^2'), n * n, { ex: n > 100 ? '(' + (n - n % 100 === n ? n : Math.round(n / 100) * 100) + ' ± …)²' : '' }), Q('Υπολόγισε: ' + T((n + 1) + ' \\times ' + (n - 1)), n * n - 1, { ex: '(α + 1)(α − 1) = α² − 1' })]); };
   G.factor = () => {
     const kind = pick(['common', 'diff', 'square', 'trinom']); let e, ans, w;
-    if (kind === 'common') { const a = ri(2, 6), b = ri(2, 9); e = a + 'x^2 + ' + a * b + 'x'; ans = a + 'x(x + ' + b + ')'; w = [a + '(x^2 + ' + b + 'x)', 'x(' + a + 'x + ' + b + ')', a + 'x(x + ' + a * b + ')']; }
+    if (kind === 'common') { const a = ri(2, 6), b = ri(2, 9); e = a + 'x^2 + ' + a * b + 'x'; ans = a + 'x(x + ' + b + ')'; w = [a + 'x(x - ' + b + ')', 'x(' + a + 'x + ' + b + ')', a + 'x(x + ' + a * b + ')']; }
     else if (kind === 'diff') { const k = ri(1, 10); e = 'x^2 - ' + k * k; ans = '(x - ' + k + ')(x + ' + k + ')'; w = ['(x - ' + k + ')^2', '(x + ' + k + ')^2', '(x - ' + k * k + ')(x + 1)']; }
     else if (kind === 'square') { const k = ri(1, 9); e = M.tpoly([1, 2 * k, k * k]); ans = '(x + ' + k + ')^2'; w = ['(x - ' + k + ')^2', '(x - ' + k + ')(x + ' + k + ')', '(x + ' + 2 * k + ')^2']; }
     else { const a = rnz(-6, 6), b = rnz(-6, 6); e = M.tpoly([1, a + b, a * b]); const f = (k) => '(x ' + (k < 0 ? '- ' + -k : '+ ' + k) + ')'; ans = f(a) + f(b); w = [f(-a) + f(-b), f(a) + f(-b), f(a + b) + f(1)]; if (a === -b) return G.factor(); }
@@ -2043,7 +2118,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.ratSimplify = () => { const k = ri(1, 9), a = rnz(-6, 6); const kind = pick(['diff', 'common']); let e, ans, w; if (kind === 'diff') { e = '\\frac{x^2 - ' + k * k + '}{x - ' + k + '}'; ans = 'x + ' + k; w = ['x - ' + k, 'x', 'x + ' + k * k]; } else { e = '\\frac{' + 2 * k + 'x}{' + 4 * k + 'x^2}'; ans = '\\frac{1}{2x}'; w = ['2x', '\\frac{x}{2}', '\\frac{1}{2}']; } return Q('Απλοποίησε την παράσταση ' + T(e) + ' (με τους κατάλληλους περιορισμούς).', T(ans), { ch: mc(T(ans), w.map(T)), at: 'text' }); };
   G.ratRestrict = () => { const a = rnz(-9, 9); return Q('Για ποια τιμή του x δεν ορίζεται η παράσταση ' + T('\\frac{3x}{x ' + (a < 0 ? '+ ' + -a : '- ' + a) + '}') + ';', a); };
   G.quadDisc = () => { const a = rnz(-3, 3), b = rnz(-8, 8), c = rnz(-9, 9); return Q('Βρες τη διακρίνουσα Δ της ' + T(M.tpoly([a, b, c]) + ' = 0'), b * b - 4 * a * c, { ex: 'Δ = β² − 4αγ' }); };
-  G.quadRoots = (p = {}) => { const r1 = rnz(-7, 7), r2 = rnz(-7, 7); const a = p.a1 ? 1 : pick([1, 1, 2, -1]); const co = [a, -a * (r1 + r2), a * r1 * r2]; const sol = r1 === r2 ? [r1] : [r1, r2]; return Q('Λύσε την εξίσωση ' + T(M.tpoly(co) + ' = 0') + '. (Αν έχει δύο λύσεις, χώρισέ τες με ; )', sol, { at: 'set', show: sol.map(fmt).join(' και ') }); };
+  G.quadRoots = (p = {}) => { const r1 = rnz(-7, 7), r2 = rnz(-7, 7); const a = p.a1 ? 1 : pick([1, 1, 2, -1]); const co = [a, -a * (r1 + r2), a * r1 * r2]; const sol = r1 === r2 ? [r1] : [r1, r2]; return Q('Λύσε την εξίσωση ' + T(M.tpoly(co) + ' = 0') + '. (Αν έχει δύο λύσεις, γράψε τες χωρισμένες με κόμμα και κενό.)', sol, { at: 'set', show: sol.map(fmt).join(' και ') }); };
   G.quadCount = () => { const k = pick(['δύο λύσεις', 'μία διπλή λύση', 'καμία λύση']); let co; if (k === 'δύο λύσεις') { const r1 = rnz(-5, 5), r2 = r1 + ri(1, 4); co = [1, -(r1 + r2), r1 * r2]; } else if (k === 'μία διπλή λύση') { const r = rnz(-5, 5); co = [1, -2 * r, r * r]; } else co = [1, rnz(-3, 3), ri(5, 12)]; return Q('Πόσες πραγματικές λύσεις έχει η ' + T(M.tpoly(co) + ' = 0') + ';', k, { ch: ['δύο λύσεις', 'μία διπλή λύση', 'καμία λύση'], at: 'text' }); };
   G.quadSteps = () => { const r1 = ri(1, 6), r2 = -ri(1, 6); const b = -(r1 + r2), c = r1 * r2; const D = b * b - 4 * c; return { q: 'Βάλε σε σειρά τα βήματα επίλυσης της ' + T(M.tpoly([1, b, c]) + ' = 0'), steps: [T('α = 1,\\; β = ' + b + ',\\; γ = ' + c), T('Δ = ' + tp(b) + '^2 - 4 \\times 1 \\times ' + tp(c) + ' = ' + D), T('x = \\frac{' + -b + ' \\pm ' + Math.sqrt(D) + '}{2}'), T('x_1 = ' + Math.max(r1, r2) + ',\\; x_2 = ' + Math.min(r1, r2))] }; };
   G.quadWord = () => { const x = ri(3, 12); return pick([Q('Το γινόμενο δύο διαδοχικών θετικών ακεραίων είναι ' + x * (x + 1) + '. Ποιος είναι ο μικρότερος;', x), Q('Ένα ορθογώνιο έχει μήκος κατά 3 μ. μεγαλύτερο από το πλάτος και εμβαδόν ' + x * (x + 3) + ' τ.μ. Πόσο είναι το πλάτος;', x, { unit: 'μ.' })]); };
@@ -2141,7 +2216,27 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* ---------- Εξισώσεις και ανισώσεις Α΄ Λυκείου ---------- */
   G.eqPower = () => { const k = pick([2, 3, 4, 5]), r = ri(2, 4); const a = Math.pow(r, k); return k % 2 ? Q('Λύσε στο ℝ: ' + T('x^{' + k + '} = ' + a), r) : Q('Λύσε στο ℝ: ' + T('x^{' + k + '} = ' + a) + ' (χώρισε τις λύσεις με ; )', [-r, r], { at: 'set' }); };
   G.vietaSum = () => { const r1 = rnz(-8, 8), r2 = rnz(-8, 8); const co = [1, -(r1 + r2), r1 * r2]; return pick([Q('Χωρίς να λύσεις την ' + T(M.tpoly(co) + ' = 0') + ', βρες το άθροισμα S των ριζών.', r1 + r2, { ex: 'S = −β/α' }), Q('Χωρίς να λύσεις την ' + T(M.tpoly(co) + ' = 0') + ', βρες το γινόμενο P των ριζών.', r1 * r2, { ex: 'P = γ/α' })]); };
-  G.quadForm = () => { const S = rnz(-6, 6), P = rnz(-9, 9); const ans = T(M.tpoly([1, -S, P]) + ' = 0'); return Q('Ποια εξίσωση έχει ρίζες με άθροισμα ' + S + ' και γινόμενο ' + P + ';', ans, { ch: mc(ans, [T(M.tpoly([1, S, P]) + ' = 0'), T(M.tpoly([1, -P, S]) + ' = 0'), T(M.tpoly([1, -S, -P]) + ' = 0')]), at: 'text' }); };
+  /* εξίσωση από S και P: περιλαμβάνει και την περίπτωση S² < 4P, όπου δεν υπάρχουν πραγματικοί αριθμοί */
+  const NONE_SP = 'Καμία, δεν υπάρχουν πραγματικοί αριθμοί με αυτό το άθροισμα και γινόμενο';
+  G.quadForm = () => {
+    let S, P; const none = M.chance(0.3);
+    if (none) { S = rnz(-6, 6); P = Math.floor((S * S) / 4) + ri(1, 6); }
+    else { const r1 = rnz(-5, 5), r2 = rnz(-5, 5); S = r1 + r2; P = r1 * r2; if (S === 0 || P === 0) return G.quadForm(); }
+    const eq = T(M.tpoly([1, -S, P]) + ' = 0'); const ans = none ? NONE_SP : eq;
+    const w = [...new Set([T(M.tpoly([1, S, P]) + ' = 0'), T(M.tpoly([1, -S, -P]) + ' = 0'), T(M.tpoly([1, -P, S]) + ' = 0'), T(M.tpoly([1, S, -P]) + ' = 0')])].filter((x) => x !== eq); /* χωρίς επιλογή ίδια με τη σωστή (π.χ. όταν S = P) */
+    const ch = M.shuffle([NONE_SP, eq].concat(M.shuffle(w).slice(0, 2)));
+    return Q('Ποια εξίσωση έχει πραγματικές ρίζες με άθροισμα ' + S + ' και γινόμενο ' + P + ';', ans, { ch, at: 'text', ex: 'Η εξίσωση είναι x² − Sx + P = 0 με Δ = S² − 4P = ' + (S * S - 4 * P) + (none ? ' < 0, άρα δεν έχει πραγματικές ρίζες' : ' ≥ 0') });
+  };
+  /* υπάρχουν δύο πραγματικοί αριθμοί με δοσμένο άθροισμα και γινόμενο; */
+  G.spExist = () => {
+    const kind = pick(['two', 'equal', 'none']); let S, P;
+    if (kind === 'two') { const a = rnz(-6, 6), b = rnz(-6, 6); if (a === b) return G.spExist(); S = a + b; P = a * b; }
+    else if (kind === 'equal') { const a = rnz(-6, 6); S = 2 * a; P = a * a; }
+    else { S = rnz(-6, 6); P = Math.floor((S * S) / 4) + ri(1, 8); }
+    const D = S * S - 4 * P; const C = ['Ναι, δύο διαφορετικοί αριθμοί', 'Ναι, δύο ίσοι αριθμοί', 'Όχι, δεν υπάρχουν πραγματικοί αριθμοί'];
+    const ans = D > 0 ? C[0] : D === 0 ? C[1] : C[2];
+    return Q('Υπάρχουν δύο πραγματικοί αριθμοί με άθροισμα ' + S + ' και γινόμενο ' + P + ';', ans, { ch: C, at: 'text', ex: 'Θα ήταν ρίζες της x² − Sx + P = 0, με Δ = S² − 4P = ' + D + (D > 0 ? ' > 0' : D === 0 ? '' : ' < 0') });
+  };
   G.paramEq = () => { const l = rnz(-5, 5); return Q('Για ποια τιμή του λ η εξίσωση ' + T('(λ ' + (l < 0 ? '+ ' + -l : '- ' + l) + ')x = 3') + ' είναι αδύνατη;', l); };
   G.quadSign = () => { const r1 = rnz(-6, 3), r2 = r1 + ri(1, 6); const lt = M.chance(0.5); const co = [1, -(r1 + r2), r1 * r2]; const ans = lt ? T(tn(r1) + ' < x < ' + tn(r2)) : T('x < ' + tn(r1) + '\\;\\text{ ή }\\; x > ' + tn(r2)); const w = [lt ? T('x < ' + tn(r1) + '\\;\\text{ ή }\\; x > ' + tn(r2)) : T(tn(r1) + ' < x < ' + tn(r2)), T('x < ' + tn(r2)), T('x > ' + tn(r1))]; return Q('Λύσε την ανίσωση ' + T(M.tpoly(co) + (lt ? ' < 0' : ' > 0')), ans, { ch: mc(ans, w), at: 'text', ex: 'Το τριώνυμο είναι ετερόσημο του α ανάμεσα στις ρίζες.' }); };
   G.ineqDouble = () => { const a = ri(2, 4), b = rnz(-5, 5), lo = rnz(-6, 0), hi = lo + ri(2, 6); return Q('Πόσες ακέραιες λύσεις έχει η ' + T(tn(a * lo + b) + ' \\le ' + M.tlin([[a, 'x'], [b, '']]) + ' \\le ' + tn(a * hi + b)) + ';', hi - lo + 1); };
@@ -2183,7 +2278,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
 
   /* ---------- Β΄ Λυκείου ---------- */
   G.det = () => { const a = rnz(-6, 6), b = rnz(-6, 6), c = rnz(-6, 6), d = rnz(-6, 6); return Q('Υπολόγισε την ορίζουσα ' + T('D = \\begin{vmatrix} ' + a + ' & ' + b + ' \\\\ ' + c + ' & ' + d + ' \\end{vmatrix}'), a * d - b * c); };
-  G.sysKind = () => { const k = pick(['μοναδική λύση', 'αδύνατο', 'άπειρες λύσεις']); const a = ri(1, 4), b = ri(1, 4), c = ri(1, 9), m = ri(2, 3); let e; if (k === 'μοναδική λύση') e = [[a, b, c], [a + 1, b - (b > 1 ? 1 : -1), c + 2]]; else if (k === 'αδύνατο') e = [[a, b, c], [m * a, m * b, m * c + 1]]; else e = [[a, b, c], [m * a, m * b, m * c]]; return Q('Το σύστημα ' + T('\\begin{cases} ' + e.map((r) => M.tlin([[r[0], 'x'], [r[1], 'y']]) + ' = ' + r[2]).join(' \\\\ ') + ' \\end{cases}') + ' έχει:', k, { ch: ['μοναδική λύση', 'αδύνατο', 'άπειρες λύσεις'], at: 'text' }); };
+  G.sysKind = () => { const k = pick(['μοναδική λύση', 'αδύνατο', 'άπειρες λύσεις']); const a = ri(1, 4), b = ri(1, 4), c = ri(1, 9), m = ri(2, 3); let e; if (k === 'μοναδική λύση') { e = [[a, b, c], [a + 1, b - (b > 1 ? 1 : -1), c + 2]]; if (e[0][0] * e[1][1] - e[0][1] * e[1][0] === 0) return G.sysKind(); /* D ≠ 0 */ } else if (k === 'αδύνατο') e = [[a, b, c], [m * a, m * b, m * c + 1]]; else e = [[a, b, c], [m * a, m * b, m * c]]; return Q('Το σύστημα ' + T('\\begin{cases} ' + e.map((r) => M.tlin([[r[0], 'x'], [r[1], 'y']]) + ' = ' + r[2]).join(' \\\\ ') + ' \\end{cases}') + ' έχει:', k, { ch: ['μοναδική λύση', 'αδύνατο', 'άπειρες λύσεις'], at: 'text' }); };
   G.monotone = () => { const a = pick([1, -1]), h = rnz(-2, 2), k = rnz(-2, 2); const f = (x) => a * (x - h) * (x - h) + k; return pick([Q('Η συνάρτηση του σχήματος έχει ' + (a > 0 ? 'ελάχιστο' : 'μέγιστο') + '. Σε ποιο x;', h, { vis: M.plot([f]) }), Q('Η συνάρτηση του σχήματος έχει ' + (a > 0 ? 'ελάχιστη' : 'μέγιστη') + ' τιμή. Πόση είναι;', k, { vis: M.plot([f]) }), Q('Στο διάστημα ' + T('(' + (h) + ', +\\infty)') + ' η συνάρτηση του σχήματος είναι:', a > 0 ? 'γνησίως αύξουσα' : 'γνησίως φθίνουσα', { vis: M.plot([f]), ch: ['γνησίως αύξουσα', 'γνησίως φθίνουσα'], at: 'text' })]); };
   G.parity = () => { const B = [['x^4 + 3x^2', 'άρτια'], ['x^3 - 2x', 'περιττή'], ['x^2 + x', 'ούτε άρτια ούτε περιττή'], ['|x|', 'άρτια'], ['\\frac{1}{x}', 'περιττή'], ['x^3 + 1', 'ούτε άρτια ούτε περιττή']]; const [e, a] = pick(B); return Q('Η συνάρτηση ' + T('f(x) = ' + e) + ' είναι:', a, { ch: ['άρτια', 'περιττή', 'ούτε άρτια ούτε περιττή'], at: 'text' }); };
   G.shift = () => { const h = rnz(-4, 4), k = rnz(-4, 4); const ans = h > 0 ? h + ' μονάδες δεξιά' : -h + ' μονάδες αριστερά'; const vert = k > 0 ? ' και ' + k + ' μονάδες πάνω' : ' και ' + -k + ' μονάδες κάτω'; const right = ans + vert; const wrong = [(h > 0 ? h + ' μονάδες αριστερά' : -h + ' μονάδες δεξιά') + vert, ans + (k > 0 ? ' και ' + k + ' μονάδες κάτω' : ' και ' + -k + ' μονάδες πάνω'), (h > 0 ? h + ' μονάδες αριστερά' : -h + ' μονάδες δεξιά') + (k > 0 ? ' και ' + k + ' μονάδες κάτω' : ' και ' + -k + ' μονάδες πάνω')]; return Q('Η γραφική παράσταση της ' + T('g(x) = f(x ' + (h > 0 ? '- ' + h : '+ ' + -h) + ') ' + (k > 0 ? '+ ' + k : '- ' + -k)) + ' προκύπτει από της f με μετατόπιση:', right, { ch: mc(right, wrong), at: 'text' }); };
@@ -2192,16 +2287,16 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   const SPEC = G._SPEC;
   G.trigAny = () => { const base = pick([30, 45, 60]); const q = pick([0, 1, 2, 3]); const w = base + 90 * q + (q % 2 ? 0 : 0); const ang = q === 0 ? base : q === 1 ? 180 - base : q === 2 ? 180 + base : 360 - base; const k = ri(0, 1); const sgn = k === 0 ? (ang < 180 ? 1 : -1) : (ang < 90 || ang > 270 ? 1 : -1); const v = SPEC[base][k]; const ans = T((sgn < 0 ? '-' : '') + v); const pool = [...new Set([30, 45, 60].flatMap((b) => [SPEC[b][0], SPEC[b][1]]).flatMap((x) => [x, '-' + x]))].filter((x) => x !== (sgn < 0 ? '-' : '') + v); return Q('Πόσο είναι το ' + T('\\text{' + ['ημ', 'συν'][k] + '}\\,' + ang + '^{\\circ}') + ';', ans, { ch: mc(ans, sample(pool, 3).map(T)), at: 'text', ex: 'Αναγωγή στο 1ο τεταρτημόριο.' }); };
   G.radDeg = () => { const B = [['\\frac{\\pi}{6}', 30], ['\\frac{\\pi}{4}', 45], ['\\frac{\\pi}{3}', 60], ['\\frac{\\pi}{2}', 90], ['\\frac{2\\pi}{3}', 120], ['\\pi', 180], ['\\frac{3\\pi}{2}', 270], ['2\\pi', 360]]; const [r, d] = pick(B); return Q('Πόσες μοίρες είναι ' + T(r) + ' rad;', d, { unit: '°' }); };
-  G.period = () => { const k = pick([2, 3, 4, 1 / 2]); const per = (2 * Math.PI) / k; const ans = T(k === 1 / 2 ? '4\\pi' : k === 2 ? '\\pi' : '\\frac{2\\pi}{' + k + '}'); return Q('Ποια είναι η περίοδος της ' + T('f(x) = \\text{ημ}(' + (k === 1 / 2 ? '\\frac{x}{2}' : k + 'x') + ')') + ';', ans, { ch: mc(ans, [T('2\\pi'), T('\\pi'), T('4\\pi'), T('\\frac{\\pi}{2}'), T('\\frac{2\\pi}{3}')]), at: 'text', ex: 'T = 2π/ω' }); };
+  G.period = () => { const k = pick([2, 3, 4, 1 / 2]); const per = (2 * Math.PI) / k; const ans = T(k === 1 / 2 ? '4\\pi' : k === 2 ? '\\pi' : k === 4 ? '\\frac{\\pi}{2}' : '\\frac{2\\pi}{' + k + '}'); return Q('Ποια είναι η περίοδος της ' + T('f(x) = \\text{ημ}(' + (k === 1 / 2 ? '\\frac{x}{2}' : k + 'x') + ')') + ';', ans, { ch: mc(ans, [T('2\\pi'), T('\\pi'), T('4\\pi'), T('\\frac{\\pi}{2}'), T('\\frac{2\\pi}{3}')]), at: 'text', ex: 'T = 2π/ω' }); };
   G.trigEq = () => { const B = [['\\text{ημ}\\,x = \\frac{1}{2}', 'x = 2κπ + \\frac{\\pi}{6} \\;\\text{ή}\\; x = 2κπ + \\frac{5\\pi}{6}'], ['\\text{συν}\\,x = \\frac{1}{2}', 'x = 2κπ \\pm \\frac{\\pi}{3}'], ['\\text{εφ}\\,x = 1', 'x = κπ + \\frac{\\pi}{4}'], ['\\text{ημ}\\,x = 0', 'x = κπ']]; const [e, a] = pick(B); return Q('Οι λύσεις της ' + T(e) + ' (κ ∈ ℤ) είναι:', T(a), { ch: mc(T(a), B.map((x) => T(x[1])).filter((x) => x !== T(a))), at: 'text' }); };
   G.trigIdent2 = () => { const [a, b, c] = pick([[3, 4, 5], [5, 12, 13], [8, 15, 17]]); return pick([Q('Αν ' + T('\\text{συν}\\,x = \\frac{' + b + '}{' + c + '}') + ' και ' + T('0 < x < \\frac{\\pi}{2}') + ', πόσο είναι η ' + T('\\text{εφ}\\,x') + ';', [a, b], { at: 'frac', show: T('\\frac{' + a + '}{' + b + '}') }), Q('Αν ' + T('\\text{ημ}\\,x = \\frac{' + a + '}{' + c + '}') + ', ' + T('\\frac{\\pi}{2} < x < \\pi') + ', πόσο είναι το ' + T('\\text{συν}\\,x') + ';', [-b, c], { at: 'frac', show: T('-\\frac{' + b + '}{' + c + '}') })]); };
-  G.tuneSin = () => { const A = pick([1, 2, 3]), w = pick([1, 2]); return { q: 'Ρύθμισε τα ρ και ω ώστε η μπλε καμπύλη ' + T('y = ρ\\,\\text{ημ}(ωx)') + ' να συμπέσει με τη διακεκομμένη.', params: [{ n: 'ρ', min: 1, max: 3, step: 1, v: 1 }, { n: 'ω', min: 1, max: 3, step: 1, v: 1 }], f: (P) => (x) => P[0] * Math.sin(P[1] * x), target: (x) => A * Math.sin(w * x), check: (P) => P[0] === A && P[1] === w, want: [A, w], show: 'ρ = ' + A + ', ω = ' + w, win: { xmin: -6.3, xmax: 6.3, ymin: -4, ymax: 4 } }; };
+  G.tuneSin = () => { const A = pick([1, 2, 3]), w = pick([1, 2]); if (A === 1 && w === 1) return G.tuneSin(); /* να μην ξεκινά λυμένη */ return { q: 'Ρύθμισε τα ρ και ω (με ρ > 0 και ω > 0) ώστε η μπλε καμπύλη ' + T('y = ρ\\,\\text{ημ}(ωx)') + ' να συμπέσει με τη διακεκομμένη.', params: [{ n: 'ρ', min: 1, max: 3, step: 1, v: 1 }, { n: 'ω', min: 1, max: 3, step: 1, v: 1 }], f: (P) => (x) => P[0] * Math.sin(P[1] * x), target: (x) => A * Math.sin(w * x), check: (P) => P[0] === A && P[1] === w, want: [A, w], show: 'ρ = ' + A + ', ω = ' + w, win: { xmin: -6.3, xmax: 6.3, ymin: -4, ymax: 4 } }; };
   /* Πολυώνυμα */
   G.polyVal = () => { const co = [rnz(-3, 3), rnz(-4, 4), rnz(-5, 5), rnz(-6, 6)]; const r = rnz(-3, 3); const v = co.reduce((acc, c) => acc * r + c, 0); return pick([Q('Δίνεται ' + T('P(x) = ' + M.tpoly(co)) + '. Πόσο είναι το ' + T('P(' + r + ')') + ';', v), Q('Ποιο είναι το υπόλοιπο της διαίρεσης του ' + T('P(x) = ' + M.tpoly(co)) + ' με το ' + T('x ' + (r < 0 ? '+ ' + -r : '- ' + r)) + ';', v, { ex: 'Θεώρημα υπολοίπου: υ = P(ρ)' })]); };
   G.polyDeg = () => { const n = ri(2, 6); const co = [rnz(-5, 5)].concat(Array.from({ length: n }, () => rnz(-5, 5))); return Q('Τι βαθμού είναι το πολυώνυμο ' + T(M.tpoly(co)) + ';', n); };
   G.polyRoot = () => { const r = rnz(-3, 3), a = rnz(-4, 4), b = rnz(-4, 4); const co = [1, a - r, b - a * r, -b * r]; return Q('Το ' + T('x ' + (r < 0 ? '+ ' + -r : '- ' + r)) + ' είναι παράγοντας του ' + T('P(x) = ' + M.tpoly(co)) + ';', 'Ναι', { ch: ['Ναι', 'Όχι'], at: 'text', ex: 'P(' + r + ') = 0' }); };
   const _pr = G.polyRoot; G.polyRoot = (p) => { if (M.chance(0.5)) return _pr(p); const r = rnz(-3, 3), co = [1, rnz(-3, 3), rnz(-4, 4), rnz(-5, 5)]; const v = co.reduce((acc, c) => acc * r + c, 0); return Q('Το ' + T('x ' + (r < 0 ? '+ ' + -r : '- ' + r)) + ' είναι παράγοντας του ' + T('P(x) = ' + M.tpoly(co)) + ';', v === 0 ? 'Ναι' : 'Όχι', { ch: ['Ναι', 'Όχι'], at: 'text', ex: 'P(' + r + ') = ' + v }); };
-  G.cubicRoots = () => { const r = [rnz(-4, 4), rnz(-4, 4), rnz(-4, 4)]; const co = [1, -(r[0] + r[1] + r[2]), r[0] * r[1] + r[0] * r[2] + r[1] * r[2], -r[0] * r[1] * r[2]]; return Q('Λύσε την εξίσωση ' + T(M.tpoly(co) + ' = 0') + ' (οι ρίζες είναι ακέραιες, χώρισέ τες με ; )', [...new Set(r)], { at: 'set', ex: 'Δοκιμάζουμε διαιρέτες του σταθερού όρου και κάνουμε σχήμα Horner.' }); };
+  G.cubicRoots = () => { const r = [rnz(-4, 4), rnz(-4, 4), rnz(-4, 4)]; const co = [1, -(r[0] + r[1] + r[2]), r[0] * r[1] + r[0] * r[2] + r[1] * r[2], -r[0] * r[1] * r[2]]; return Q('Λύσε την εξίσωση ' + T(M.tpoly(co) + ' = 0') + ' (οι ρίζες είναι ακέραιες. Γράψε τες χωρισμένες με κόμμα και κενό.)', [...new Set(r)], { at: 'set', ex: 'Δοκιμάζουμε διαιρέτες του σταθερού όρου και κάνουμε σχήμα Horner.' }); };
   G.polyDivide = () => { const r = rnz(-3, 3), a = rnz(-4, 4); const q = [1, a]; const co = [1, a - r, -a * r]; const ans = T(M.tpoly(q)); return Q('Βρες το πηλίκο της διαίρεσης ' + T('(' + M.tpoly(co) + ') : (x ' + (r < 0 ? '+ ' + -r : '- ' + r) + ')'), ans, { ch: mc(ans, [T(M.tpoly([1, -a])), T(M.tpoly([1, a + r])), T(M.tpoly([1, r]))]), at: 'text' }); };
   /* Εκθετική, λογάριθμος */
   G.logVal = () => { const B = [() => { const k = ri(1, 5); return ['\\log 10^{' + k + '}', k]; }, () => { const k = ri(1, 4); return ['\\log ' + tn(Math.pow(10, k)), k]; }, () => { const k = ri(1, 6); return ['\\ln e^{' + k + '}', k]; }, () => ['\\log 1', 0], () => { const k = ri(1, 3); return ['\\log 0{,}' + '0'.repeat(k - 1) + '1', -k]; }, () => { const k = ri(2, 5); return ['\\log_{2} ' + Math.pow(2, k), k]; }]; const [e, v] = pick(B)(); return Q(T(e + ' ='), v); };
@@ -2220,7 +2315,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* Διανύσματα */
   G.vecOps = () => { const a = [rnz(-5, 5), rnz(-5, 5)], b = [rnz(-5, 5), rnz(-5, 5)]; const k = rnz(-3, 3); return pick([Q('Αν ' + T('\\vec{α} = (' + a + ')') + ' και ' + T('\\vec{β} = (' + b + ')') + ', ποιο είναι το ' + T('\\vec{α} + \\vec{β}') + '; (x, y)', [a[0] + b[0], a[1] + b[1]], { at: 'pair' }), Q('Αν ' + T('\\vec{α} = (' + a + ')') + ', ποιο είναι το ' + T(k + '\\vec{α}') + '; (x, y)', [k * a[0], k * a[1]], { at: 'pair' })]); };
   G.vecLen = () => { const [x, y] = pick([[3, 4], [6, 8], [5, 12], [8, 15], [0, 7]]); return Q('Πόσο είναι το μέτρο του διανύσματος ' + T('\\vec{α} = (' + (M.chance(0.5) ? -x : x) + ', ' + y + ')') + ';', Math.hypot(x, y)); };
-  G.dot = () => { const a = [rnz(-5, 5), rnz(-5, 5)], b = [rnz(-5, 5), rnz(-5, 5)]; return Q('Υπολόγισε το εσωτερικό γινόμενο ' + T('\\vec{α} \\times \\vec{β}') + ' για ' + T('\\vec{α} = (' + a + ')') + ' και ' + T('\\vec{β} = (' + b + ')') + '.', a[0] * b[0] + a[1] * b[1]); };
+  G.dot = () => { const a = [rnz(-5, 5), rnz(-5, 5)], b = [rnz(-5, 5), rnz(-5, 5)]; return Q('Υπολόγισε το εσωτερικό γινόμενο ' + T('\\vec{α}\\,\\vec{β}') + ' για ' + T('\\vec{α} = (' + a + ')') + ' και ' + T('\\vec{β} = (' + b + ')') + '.', a[0] * b[0] + a[1] * b[1]); };
   G.vecPerp = () => { const a = rnz(-4, 4), b = rnz(-4, 4), c = rnz(-4, 4); if (!c) return G.vecPerp(); const l = (-a * b) / c; if (!Number.isInteger(l)) return G.vecPerp(); return Q('Για ποια τιμή του λ τα διανύσματα ' + T('\\vec{α} = (' + a + ', ' + c + ')') + ' και ' + T('\\vec{β} = (' + b + ', λ)') + ' είναι κάθετα;', l, { ex: 'α×β = 0'.replace('×', ' × ') }); };
   G.midCoord = () => { const A = [rnz(-6, 6), rnz(-6, 6)], B = [A[0] + 2 * rnz(-4, 4), A[1] + 2 * rnz(-4, 4)]; return Q('Βρες το μέσο του τμήματος ΑΒ με ' + T('A(' + A + ')') + ' και ' + T('B(' + B + ')') + '. (x, y)', [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], { at: 'pair' }); };
   /* Ευθεία */
@@ -2236,7 +2331,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.conicKind = () => { const B = [['x^2 + y^2 = 9', 'κύκλος'], ['y^2 = 8x', 'παραβολή'], ['\\frac{x^2}{9} + \\frac{y^2}{4} = 1', 'έλλειψη'], ['\\frac{x^2}{9} - \\frac{y^2}{4} = 1', 'υπερβολή'], ['x^2 = -4y', 'παραβολή'], ['4x^2 + 9y^2 = 36', 'έλλειψη']]; const [e, a] = pick(B); return Q('Τι είδους κωνική τομή είναι η ' + T(e) + ';', a, { ch: ['κύκλος', 'παραβολή', 'έλλειψη', 'υπερβολή'], at: 'text' }); };
 
   /* ---------- Γ΄ Λυκείου ---------- */
-  G.perm = () => { const n = ri(3, 7); return pick([Q('Με πόσους τρόπους μπορούν να καθίσουν ' + n + ' άτομα σε ' + n + ' θέσεις σε σειρά;', fact(n), { ex: n + '!' }), Q('Πόσα διαφορετικά «λέξεις» (με ή χωρίς νόημα) φτιάχνονται με όλα τα γράμματα της λέξης ΑΡΙΘΜΟΣ;', fact(7))]); };
+  G.perm = () => { const n = ri(3, 7); return pick([Q('Με πόσους τρόπους μπορούν να καθίσουν ' + n + ' άτομα σε ' + n + ' θέσεις σε σειρά;', fact(n), { ex: n + '!' }), Q('Πόσες διαφορετικές «λέξεις» (με ή χωρίς νόημα) φτιάχνονται με όλα τα γράμματα της λέξης ΑΡΙΘΜΟΣ;', fact(7))]); };
   G.arrange = () => { const n = ri(5, 9), k = ri(2, 3); return Q('Με πόσους τρόπους μπορούμε να επιλέξουμε πρόεδρο, αντιπρόεδρο' + (k === 3 ? ' και γραμματέα' : '') + ' από ' + n + ' άτομα;', fact(n) / fact(n - k)); };
   G.comb = () => { const n = ri(4, 10), k = ri(2, Math.min(4, n - 1)); return pick([Q('Υπολόγισε τον συνδυασμό ' + T('\\binom{' + n + '}{' + k + '}'), C(n, k)), Q('Με πόσους τρόπους επιλέγουμε ομάδα ' + k + ' ατόμων από ' + n + ' άτομα;', C(n, k))]); };
   G.probComb = () => { const r = ri(3, 6), b = ri(2, 5); const tot = C(r + b, 2), fav = C(r, 2); const [n, d] = M.reduce(fav, tot); return Q('Ένα κουτί έχει ' + r + ' κόκκινες και ' + b + ' μπλε μπάλες. Παίρνουμε τυχαία 2. Ποια είναι η πιθανότητα να είναι και οι δύο κόκκινες; (κλάσμα)', [fav, tot], { at: 'frac', show: T(tf(n, d)) }); };
@@ -2255,16 +2350,16 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.inverse = () => { const a = pick([2, 3, -2, 4, -1]), b = rnz(-6, 6); const ans = T('f^{-1}(x) = \\frac{x ' + (b < 0 ? '+ ' + -b : '- ' + b) + '}{' + a + '}'); return Q('Ποια είναι η αντίστροφη της ' + T('f(x) = ' + M.tlin([[a, 'x'], [b, '']])) + ';', ans, { ch: mc(ans, [T('f^{-1}(x) = \\frac{x ' + (b < 0 ? '- ' + -b : '+ ' + b) + '}{' + a + '}'), T('f^{-1}(x) = ' + M.tlin([[a, 'x'], [-b, '']])), T('f^{-1}(x) = \\frac{1}{' + M.tlin([[a, 'x'], [b, '']]) + '}')]), at: 'text' }); };
   G.oneToOne = () => { const B = [['f(x) = 2x + 1', 'Ναι'], ['f(x) = x^2', 'Όχι'], ['f(x) = x^3', 'Ναι'], ['f(x) = |x|', 'Όχι'], ['f(x) = e^x', 'Ναι'], ['f(x) = \\text{ημ}\\,x', 'Όχι']]; const [e, a] = pick(B); return Q('Είναι η ' + T(e) + ' (με πεδίο ορισμού το ℝ) συνάρτηση 1 προς 1;', a, { ch: ['Ναι', 'Όχι'], at: 'text' }); };
   G.limPoly = () => { const co = [rnz(-3, 3), rnz(-5, 5), rnz(-6, 6)]; const x0 = rnz(-3, 3); return Q('Υπολόγισε ' + T('\\lim_{x \\to ' + x0 + '} (' + M.tpoly(co) + ')'), co[0] * x0 * x0 + co[1] * x0 + co[2]); };
-  G.limZero = () => { const a = rnz(-6, 6), b = rnz(-6, 6); if (a === b) return G.limZero(); return Q('Υπολόγισε ' + T('\\lim_{x \\to ' + a + '} \\frac{' + M.tpoly([1, -(a + b), a * b]) + '}{x ' + (a < 0 ? '+ ' + -a : '- ' + a) + '}'), a - b, { ex: 'Παραγοντοποιούμε και απλοποιούμε τον παράγοντα (x − ' + a + ').' }); };
+  G.limZero = () => { const a = rnz(-6, 6), b = rnz(-6, 6); if (a === b) return G.limZero(); return Q('Υπολόγισε ' + T('\\lim_{x \\to ' + a + '} \\frac{' + M.tpoly([1, -(a + b), a * b]) + '}{x ' + (a < 0 ? '+ ' + -a : '- ' + a) + '}'), a - b, { ex: 'Παραγοντοποιούμε και απλοποιούμε τον παράγοντα (x ' + (a < 0 ? '+ ' + -a : '− ' + a) + ').' }); };
   G.limInf = () => { const a = rnz(-5, 5), b = rnz(-5, 5), c = rnz(-5, 5), d = rnz(-5, 5); const kind = pick(['same', 'lower']); if (kind === 'same') return Q('Υπολόγισε ' + T('\\lim_{x \\to +\\infty} \\frac{' + M.tpoly([a, c]) + '}{' + M.tpoly([b, d]) + '}'), [a, b], { at: 'frac', show: T(tf(a, b, true)), ex: 'Λόγος των μεγιστοβάθμιων συντελεστών' }); return Q('Υπολόγισε ' + T('\\lim_{x \\to +\\infty} \\frac{' + M.tpoly([a, c]) + '}{' + M.tpoly([b, 0, d]) + '}'), 0); };
   G.continuityParam = () => { const x0 = rnz(-3, 3), a = rnz(-3, 3), b = rnz(-4, 4); const val = a * x0 + b; return Q('Για ποια τιμή του κ η συνάρτηση ' + T('f(x) = \\begin{cases} ' + M.tlin([[a, 'x'], [b, '']]) + ', & x < ' + x0 + ' \\\\ x + κ, & x \\ge ' + x0 + ' \\end{cases}') + ' είναι συνεχής;', val - x0); };
   G.bolzano = () => { const B = [['f(x) = x^3 + x - 1', '[0, 1]', 'Ναι'], ['f(x) = x^2 + 1', '[-1, 1]', 'Όχι'], ['f(x) = x^3 - 8', '[0, 3]', 'Ναι'], ['f(x) = e^x', '[0, 2]', 'Όχι']]; const [f, I, a] = pick(B); return Q('Εξασφαλίζει το θεώρημα Bolzano ρίζα της ' + T(f) + ' στο ' + T(I) + ';', a, { ch: ['Ναι', 'Όχι'], at: 'text', ex: 'Ελέγχουμε αν f(α)×f(β) < 0'.replace('×', ' × ') }); };
-  G.deriv = () => { const n = ri(2, 6), a = rnz(-5, 5); const B = [['x^{' + n + '}', n + 'x^{' + (n - 1) + '}', [n + 'x^{' + n + '}', 'x^{' + (n - 1) + '}', (n - 1) + 'x^{' + n + '}']], ['\\text{ημ}\\,x', '\\text{συν}\\,x', ['-\\text{συν}\\,x', '\\text{ημ}\\,x', '-\\text{ημ}\\,x']], ['\\text{συν}\\,x', '-\\text{ημ}\\,x', ['\\text{ημ}\\,x', '\\text{συν}\\,x', '-\\text{συν}\\,x']], ['e^{x}', 'e^{x}', ['xe^{x - 1}', 'e', '\\ln x']], ['\\ln x', '\\frac{1}{x}', ['\\ln x', 'x', 'e^{x}']], ['\\sqrt{x}', '\\frac{1}{2\\sqrt{x}}', ['\\frac{1}{\\sqrt{x}}', '2\\sqrt{x}', '\\frac{\\sqrt{x}}{2}']], [a + 'x^2', 2 * a + 'x', [a + 'x', 2 * a + 'x^2', a * a + 'x']]]; const [f, d, w] = pick(B); return Q('Ποια είναι η παράγωγος της ' + T('f(x) = ' + f) + ';', T("f'(x) = " + d), { ch: mc(T("f'(x) = " + d), w.map((x) => T("f'(x) = " + x))), at: 'text' }); };
+  G.deriv = () => { const n = ri(2, 6), a = rnz(-5, 5); const px = (k) => (k === 0 ? '1' : k === 1 ? 'x' : 'x^{' + k + '}'); const cf = (c, k) => (c === 1 ? px(k) : c === -1 ? '-' + px(k) : c + px(k)); const B = [['x^{' + n + '}', cf(n, n - 1), [cf(n, n), px(n - 1), cf(n - 1, n)]], ['\\text{ημ}\\,x', '\\text{συν}\\,x', ['-\\text{συν}\\,x', '\\text{ημ}\\,x', '-\\text{ημ}\\,x']], ['\\text{συν}\\,x', '-\\text{ημ}\\,x', ['\\text{ημ}\\,x', '\\text{συν}\\,x', '-\\text{συν}\\,x']], ['e^{x}', 'e^{x}', ['xe^{x - 1}', 'e', '\\ln x']], ['\\ln x', '\\frac{1}{x}', ['\\ln x', 'x', 'e^{x}']], ['\\sqrt{x}', '\\frac{1}{2\\sqrt{x}}', ['\\frac{1}{\\sqrt{x}}', '2\\sqrt{x}', '\\frac{\\sqrt{x}}{2}']], [cf(a, 2), cf(2 * a, 1), [cf(a, 1), cf(2 * a, 2), cf(a * a === 2 * a ? a * a + 1 : a * a, 1)]]]; const [f, d, w] = pick(B); return Q('Ποια είναι η παράγωγος της ' + T('f(x) = ' + f) + ';', T("f'(x) = " + d), { ch: mc(T("f'(x) = " + d), w.map((x) => T("f'(x) = " + x))), at: 'text' }); };
   G.derivVal = () => { const co = [rnz(-2, 2), rnz(-4, 4), rnz(-5, 5), rnz(-6, 6)]; const x0 = rnz(-3, 3); const v = 3 * co[0] * x0 * x0 + 2 * co[1] * x0 + co[2]; return Q('Για ' + T('f(x) = ' + M.tpoly(co)) + ', πόσο είναι το ' + T("f'(" + x0 + ')') + ';', v); };
   G.tangentSlope = () => { const a = rnz(-3, 3), b = rnz(-4, 4), x0 = rnz(-3, 3); return Q('Πόση είναι η κλίση της εφαπτομένης της ' + T('f(x) = ' + M.tpoly([a, b, 0])) + ' στο σημείο με τετμημένη ' + x0 + ';', 2 * a * x0 + b); };
   G.critical = () => { const r1 = rnz(-4, 1), r2 = r1 + ri(1, 5); return Q('Η ' + T("f'(x) = 3(x " + (r1 < 0 ? '+ ' + -r1 : '- ' + r1) + ')(x ' + (r2 < 0 ? '+ ' + -r2 : '- ' + r2) + ')') + '. Σε ποιο x η f παρουσιάζει τοπικό μέγιστο;', r1, { ex: "Η f' αλλάζει από θετική σε αρνητική στο x = " + r1 }); };
   G.monoDeriv = () => { const r = rnz(-3, 3); const up = M.chance(0.5); const ans = up ? 'γνησίως αύξουσα' : 'γνησίως φθίνουσα'; return Q('Αν ' + T("f'(x) " + (up ? '>' : '<') + ' 0') + ' για κάθε ' + T('x > ' + r) + ', τότε στο ' + T('(' + r + ', +\\infty)') + ' η f είναι:', ans, { ch: ['γνησίως αύξουσα', 'γνησίως φθίνουσα', 'σταθερή'], at: 'text' }); };
-  G.antideriv = () => { const n = ri(1, 5); const B = [['x^{' + n + '}', '\\frac{x^{' + (n + 1) + '}}{' + (n + 1) + '} + c', ['x^{' + (n + 1) + '} + c', n + 'x^{' + (n - 1) + '} + c', '\\frac{x^{' + n + '}}{' + n + '} + c']], ['\\text{συν}\\,x', '\\text{ημ}\\,x + c', ['-\\text{ημ}\\,x + c', '\\text{συν}\\,x + c', '-\\text{συν}\\,x + c']], ['\\frac{1}{x}', '\\ln|x| + c', ['-\\frac{1}{x^2} + c', 'x + c', 'e^x + c']], ['e^{x}', 'e^{x} + c', ['xe^{x} + c', '\\ln x + c', 'e + c']]]; const [f, F, w] = pick(B); return Q('Ποιο είναι το αόριστο ολοκλήρωμα ' + T('\\int ' + f + '\\,dx') + ';', T(F), { ch: mc(T(F), w.map(T)), at: 'text' }); };
+  G.antideriv = () => { const n = ri(2, 5); const B = [['x^{' + n + '}', '\\frac{x^{' + (n + 1) + '}}{' + (n + 1) + '} + c', ['x^{' + (n + 1) + '} + c', n + (n === 2 ? 'x' : 'x^{' + (n - 1) + '}') + ' + c', '\\frac{x^{' + n + '}}{' + n + '} + c']], ['x', '\\frac{x^{2}}{2} + c', ['x^{2} + c', '1 + c', '2x^{2} + c']], ['\\text{συν}\\,x', '\\text{ημ}\\,x + c', ['-\\text{ημ}\\,x + c', '\\text{συν}\\,x + c', '-\\text{συν}\\,x + c']], ['\\frac{1}{x}', '\\ln|x| + c', ['-\\frac{1}{x^2} + c', 'x + c', 'e^x + c']], ['e^{x}', 'e^{x} + c', ['xe^{x} + c', '\\ln x + c', 'e + c']]]; const [f, F, w] = pick(B); return Q('Ποιο είναι το αόριστο ολοκλήρωμα ' + T('\\int ' + f + '\\,dx') + ';', T(F), { ch: mc(T(F), w.map(T)), at: 'text' }); };
   G.defInt = () => { const a = rnz(-3, 3), b = rnz(-4, 4), lo = ri(0, 2), hi = lo + ri(1, 3); const F = (x) => (a * x * x * x) / 3 + (b * x * x) / 2; const v = round(F(hi) - F(lo), 4); return Q('Υπολόγισε ' + T('\\int_{' + lo + '}^{' + hi + '} (' + M.tpoly([a, b, 0]) + ')\\,dx'), v, { tol: 0.01 }); };
   G.areaUnder = () => { const k = ri(1, 3), hi = ri(1, 3); return Q('Βρες το εμβαδόν του χωρίου που περικλείεται από τη ' + T('f(x) = ' + (k === 1 ? '' : k) + 'x^2') + ', τον άξονα x και τις ευθείες x = 0 και x = ' + hi + '.', round((k * hi * hi * hi) / 3, 4), { tol: 0.01, vis: M.plot([(x) => k * x * x], { xmin: -1, xmax: 4, ymin: -1, ymax: 10 }) }); };
 })();
@@ -2284,9 +2379,20 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   G.ordinal = (p = {}) => { const n = p.n || 5; const row = sample(ANIMALS, n); const k = ri(0, n - 1); const fromLeft = M.chance(0.6) || !p.both; const pos = fromLeft ? k : n - 1 - k; return Q('Ποιο ζωάκι είναι ' + ORD[pos] + ' από ' + (fromLeft ? 'αριστερά' : 'δεξιά') + ';', row[k], { vis: `<div class="mm-emoji" style="font-size:36px;gap:.4em">${row.join(' ')}</div>`, ch: mc(row[k], row.filter((x) => x !== row[k])), at: 'text' }); };
   G.between = (p = {}) => { const row = sample(ANIMALS, 5); const k = ri(1, 3); return Q('Ποιο ζωάκι είναι ανάμεσα στο ' + row[k - 1] + ' και στο ' + row[k + 1] + ';', row[k], { vis: `<div class="mm-emoji" style="font-size:36px;gap:.4em">${row.join(' ')}</div>`, ch: mc(row[k], row.filter((x) => x !== row[k])), at: 'text' }); };
   G.inOut = () => { const B = [['🐟', 'μέσα', 'στη γυάλα'], ['🐦', 'πάνω', 'στο κλαδί'], ['🐱', 'κάτω', 'από το τραπέζι'], ['⚽', 'μπροστά', 'από το τέρμα'], ['🌳', 'πίσω', 'από το σπίτι'], ['🐭', 'έξω', 'από την τρύπα']]; const [e, w, rest] = pick(B); return Q('Το ' + e + ' είναι ... ' + rest + '. Ποια λέξη ταιριάζει;', w, { ch: mc(w, ['μέσα', 'έξω', 'πάνω', 'κάτω', 'μπροστά', 'πίσω'].filter((x) => x !== w)), at: 'text' }); };
-  G.shapeSort = (p = {}) => { const cats = p.cats || ['τρίγωνο', 'τετράγωνο', 'κύκλος']; const s = pick(cats); const lab = { 'τρίγωνο': 'Τρίγωνα', 'τετράγωνο': 'Τετράγωνα', 'κύκλος': 'Κύκλοι', 'ορθογώνιο': 'Ορθογώνια' }; return { q: M.shape(s, 54, pick(M.PAL)), a: lab[s], cats: cats.map((c) => lab[c]) }; };
+  G.shapeSort = (p = {}) => { const cats = p.cats || ['τρίγωνο', 'τετράγωνο', 'κύκλος']; const s = pick(cats); const lab = { 'τρίγωνο': 'Τρίγωνα', 'τετράγωνο': 'Τετράγωνα', 'κύκλος': 'Κύκλοι', 'ορθογώνιο': 'Ορθογώνια (όχι τετράγωνα)' }; return { q: M.shape(s, 54, pick(M.PAL)), a: lab[s], cats: cats.map((c) => lab[c]) }; };
   G.countShape = () => { const target = pick(['τρίγωνο', 'κύκλος', 'τετράγωνο']); const k = ri(2, 5); const others = ri(2, 4); const list = shuffle(Array(k).fill(target).concat(Array.from({ length: others }, () => pick(['τρίγωνο', 'κύκλος', 'τετράγωνο'].filter((x) => x !== target))))); const nm = { 'τρίγωνο': 'τρίγωνα', 'κύκλος': 'κύκλους', 'τετράγωνο': 'τετράγωνα' }[target]; return Q((target === "κύκλος" ? "Πόσους " : "Πόσα ") + nm + ' βλέπεις;', k, { vis: `<div class="flex flex-wrap gap-2 justify-center">${list.map((s) => `<span style="width:54px">${M.shape(s, 54, pick(M.PAL))}</span>`).join('')}</div>` }); };
   G.dice = (p = {}, t) => { const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']; const n = t ?? ri(1, 6); return Q('Πόσες τελείες έχει το ζάρι;', n, { vis: `<div style="font-size:84px;text-align:center;line-height:1">${faces[n - 1]}</div>` }); };
+  /* πιθανότητα με δύο ζάρια: 36 ισοπίθανα αποτελέσματα */
+  G.prob2dice = () => {
+    const all = []; for (let i = 1; i <= 6; i++) for (let j = 1; j <= 6; j++) all.push([i, j]);
+    const k = ri(3, 11); const B = [
+      ['το άθροισμα να είναι ' + k, ([i, j]) => i + j === k], ['να φέρουμε τον ίδιο αριθμό και στα δύο ζάρια', ([i, j]) => i === j],
+      ['το άθροισμα να είναι μεγαλύτερο από ' + k, ([i, j]) => i + j > k], ['να φέρουμε τουλάχιστον ένα 6', ([i, j]) => i === 6 || j === 6],
+      ['και τα δύο ζάρια να φέρουν άρτιο', ([i, j]) => i % 2 === 0 && j % 2 === 0]];
+    const [txt, f] = pick(B); const n = all.filter(f).length; if (!n) return G.prob2dice();
+    const g = M.gcd(n, 36);
+    return Q('Ρίχνουμε δύο ζάρια. Ποια είναι η πιθανότητα ' + txt + ';', [n, 36], { at: 'frac', show: T('\\frac{' + n + '}{36}' + (g > 1 ? ' = \\frac{' + n / g + '}{' + 36 / g + '}' : '')), ex: 'Ευνοϊκά αποτελέσματα ' + n + ' από τα 36' });
+  };
   G.dice2 = (p = {}, t) => { const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']; const a = ri(1, 6), b = ri(1, 6); return Q('Πόσες τελείες έχουν και τα δύο ζάρια μαζί;', a + b, { vis: `<div style="font-size:72px;text-align:center;line-height:1">${faces[a - 1]} ${faces[b - 1]}</div>` }); };
   G.biggest = (p = {}) => { const set = new Set(); while (set.size < 4) set.add(ri(p.min || 0, p.max || 10)); const arr = [...set]; const small = p.small ?? M.chance(0.4); const ans = small ? Math.min(...arr) : Math.max(...arr); return Q('Ποιος αριθμός είναι ο ' + (small ? 'μικρότερος' : 'μεγαλύτερος') + ';', fmt(ans), { ch: arr.map(fmt), at: 'text' }); };
   G.evenOdd = (p = {}) => { const n = ri(p.min || 1, p.max || 20); return { q: `<span style="font-size:1.3rem;font-weight:800">${fmt(n)}</span>`, a: n % 2 ? 'Μονός' : 'Ζυγός', cats: ['Ζυγός', 'Μονός'] }; };
@@ -2447,7 +2553,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
   /* παραγοντοποίηση με πολλές μεθόδους */
   G.factorMix = () => {
     const k = ri(1, 6), a = ri(2, 5); const kind = pick(['group', 'cube', 'commonDiff', 'commonSq']); let e, ans, w;
-    if (kind === 'group') { e = 'x^2 + ' + a + 'x + ' + k + 'x + ' + a * k; ans = '(x + ' + a + ')(x + ' + k + ')'; w = ['x(x + ' + (a + k) + ')', '(x + ' + a * k + ')(x + 1)', '(x - ' + a + ')(x - ' + k + ')']; if (a === k) return G.factorMix(); }
+    if (kind === 'group') { e = 'x^2 + ' + a + 'x + ' + (k === 1 ? '' : k) + 'x + ' + a * k; ans = '(x + ' + a + ')(x + ' + k + ')'; w = ['x(x + ' + (a + k) + ')', '(x + ' + a * k + ')(x + 1)', '(x - ' + a + ')(x - ' + k + ')']; if (a === k) return G.factorMix(); }
     else if (kind === 'cube') { e = 'x^3 - ' + k * k * k; ans = '(x - ' + k + ')(x^2 + ' + (k === 1 ? '' : k) + 'x + ' + k * k + ')'; w = ['(x - ' + k + ')^3', '(x - ' + k + ')(x^2 - ' + (k === 1 ? '' : k) + 'x + ' + k * k + ')', '(x - ' + k + ')(x + ' + k + ')^2']; }
     else if (kind === 'commonDiff') { e = a + 'x^2 - ' + a * k * k; ans = a + '(x - ' + k + ')(x + ' + k + ')'; w = [a + '(x - ' + k + ')^2', '(' + a + 'x - ' + k + ')(x + ' + k + ')', a + 'x(x - ' + k * k + ')']; }
     else { e = a + 'x^2 + ' + 2 * a * k + 'x + ' + a * k * k; ans = a + '(x + ' + k + ')^2'; w = ['(' + a + 'x + ' + k + ')^2', a + '(x - ' + k + ')^2', a + '(x + ' + k + ')(x - ' + k + ')']; }
@@ -2500,7 +2606,7 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     const x = ri(3, 12), d = ri(1, 6); const kind = pick(['rect', 'sq', 'num']);
     if (kind === 'rect') return Q('Ένα ορθογώνιο έχει μήκος κατά ' + d + ' εκ. μεγαλύτερο από το πλάτος του και εμβαδόν ' + x * (x + d) + ' τ.εκ. Πόσο είναι το πλάτος του;', x, { unit: 'εκ.', ex: 'x(x + ' + d + ') = ' + x * (x + d) + ', κρατώ τη θετική λύση.' });
     if (kind === 'sq') return Q('Αν αυξήσουμε την πλευρά ενός τετραγώνου κατά ' + d + ' εκ., το εμβαδόν του γίνεται ' + (x + d) * (x + d) + ' τ.εκ. Πόση είναι η πλευρά του;', x, { unit: 'εκ.', ex: '(x + ' + d + ')² = ' + (x + d) * (x + d) + ', άρα x + ' + d + ' = ' + (x + d) });
-    return Q('Το τετράγωνο ενός θετικού αριθμού αυξημένο κατά το ' + d + 'πλάσιό του κάνει ' + (x * x + d * x) + '. Ποιος είναι ο αριθμός;', x, { ex: 'x² + ' + d + 'x = ' + (x * x + d * x) });
+    return Q('Το τετράγωνο ενός θετικού αριθμού αυξημένο κατά ' + (d === 1 ? 'τον ίδιο τον αριθμό' : 'το ' + ['', '', 'διπλάσιο', 'τριπλάσιο', 'τετραπλάσιο', 'πενταπλάσιο', 'εξαπλάσιο'][d] + ' του') + ' κάνει ' + (x * x + d * x) + '. Ποιος είναι ο αριθμός;', x, { ex: 'x² + ' + (d === 1 ? '' : d) + 'x = ' + (x * x + d * x) });
   };
   /* είδος λύσεων από τη διακρίνουσα, με α ≠ 1 */
   G.quadDiscKind = () => {
@@ -2599,6 +2705,296 @@ body { font-family: 'Nunito', sans-serif; transition: background-color .5s ease,
     do { i = ri(1, 15); f = pick(['ημ', 'συν', 'εφ']); const a = (A[i][0] * Math.PI) / 180; v = f === 'ημ' ? Math.sin(a) : f === 'συν' ? Math.cos(a) : Math.tan(a); } while (Math.abs(v) < 1e-9 || Math.abs(v) > 1e6 || !isFinite(v));
     return { q: T('\\text{' + f + '}' + angleTex(i, (p && p.mode) || 'rad')), a: v > 0 ? cats[0] : cats[1], cats };
   };
+})();
+
+</script>
+<script>/* assets/gens7.js */
+/* Mathimagika: γεννήτριες Α΄ Γυμνασίου (γωνίες, παράλληλες και τέμνουσα, τρίγωνα, διαιρετότητα, ευκλείδεια διαίρεση, κλάσματα) */
+(function () {
+  const G = window.G;
+  const { ri, rnz, pick, shuffle } = M;
+  const Q = (q, a, o) => Object.assign({ q, a }, o || {});
+  const T = (tex) => '$' + tex + '$';
+  const tn = (n) => M.fmt(n);
+  const RAD = Math.PI / 180;
+  const deg = (d) => d + '°';
+  /* έκφραση kx + c για ετικέτες γωνιών */
+  const ex = (k, c) => (k === 1 ? 'x' : k + 'x') + (c > 0 ? ' + ' + c + '°' : c < 0 ? ' − ' + -c + '°' : '');
+  const exT = (k, c) => (k === 1 ? 'x' : k + 'x') + (c > 0 ? ' + ' + c : c < 0 ? ' - ' + -c : '');
+
+  /* ---------- σχήματα ---------- */
+  const W = 320, H = 210;
+  const pt = (cx, cy, r, d) => [cx + r * Math.cos(d * RAD), cy - r * Math.sin(d * RAD)];
+  const arc = (cx, cy, r, d1, d2, col) => { const [x1, y1] = pt(cx, cy, r, d1), [x2, y2] = pt(cx, cy, r, d2); const big = (d2 - d1 + 360) % 360 > 180 ? 1 : 0; return `<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${big} 0 ${x2.toFixed(1)},${y2.toFixed(1)}" fill="none" stroke="${col}" stroke-width="2.4"/>`; };
+  /* ετικέτα με φόντο (περίγραμμα στο χρώμα της σελίδας), για να διαβάζεται πάνω στις γραμμές */
+  const lab = (cx, cy, r, d, s, col, fs) => { const [x, y] = pt(cx, cy, r, d); return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${fs || 14}" text-anchor="middle" dominant-baseline="middle" fill="${col || '#dc2626'}" font-weight="700" style="paint-order:stroke;stroke:var(--mm-paper,#fff);stroke-width:4px;stroke-linejoin:round">${s}</text>`; };
+  const ray = (cx, cy, r, d, w) => { const [x, y] = pt(cx, cy, r, d); return `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="currentColor" stroke-width="${w || 2.6}"/>`; };
+  const sq = (cx, cy, d, s) => { const a = pt(cx, cy, s, d), b = pt(cx, cy, s * Math.SQRT2, d + 45), c = pt(cx, cy, s, d + 90); return `<polyline points="${a.join(',')} ${b.join(',')} ${c.join(',')}" fill="none" stroke="#dc2626" stroke-width="2"/>`; };
+  const COL = ['#dc2626', '#2563eb', '#16a34a', '#d97706'];
+
+  /* ακτίνες από ένα σημείο Ο: rays = [[μοίρες, όνομα]], arcs = [[από, έως, ετικέτα]] */
+  M.raysFig = function (rays, arcs, o = {}) {
+    const cx = o.cx || W / 2, cy = o.cy || H - 40, R = o.R || 120;
+    let s = '';
+    rays.forEach(([d, n]) => { s += ray(cx, cy, R, d); if (n) s += lab(cx, cy, R + 14, d, n, 'currentColor', 15); });
+    arcs.forEach(([d1, d2, t, right], k) => {
+      const col = COL[k % COL.length];
+      if (right) s += sq(cx, cy, d1, 13); else s += arc(cx, cy, 30 + 8 * (k % 2), d1, d2, col);
+      if (t) s += lab(cx, cy, 64 + 10 * (k % 2), (d1 + ((d2 - d1 + 360) % 360) / 2) % 360, t, col);
+    });
+    s += M.txt(cx - 6, cy + 16, 'Ο', { fs: 15 });
+    return M.svg(W, H, s);
+  };
+  /* δύο τεμνόμενες ευθείες: γωνία θ και οι τέσσερις ετικέτες (από τη γωνία 0 έως θ, αριστερόστροφα) */
+  M.crossFig = function (th, labels) {
+    const cx = W / 2, cy = H / 2, R = 125; let s = '';
+    s += `<line x1="${pt(cx, cy, R, 0).join(',').split(',')[0]}" y1="${cy}" x2="${pt(cx, cy, R, 180)[0]}" y2="${cy}" stroke="currentColor" stroke-width="2.6"/>`;
+    const a = pt(cx, cy, R, th), b = pt(cx, cy, R, th + 180); s += `<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="currentColor" stroke-width="2.6"/>`;
+    const sec = [[0, th], [th, 180], [180, 180 + th], [180 + th, 360]];
+    sec.forEach(([d1, d2], k) => { if (labels[k] == null) return; const col = COL[k]; s += arc(cx, cy, 26 + (k % 2) * 6, d1, d2, col); s += lab(cx, cy, 50, (d1 + d2) / 2, labels[k], col); });
+    s += M.txt(cx + 2, cy + 16, 'Ο', { fs: 13 });
+    return M.svg(W, H, s);
+  };
+  /* δύο παράλληλες ευθείες ε1, ε2 και τέμνουσα ε με κλίση θ. Γωνίες 1 έως 8: 1 πάνω δεξιά, 2 πάνω αριστερά, 3 κάτω αριστερά, 4 κάτω δεξιά (πάνω τομή), 5 έως 8 ίδια σειρά στην κάτω τομή */
+  const PSEC = (th) => [[0, th], [th, 180], [180, 180 + th], [180 + th, 360]];
+  M.parFig = function (th, marks, o = {}) {
+    const y1 = 70, y2 = 150, x0 = 165, dx = (y2 - y1) / Math.tan(th * RAD); const P = [[x0, y1], [x0 - dx, y2]];
+    let s = `<line x1="15" y1="${y1}" x2="${W - 15}" y2="${y1}" stroke="currentColor" stroke-width="2.6"/><line x1="15" y1="${y2}" x2="${W - 15}" y2="${y2}" stroke="currentColor" stroke-width="2.6"/>`;
+    const e1 = pt(P[0][0], P[0][1], 60, th), e2 = pt(P[1][0], P[1][1], 60, th + 180);
+    s += `<line x1="${e1[0].toFixed(1)}" y1="${e1[1].toFixed(1)}" x2="${e2[0].toFixed(1)}" y2="${e2[1].toFixed(1)}" stroke="currentColor" stroke-width="2.6"/>`;
+    s += M.txt(W - 22, y1 - 12, 'ε₁', { fs: 14 }) + M.txt(W - 22, y2 - 12, 'ε₂', { fs: 14 }) + M.txt(e1[0] + 10, e1[1] + 2, 'ε', { fs: 14 });
+    if (!o.noArrows) s += `<path d="M${W - 70},${y1 - 5} l8,5 l-8,5 M${W - 70},${y2 - 5} l8,5 l-8,5" fill="none" stroke="currentColor" stroke-width="1.8"/>`;
+    (marks || []).forEach(([n, t], k) => { const p = P[n <= 4 ? 0 : 1]; const [d1, d2] = PSEC(th)[(n - 1) % 4]; const col = COL[k % COL.length]; s += arc(p[0], p[1], 20, d1, d2, col); s += lab(p[0], p[1], 36, (d1 + d2) / 2, t == null ? String(n) : t, col, 13); });
+    return M.svg(W, H, s);
+  };
+  /* τρίγωνο με κορυφές Α (πάνω), Β, Γ (βάση) και προέκταση της ΒΓ πέρα από το Γ */
+  M.triExtFig = function (B, C, labels, extLabel, o = {}) {
+    const bx = 40, by = 170, cx = 210, cy = 170; const A = 180 - B - C;
+    const side = (cx - bx) * Math.sin(C * RAD) / Math.sin(A * RAD); const ax = bx + side * Math.cos(B * RAD), ay = by - side * Math.sin(B * RAD);
+    const sc = Math.min(1, 150 / (by - ay)); const ax2 = bx + (ax - bx) * sc, ay2 = by - (by - ay) * sc, cx2 = bx + (cx - bx) * sc;
+    let s = `<polygon points="${bx},${by} ${cx2},${cy} ${ax2.toFixed(1)},${ay2.toFixed(1)}" fill="#fde68a" fill-opacity=".45" stroke="currentColor" stroke-width="2.4"/>`;
+    s += `<line x1="${cx2}" y1="${cy}" x2="${cx2 + 80}" y2="${cy}" stroke="currentColor" stroke-width="2.4"/>`;
+    s += M.txt(ax2, ay2 - 12, 'Α', { fs: 15 }) + M.txt(bx - 12, by + 4, 'Β', { fs: 15 }) + M.txt(cx2 + 2, cy + 16, 'Γ', { fs: 15 }) + M.txt(cx2 + 78, cy + 16, 'Δ', { fs: 15 });
+    const angA = Math.atan2(by - ay2, ax2 - bx) / RAD; // κατεύθυνση ΒΑ
+    const angCA = Math.atan2(cy - ay2, ax2 - cx2) / RAD; // κατεύθυνση ΓΑ
+    if (labels[1] != null) { s += arc(bx, by, 26, 0, angA, COL[0]); s += lab(bx, by, 46, angA / 2, labels[1], COL[0], 13); }
+    if (labels[0] != null) { const d1 = angA + 180, d2 = angCA + 180; s += arc(ax2, ay2, 22, d1, d2, COL[1]); s += lab(ax2, ay2, 40, (d1 + d2) / 2, labels[0], COL[1], 13); }
+    if (labels[2] != null) { s += arc(cx2, cy, 22, angCA, 180, COL[2]); s += lab(cx2, cy, 42, (angCA + 180) / 2, labels[2], COL[2], 13); }
+    if (extLabel != null) { s += arc(cx2, cy, 30, 0, angCA, COL[3]); s += lab(cx2, cy, 52, angCA / 2, extLabel, COL[3], 13); }
+    if (o.iso) { const m1 = [(bx + ax2) / 2, (by + ay2) / 2], m2 = [(cx2 + ax2) / 2, (cy + ay2) / 2]; [m1, m2].forEach(([x, y]) => (s += `<circle cx="${x}" cy="${y}" r="3.5" fill="#2563eb"/>`)); }
+    return M.svg(W, H + 5, s);
+  };
+
+  /* ---------- Γωνίες ---------- */
+  /* εφεξής γωνίες που σχηματίζουν ορθή ή ευθεία γωνία, με εκφράσεις του x */
+  G.angAdjFig = (p = {}) => {
+    const full = p.full || pick([90, 180]);
+    for (let g = 0; g < 200; g++) {
+      const k1 = ri(1, 5), k2 = ri(1, 5), c1 = pick([0, 0, 10, -10, 20, 30]), c2 = pick([0, 0, 10, -10, 15]);
+      const x = (full - c1 - c2) / (k1 + k2); if (!Number.isInteger(x) || x <= 0) continue;
+      const a1 = k1 * x + c1, a2 = k2 * x + c2; if (a1 < 15 || a2 < 15) continue;
+      const fig = full === 90 ? M.raysFig([[0, 'Α'], [a1, 'Γ'], [90, 'Β']], [[0, 90, null, true], [0, a1, ex(k1, c1)], [a1, 90, ex(k2, c2)]], { cy: H - 30, cx: 110 }) : M.raysFig([[0, 'Β'], [a1, 'Γ'], [180, 'Α']], [[0, a1, ex(k1, c1)], [a1, 180, ex(k2, c2)]]);
+      const askAngle = M.chance(0.4) && (k1 > 1 || c1);
+      return Q(askAngle ? 'Στο σχήμα, πόσες μοίρες είναι η γωνία που σημειώνεται με ' + T(exT(k1, c1)) + ';' : 'Βρες το x στο σχήμα.', askAngle ? a1 : x, { vis: fig, unit: askAngle ? '°' : '', ex: '(' + ex(k1, c1) + ') + (' + ex(k2, c2) + ') = ' + full + '°, άρα x = ' + x + '°' + (askAngle ? ' και η γωνία είναι ' + a1 + '°' : '') });
+    }
+    return G.compSupp();
+  };
+  /* τεμνόμενες ευθείες: κατακορυφήν και εφεξής παραπληρωματικές */
+  G.angCrossFig = () => {
+    for (let g = 0; g < 200; g++) {
+      const k = ri(1, 4), c = pick([0, 10, 20, -10, 30]), th = ri(35, 145);
+      if ((th - c) % k) continue; const x = (th - c) / k; if (x <= 0) continue;
+      const other = 180 - th; const kind = pick(['vert', 'supp', 'y']);
+      const L = [ex(k, c), null, null, null];
+      if (kind === 'vert') { L[2] = th + '°'; return Q('Στο σχήμα δύο ευθείες τέμνονται. Βρες το x.', x, { vis: M.crossFig(th, L), ex: 'Οι κατακορυφήν γωνίες είναι ίσες: ' + ex(k, c) + ' = ' + th + '°, άρα x = ' + x + '°' }); }
+      if (kind === 'supp') { L[1] = other + '°'; return Q('Στο σχήμα δύο ευθείες τέμνονται. Βρες το x.', x, { vis: M.crossFig(th, L), ex: 'Οι εφεξής γωνίες σε ευθεία είναι παραπληρωματικές: ' + ex(k, c) + ' + ' + other + '° = 180°, άρα x = ' + x + '°' }); }
+      const L2 = [th + '°', 'y', null, null]; return Q('Στο σχήμα δύο ευθείες τέμνονται. Πόσες μοίρες είναι η γωνία y;', other, { vis: M.crossFig(th, L2), unit: '°', ex: 'y = 180° − ' + th + '° = ' + other + '°' });
+    }
+  };
+  /* τεμνόμενες ευθείες με εκφράσεις: x + α και 2x − β κατακορυφήν, y εφεξής */
+  G.angCrossXY = () => {
+    for (let g = 0; g < 300; g++) {
+      const a = ri(10, 60), b = ri(5, 35); const x = a + b, th = x + a; if (th < 40 || th > 140) continue;
+      const y = 180 - th; const L = ['x + ' + a + '°', 'y', '2x − ' + b + '°', null]; const askX = M.chance(0.5);
+      return Q('Στο σχήμα δύο ευθείες τέμνονται. Βρες ' + (askX ? 'το x.' : 'τη γωνία y.'), askX ? x : y, { vis: M.crossFig(th, L), unit: askX ? '' : '°', ex: 'Κατακορυφήν: x + ' + a + '° = 2x − ' + b + '°, άρα x = ' + x + '°.' + (askX ? '' : ' Η γωνία x + ' + a + '° είναι ' + th + '°, άρα y = 180° − ' + th + '° = ' + y + '°') });
+    }
+  };
+  /* προβλήματα με λόγια (συμπληρωματικές και παραπληρωματικές) */
+  G.angWord = () => {
+    const S = pick([90, 180]), nm = S === 90 ? 'συμπληρωματικές' : 'παραπληρωματικές', nm1 = S === 90 ? 'συμπληρωματική' : 'παραπληρωματική';
+    const kind = pick(['times', 'diff', 'ratio', 'less']);
+    if (kind === 'times') { const k = pick([2, 3, 4, 5, 8]); if (S % (k + 1)) return G.angWord(); const x = S / (k + 1); return Q('Δύο γωνίες είναι ' + nm + ' και η μία είναι ' + ['', '', 'διπλάσια', 'τριπλάσια', 'τετραπλάσια', 'πενταπλάσια', '', '', 'οκταπλάσια'][k] + ' της άλλης. Πόσες μοίρες είναι η μικρότερη;', x, { unit: '°', ex: 'x + ' + k + 'x = ' + S + '°, άρα x = ' + x + '°' }); }
+    if (kind === 'diff') { const d = ri(1, 7) * 10 + pick([0, 5]); if ((S + d) % 2) return G.angWord(); const big = (S + d) / 2; return Q('Μια γωνία είναι κατά ' + d + '° μεγαλύτερη από την ' + nm1 + ' της. Πόσες μοίρες είναι;', big, { unit: '°', ex: 'x + (x − ' + d + '°) = ' + S + '°, άρα x = ' + big + '°' }); }
+    if (kind === 'less') { const d = ri(4, 40); if ((S - d) % 2 || (S - d) / 2 < 5) return G.angWord(); const sm = (S - d) / 2; return Q('Μια γωνία είναι κατά ' + d + '° μικρότερη από την ' + nm1 + ' της. Πόσες μοίρες είναι;', sm, { unit: '°', ex: 'x + (x + ' + d + '°) = ' + S + '°, άρα x = ' + sm + '°' }); }
+    const [a, b] = pick([[1, 2], [2, 3], [4, 5], [5, 4], [1, 5], [7, 2], [3, 1], [5, 13]]); if (S % (a + b)) return G.angWord(); const u = S / (a + b);
+    return Q('Δύο γωνίες ω και φ είναι ' + nm + ' και τα μέτρα τους είναι ανάλογα των αριθμών ' + a + ' και ' + b + '. Πόσες μοίρες είναι η ω;', a * u, { unit: '°', ex: 'ω = ' + a + 'κ, φ = ' + b + 'κ, ' + (a + b) + 'κ = ' + S + '°, κ = ' + u + '°' });
+  };
+  /* Σωστό ή Λάθος */
+  G.angTF = () => {
+    const B = [['Αν δύο γωνίες έχουν κοινή κορυφή, είναι κατακορυφήν.', 'Λάθος'], ['Η συμπληρωματική της γωνίας α είναι η 90° − α.', 'Σωστό'], ['Αν δύο γωνίες είναι εφεξής και οι μη κοινές πλευρές τους είναι αντικείμενες ημιευθείες, τότε είναι παραπληρωματικές.', 'Σωστό'], ['Η παραπληρωματική της γωνίας φ είναι η 180° − φ.', 'Σωστό'], ['Αν μια γωνία είναι οξεία, τότε η παραπληρωματική της είναι οξεία.', 'Λάθος'], ['Οι κατακορυφήν γωνίες είναι ίσες.', 'Σωστό'], ['Δύο αμβλείες γωνίες μπορεί να είναι παραπληρωματικές.', 'Λάθος'], ['Η συμπληρωματική μιας οξείας γωνίας είναι οξεία.', 'Σωστό'], ['Δύο ίσες γωνίες είναι πάντα κατακορυφήν.', 'Λάθος'], ['Αν δύο γωνίες είναι παραπληρωματικές και ίσες, τότε είναι ορθές.', 'Σωστό'], ['Μια αμβλεία γωνία έχει συμπληρωματική.', 'Λάθος'], ['Οι γωνίες γύρω από ένα σημείο έχουν άθροισμα 360°.', 'Σωστό']];
+    const [s, a] = pick(B); return Q('Σωστό ή Λάθος; «' + s + '»', a, { ch: ['Σωστό', 'Λάθος'], at: 'text' });
+  };
+  /* τέσσερις γωνίες από δύο τεμνόμενες ευθείες, η μία πολλαπλάσια άλλης */
+  G.angFour = () => { const k = pick([2, 3, 4, 5]); const x = 180 / (k + 1); if (!Number.isInteger(x)) return G.angFour(); return Q('Δύο ευθείες τέμνονται και μια από τις τέσσερις γωνίες είναι ' + ['', '', 'διπλάσια', 'τριπλάσια', 'τετραπλάσια', 'πενταπλάσια'][k] + ' μιας άλλης. Πόσες μοίρες είναι η μικρότερη γωνία;', x, { unit: '°', ex: 'Οι άνισες γωνίες είναι εφεξής και παραπληρωματικές: x + ' + k + 'x = 180°. Οι γωνίες είναι ' + x + '°, ' + k * x + '°, ' + x + '°, ' + k * x + '°' }); };
+
+  /* ---------- Παράλληλες και τέμνουσα ---------- */
+  const PAIRS = [
+    [[3, 5], 'εντός εναλλάξ', 'eq'], [[4, 6], 'εντός εναλλάξ', 'eq'],
+    [[1, 5], 'εντός εκτός και επί τα αυτά', 'eq'], [[2, 6], 'εντός εκτός και επί τα αυτά', 'eq'], [[3, 7], 'εντός εκτός και επί τα αυτά', 'eq'], [[4, 8], 'εντός εκτός και επί τα αυτά', 'eq'],
+    [[3, 6], 'εντός και επί τα αυτά', 'sup'], [[4, 5], 'εντός και επί τα αυτά', 'sup'],
+    [[1, 7], 'εκτός εναλλάξ', 'eq'], [[2, 8], 'εκτός εναλλάξ', 'eq'],
+    [[1, 3], 'κατακορυφήν', 'eq'], [[2, 4], 'κατακορυφήν', 'eq'], [[6, 8], 'κατακορυφήν', 'eq'], [[5, 7], 'κατακορυφήν', 'eq'],
+  ];
+  const KINDS = ['εντός εναλλάξ', 'εντός εκτός και επί τα αυτά', 'εντός και επί τα αυτά', 'εκτός εναλλάξ', 'κατακορυφήν'];
+  const secVal = (th, n) => ((n - 1) % 2 === 0 ? th : 180 - th);
+  /* τι λέγονται οι δύο σημειωμένες γωνίες */
+  G.parPairKind = () => { const [[a, b], k] = pick(PAIRS.filter((x) => x[1] !== 'κατακορυφήν' || M.chance(0.3))); const th = pick([55, 60, 65, 70, 115, 120, 125]); return Q('Οι ευθείες ε₁ και ε₂ είναι παράλληλες. Πώς λέγονται οι γωνίες ' + a + ' και ' + b + ';', k, { vis: M.parFig(th, [[a], [b]]), ch: KINDS.slice(), at: 'text' }); };
+  /* ίσες ή παραπληρωματικές; */
+  G.parEqSupp = () => { const [[a, b], k, r] = pick(PAIRS); const cats = ['Ίσες', 'Παραπληρωματικές']; return { q: 'γωνίες ' + a + ' και ' + b + ' (' + k + ')', a: r === 'eq' ? cats[0] : cats[1], cats }; };
+  /* υπολογισμός γωνίας από μία γνωστή */
+  G.parAngleFind = () => { const th = ri(40, 140); if (th === 90) return G.parAngleFind(); const a = ri(1, 8); let b = ri(1, 8); while (b === a) b = ri(1, 8); const va = secVal(th, a), vb = secVal(th, b); return Q('Οι ε₁ και ε₂ είναι παράλληλες και η γωνία ' + a + ' είναι ' + va + '°. Πόσες μοίρες είναι η γωνία ' + b + ';', vb, { vis: M.parFig(th, [[a, a + ': ' + va + '°'], [b, String(b)]]), unit: '°', ex: va === vb ? 'Είναι ίσες, άρα ' + vb + '°' : 'Είναι παραπληρωματικές: 180° − ' + va + '° = ' + vb + '°' }); };
+  /* εξίσωση από δύο γωνίες με εκφράσεις */
+  G.parEquation = () => {
+    for (let g = 0; g < 300; g++) {
+      const [[a, b], k, r] = pick(PAIRS.filter((x) => x[1] !== 'κατακορυφήν')); const th = ri(35, 145); if (th === 90) continue;
+      const va = secVal(th, a), vb = secVal(th, b); const k1 = ri(1, 5), k2 = ri(1, 5); if (k1 === k2 && r === 'eq') continue;
+      const x = ri(5, 40); const c1 = va - k1 * x, c2 = vb - k2 * x; if (Math.abs(c1) > 60 || Math.abs(c2) > 60) continue;
+      return Q('Οι ε₁ και ε₂ είναι παράλληλες. Βρες το x.', x, { vis: M.parFig(th, [[a, ex(k1, c1)], [b, ex(k2, c2)]]), ex: 'Οι γωνίες είναι ' + k + (r === 'eq' ? ', άρα ίσες: ' + ex(k1, c1) + ' = ' + ex(k2, c2) : ', άρα παραπληρωματικές: (' + ex(k1, c1) + ') + (' + ex(k2, c2) + ') = 180°') + ', x = ' + x + '°' });
+    }
+  };
+
+  /* ---------- Τρίγωνα ---------- */
+  /* εξωτερική γωνία = άθροισμα των δύο απέναντι εσωτερικών */
+  G.triExtFig = () => { const B = ri(35, 80), C = ri(35, 100); const A = 180 - B - C; if (A < 25) return G.triExtFig(); const ext = 180 - C; const k = pick(['ext', 'A', 'B']); if (k === 'ext') return Q('Βρες την εξωτερική γωνία x στο σχήμα.', ext, { vis: M.triExtFig(B, C, [A + '°', B + '°', null], 'x'), unit: '°', ex: 'x = ' + A + '° + ' + B + '° = ' + ext + '° (ίση με το άθροισμα των απέναντι εσωτερικών)' }); if (k === 'A') return Q('Βρες τη γωνία x του τριγώνου.', A, { vis: M.triExtFig(B, C, ['x', B + '°', null], ext + '°'), unit: '°', ex: 'x + ' + B + '° = ' + ext + '°, άρα x = ' + A + '°' }); return Q('Βρες τη γωνία x του τριγώνου.', B, { vis: M.triExtFig(B, C, [A + '°', 'x', null], ext + '°'), unit: '°', ex: A + '° + x = ' + ext + '°, άρα x = ' + B + '°' }); };
+  /* γωνίες τριγώνου με εκφράσεις του x */
+  G.triExpr = () => { for (let g = 0; g < 200; g++) { const k = [ri(1, 4), ri(1, 4), ri(1, 5)], c = [0, pick([0, 10, 20]), pick([0, -10, 15, 30])]; const x = (180 - c[0] - c[1] - c[2]) / (k[0] + k[1] + k[2]); if (!Number.isInteger(x)) continue; const an = k.map((kk, i) => kk * x + c[i]); if (an.some((v) => v < 20)) continue; if (an[0] + an[1] >= 170) continue; return Q('Βρες το x στο τρίγωνο.', x, { vis: M.triangle(an[0], an[1], [ex(k[0], c[0]), ex(k[1], c[1]), ex(k[2], c[2])]), ex: 'Το άθροισμα των γωνιών είναι 180°, άρα x = ' + x + '°. Οι γωνίες είναι ' + an.join('°, ') + '°' }); } };
+  /* ισοσκελές με προέκταση της βάσης (βιβλίο, άσκηση 12) */
+  G.isoExtFig = () => { const top = pick([20, 30, 36, 40, 44, 50, 56, 60, 70, 80, 100]); const base = (180 - top) / 2; const k = pick(['ext', 'top']); const ext = 180 - base; if (k === 'ext') return Q('Στο ισοσκελές τρίγωνο ΑΒΓ με ΑΒ = ΑΓ η γωνία Α είναι ' + top + '°. Βρες την εξωτερική γωνία x στην κορυφή Γ.', ext, { vis: M.triExtFig(base, base, [top + '°', null, null], 'x', { iso: true }), unit: '°', ex: 'Γωνίες βάσης: (180° − ' + top + '°) : 2 = ' + base + '°, άρα x = 180° − ' + base + '° = ' + ext + '°' }); return Q('Στο ισοσκελές τρίγωνο ΑΒΓ με ΑΒ = ΑΓ η εξωτερική γωνία στο Γ είναι ' + ext + '°. Βρες τη γωνία x της κορυφής Α.', top, { vis: M.triExtFig(base, base, ['x', null, null], ext + '°', { iso: true }), unit: '°', ex: 'Γωνία βάσης Γ = 180° − ' + ext + '° = ' + base + '°, άρα x = 180° − 2 × ' + base + '° = ' + top + '°' }); };
+  /* είδος τριγώνου από τις γωνίες του */
+  G.triKindSort = () => { const cats = ['Οξυγώνιο', 'Ορθογώνιο', 'Αμβλυγώνιο']; const k = ri(0, 2); let A, B; if (k === 0) { A = ri(50, 85); B = ri(Math.max(50, 95 - A), 85); if (180 - A - B >= 90 || 180 - A - B < 10) return G.triKindSort(); } else if (k === 1) { A = 90; B = ri(20, 70); } else { A = ri(95, 150); B = ri(10, 170 - A); } const an = shuffle([A, B, 180 - A - B]); return { q: an.join('°, ') + '°', a: cats[k], cats }; };
+
+  /* ---------- Διαιρετότητα ---------- */
+  const DIVS = [2, 3, 4, 5, 6, 9, 10, 25];
+  /* πίνακας «βάλε ✓ αν διαιρείται» */
+  G.divGrid = (p = {}) => {
+    const cols = p.cols || pick([[2, 3, 4, 5, 6, 10, 25], [2, 3, 5, 9, 10], [2, 4, 5, 9, 25], [3, 4, 6, 9, 10]]);
+    const nums = []; let g = 0;
+    while (nums.length < (p.rows || 5) && g++ < 400) { const base = pick(cols); const n = M.chance(0.65) ? base * ri(11, 999) : ri(100, 99999); if (n < 100 || n > 99999 || nums.includes(n)) continue; nums.push(n); }
+    return { q: 'Βάλε ✓ αν ο αριθμός διαιρείται με τον αριθμό της στήλης.', rows: nums.map(tn), cols: cols.map(String), corner: ':', ok: nums.map((n) => cols.map((c) => n % c === 0)) };
+  };
+  /* ποιο ψηφίο λείπει */
+  G.divDigit = () => { const k = pick([3, 9, 4, 6, 5, 2]); const d = ri(3, 4); const digs = Array.from({ length: d }, (_, i) => (i === 0 ? ri(1, 9) : ri(0, 9))); const pos = ri(1, d - 1); const sols = []; for (let v = 0; v <= 9; v++) { const t = digs.slice(); t[pos] = v; if (+t.join('') % k === 0) sols.push(v); } if (!sols.length || sols.length > 5) return G.divDigit(); const shown = digs.map((v, i) => (i === pos ? '\\square' : v)).join(''); return Q('Ποια ψηφία μπορούν να μπουν στο κουτάκι ώστε ο αριθμός ' + T(shown) + ' να διαιρείται με το ' + k + '; (Γράψε όλα τα ψηφία χωρισμένα με κόμμα και κενό.)', sols, { at: 'set', show: sols.join(', '), ex: { 3: 'Το άθροισμα των ψηφίων να είναι πολλαπλάσιο του 3', 9: 'Το άθροισμα των ψηφίων να είναι πολλαπλάσιο του 9', 4: 'Τα δύο τελευταία ψηφία να σχηματίζουν πολλαπλάσιο του 4', 6: 'Να διαιρείται με το 2 και με το 3', 5: 'Να λήγει σε 0 ή 5', 2: 'Να λήγει σε άρτιο ψηφίο' }[k] }); };
+  /* γιατί διαιρείται (κριτήριο) */
+  G.divWhy = () => { const k = pick([3, 4, 9, 25, 6]); const n = k * ri(30, 900); const s = String(n).split('').reduce((a, b) => a + +b, 0); const R = { 3: 'Το άθροισμα των ψηφίων του (' + s + ') διαιρείται με το 3', 9: 'Το άθροισμα των ψηφίων του (' + s + ') διαιρείται με το 9', 4: 'Τα δύο τελευταία ψηφία του σχηματίζουν πολλαπλάσιο του 4', 25: 'Τα δύο τελευταία ψηφία του είναι 00, 25, 50 ή 75', 6: 'Διαιρείται και με το 2 και με το 3' }; const W = ['Λήγει σε άρτιο ψηφίο', 'Λήγει σε 0 ή 5', 'Το πρώτο του ψηφίο διαιρείται με το ' + k, 'Είναι μεγαλύτερος από το ' + k]; if (k === 6 && n % 2) return G.divWhy(); return Q('Ο αριθμός ' + tn(n) + ' διαιρείται με το ' + k + '. Ποιο κριτήριο το δείχνει;', R[k], { ch: M.mc(R[k], W.filter((w) => w !== R[k])), at: 'text' }); };
+
+  /* ---------- Ευκλείδεια διαίρεση ---------- */
+  G.euclidFindD = () => { const d = ri(3, 25), q = ri(8, 120), r = ri(0, d - 1); return Q('Ένας αριθμός διαιρούμενος με το ' + d + ' δίνει πηλίκο ' + q + ' και υπόλοιπο ' + r + '. Ποιος είναι ο αριθμός;', d * q + r, { ex: 'Δ = δ × π + υ = ' + d + ' × ' + q + ' + ' + r + ' = ' + tn(d * q + r) }); };
+  G.euclidIs = () => { const d = ri(5, 40), q = ri(5, 40); const kind = pick(['ok', 'big', 'eq', 'ok']); let r = kind === 'big' ? d + ri(1, 12) : ri(0, d - 1); let D = d * q + r; if (kind === 'eq') D += pick([1, -1, 10]); const ok = kind === 'ok'; return Q('Η ισότητα ' + T(tn(D) + ' = ' + d + ' \\times ' + q + ' + ' + r) + ' είναι ταυτότητα ευκλείδειας διαίρεσης με διαιρέτη ' + d + ';', ok ? 'Ναι' : 'Όχι', { ch: ['Ναι', 'Όχι'], at: 'text', ex: kind === 'big' ? 'Όχι, γιατί το υπόλοιπο ' + r + ' δεν είναι μικρότερο από τον διαιρέτη ' + d : kind === 'eq' ? 'Όχι, γιατί ' + d + ' × ' + q + ' + ' + r + ' = ' + tn(d * q + r) + ' και όχι ' + tn(D) : 'Ναι: η ισότητα ισχύει και ' + r + ' < ' + d }); };
+  G.euclidPQ = () => { const d = ri(3, 30), q = ri(5, 99), r = ri(0, d - 1); const D = d * q + r; return Q('Κάνε την ευκλείδεια διαίρεση ' + T(tn(D) + ' : ' + d) + '. Γράψε το πηλίκο και το υπόλοιπο χωρισμένα με κόμμα και κενό (π, υ).', [q, r], { at: 'pair', show: q + ', ' + r, ex: tn(D) + ' = ' + d + ' × ' + q + ' + ' + r }); };
+  G.euclidRem = () => { const d = ri(3, 12); return M.chance(0.5) ? Q('Ποιο είναι το μεγαλύτερο υπόλοιπο που μπορεί να αφήσει μια διαίρεση με διαιρέτη ' + d + ';', d - 1, { ex: 'Το υπόλοιπο είναι πάντα μικρότερο από τον διαιρέτη' }) : Q('Πόσα διαφορετικά υπόλοιπα μπορεί να αφήσει μια διαίρεση με διαιρέτη ' + d + ';', d, { ex: 'Τα 0, 1, 2, …, ' + (d - 1) }); };
+
+  /* ---------- Κλάσματα ---------- */
+  G.fracWhole = () => { const d = pick([3, 4, 5, 6, 7, 8]), n = ri(1, d - 1), k = ri(2, 12); const part = n * k, whole = d * k; return Q('Τα ' + T('\\frac{' + n + '}{' + d + '}') + ' ενός αριθμού είναι ' + part + '. Ποιος είναι ο αριθμός;', whole, { ex: part + ' : ' + n + ' = ' + k + ' (το ένα ' + d + 'ο), ' + k + ' × ' + d + ' = ' + whole }); };
+  G.fracMixed = () => { const w = ri(1, 6), d = pick([2, 3, 4, 5, 6, 8]), n = ri(1, d - 1); if (M.gcd(n, d) > 1) return G.fracMixed(); return M.chance(0.5) ? Q('Γράψε τον μεικτό ' + T(w + '\\frac{' + n + '}{' + d + '}') + ' ως κλάσμα.', [w * d + n, d], { at: 'frac', show: T('\\frac{' + (w * d + n) + '}{' + d + '}'), ex: w + ' × ' + d + ' + ' + n + ' = ' + (w * d + n) }) : Q('Πόσες ακέραιες μονάδες έχει το κλάσμα ' + T('\\frac{' + (w * d + n) + '}{' + d + '}') + ';', w, { ex: (w * d + n) + ' : ' + d + ' = ' + w + ' και υπόλοιπο ' + n + ', άρα ' + w + ' ακέραιες μονάδες και ' + n + '/' + d }); };
+  G.fracIrreducible = () => { const good = []; while (good.length < 1) { const d = ri(5, 30), n = ri(2, d - 1); if (M.gcd(n, d) === 1) good.push([n, d]); } const bad = []; let g = 0; while (bad.length < 3 && g++ < 100) { const k = pick([2, 3, 5]); const d = k * ri(2, 9), n = k * ri(1, d / k - 1); if (n > 0 && n < d && !bad.some((b) => b[0] === n && b[1] === d)) bad.push([n, d]); } const f = ([n, d]) => T('\\frac{' + n + '}{' + d + '}'); return Q('Ποιο από τα κλάσματα είναι ανάγωγο;', f(good[0]), { ch: shuffle([f(good[0])].concat(bad.map(f))), at: 'text', ex: 'Ανάγωγο είναι το κλάσμα που δεν απλοποιείται: αριθμητής και παρονομαστής δεν έχουν κοινό διαιρέτη εκτός από το 1' }); };
+  G.fracHalfSort = () => { const cats = ['Μικρότερο από το μισό', 'Ίσο με το μισό', 'Μεγαλύτερο από το μισό']; const d = ri(3, 16); let n = ri(1, d - 1); if (M.chance(0.3) && d % 2 === 0) n = d / 2; const v = n / d; return { q: T('\\frac{' + n + '}{' + d + '}'), a: v < 0.5 ? cats[0] : v === 0.5 ? cats[1] : cats[2], cats }; };
+})();
+
+</script>
+<script>/* assets/gens8.js */
+/* Mathimagika: γεννήτριες Α΄ Λυκείου (διπλές ανισώσεις, απόλυτες τιμές, πίνακες προσήμων) και Β΄ Λυκείου (ενίσχυση για Πανελλαδικές) */
+(function () {
+  const G = window.G;
+  const { ri, rnz, pick, shuffle } = M;
+  const Q = (q, a, o) => Object.assign({ q, a }, o || {});
+  const T = (tex) => '$' + tex + '$';
+  const mc = (a, w) => M.mc(a, [...new Set(w.filter((x) => x !== a))]);
+  const lin = (a, b) => M.tlin([[a, 'x'], [b, '']]); // αx + β
+  const xm = (c) => (c === 0 ? 'x' : c > 0 ? 'x - ' + c : 'x + ' + -c); // x − c
+  const iv = (l, a, b, r) => (l ? '[' : '(') + a + ', ' + b + (r ? ']' : ')');
+  const INF = '+\\infty', NINF = '-\\infty';
+  const frac = (n, d) => { const g = M.gcd(Math.abs(n), Math.abs(d)); n /= g; d /= g; if (d < 0) { n = -n; d = -d; } return d === 1 ? String(n) : (n < 0 ? '-' : '') + '\\frac{' + Math.abs(n) + '}{' + d + '}'; };
+
+  /* =================== Α΄ ΛΥΚΕΙΟΥ =================== */
+  /* διπλή ανίσωση L ⋚ αx + β ⋚ U, με θετικό ή αρνητικό α */
+  G.dblIneq2 = () => {
+    const a = pick([2, 3, -2, -3, 4, -1, 5]), b = rnz(-6, 6); const x1 = ri(-6, 2), x2 = x1 + ri(2, 7);
+    const sL = M.chance(0.5), sU = M.chance(0.5); // true = αυστηρή
+    const lo = a > 0 ? a * x1 + b : a * x2 + b, hi = a > 0 ? a * x2 + b : a * x1 + b;
+    const e = lin(a, b); const q = T(lo + (sL ? ' < ' : ' \\le ') + e + (sU ? ' < ' : ' \\le ') + hi);
+    // λύση: x1 ... x2 με αγκύλες ανάλογα με την αυστηρότητα (αν α < 0 οι ανισώσεις αλλάζουν θέση)
+    const leftClosed = a > 0 ? !sL : !sU, rightClosed = a > 0 ? !sU : !sL;
+    const ans = T(iv(leftClosed, x1, x2, rightClosed));
+    const w = [T(iv(!leftClosed, x1, x2, !rightClosed)), T(iv(leftClosed, lo - b, hi - b, rightClosed)), T(iv(rightClosed, -x2, -x1, leftClosed)), T(iv(leftClosed, x1, x2 + 1, rightClosed))];
+    return Q('Λύσε τη διπλή ανίσωση ' + q + '.', ans, { ch: mc(ans, w), at: 'text', ex: 'Αφαιρούμε ' + b + ' από όλα τα μέλη και διαιρούμε με ' + a + (a < 0 ? '. Επειδή ' + a + ' < 0, οι φορές αλλάζουν' : '') + '.' });
+  };
+  /* πόσοι ακέραιοι λύνουν τη διπλή ανίσωση */
+  G.dblIneqInt = () => { const a = pick([2, 3, -2, -3]), b = rnz(-5, 5); const x1 = ri(-5, 2), x2 = x1 + ri(2, 6); const sL = M.chance(0.5), sU = M.chance(0.5); const lo = a > 0 ? a * x1 + b : a * x2 + b, hi = a > 0 ? a * x2 + b : a * x1 + b; const lc = a > 0 ? !sL : !sU, rc = a > 0 ? !sU : !sL; const cnt = x2 - x1 - 1 + (lc ? 1 : 0) + (rc ? 1 : 0); return Q('Πόσοι ακέραιοι αριθμοί επαληθεύουν τη διπλή ανίσωση ' + T(lo + (sL ? ' < ' : ' \\le ') + lin(a, b) + (sU ? ' < ' : ' \\le ') + hi) + ';', cnt, { ex: 'Λύση ' + iv(lc, x1, x2, rc) + ', ακέραιοι: ' + cnt }); };
+  /* ανισώσεις με απόλυτα, και της μορφής |αx + β| */
+  G.absIneq2 = () => {
+    const k = pick([1, 1, 2]); const c = rnz(-5, 5), r = ri(1, 6) * k; // |kx − kc| ⋚ r  ⇔ |x − c| ⋚ r/k
+    const rr = r / k; if (!Number.isInteger(rr)) return G.absIneq2();
+    const op = pick(['<', '\\le', '>', '\\ge']); const inside = k === 1 ? xm(c) : lin(k, -k * c);
+    const A = c - rr, B = c + rr; const inner = op === '<' || op === '\\le'; const cl = op === '\\le' || op === '\\ge';
+    const sol = (inn, cls) => (inn ? T(iv(cls, A, B, cls)) : T('(' + NINF + ', ' + A + (cls ? ']' : ')') + ' \\cup ' + (cls ? '[' : '(') + B + ', ' + INF + ')'));
+    const ans = sol(inner, cl);
+    return Q('Λύσε την ανίσωση ' + T('|' + inside + '| ' + op + ' ' + r) + '.', ans, { ch: mc(ans, [sol(!inner, cl), sol(inner, !cl), T(iv(cl, -rr, rr, cl)), T(iv(cl, A - 1, B + 1, cl))]), at: 'text', ex: (inner ? 'Η απόσταση του x από το ' + c + ' είναι ' + (cl ? 'το πολύ ' : 'μικρότερη από ') + rr + ', άρα ' + A + (cl ? ' ≤' : ' <') + ' x ' + (cl ? '≤ ' : '< ') + B : 'Η απόσταση του x από το ' + c + ' είναι ' + (cl ? 'τουλάχιστον ' : 'μεγαλύτερη από ') + rr + ', άρα x ' + (cl ? '≤ ' : '< ') + A + ' ή x ' + (cl ? '≥ ' : '> ') + B) });
+  };
+  /* από λόγια σε απόλυτο (απόσταση) */
+  G.absWord = () => { const c = rnz(-6, 6), r = ri(1, 7); const kinds = [['μικρότερη από', '<'], ['το πολύ', '\\le'], ['μεγαλύτερη από', '>'], ['τουλάχιστον', '\\ge']]; const [w, op] = pick(kinds); const ans = T('|' + xm(c) + '| ' + op + ' ' + r); const others = kinds.filter((k) => k[1] !== op).map((k) => T('|' + xm(c) + '| ' + k[1] + ' ' + r)); return Q('Η απόσταση του x από το ' + c + ' είναι ' + w + ' ' + r + '. Πώς γράφεται;', ans, { ch: mc(ans, others.concat([T('|' + xm(-c) + '| ' + op + ' ' + r), T('|' + xm(r) + '| ' + op + ' ' + c)])), at: 'text' }); };
+  /* απαλοιφή απολύτων όταν ξέρω πού βρίσκεται το x */
+  G.absSimplify = () => { const a = ri(-5, 3), b = a + ri(2, 8); const kind = pick(['sum', 'diff']); const x = '|' + xm(a) + '| ' + (kind === 'sum' ? '+' : '-') + ' |' + xm(b) + '|'; if (kind === 'sum') return Q('Αν ' + T(a + ' < x < ' + b) + ', πόσο κάνει η παράσταση ' + T('A = ' + x) + ';', b - a, { ex: T('|' + xm(a) + '| = ' + xm(a)) + ' και ' + T('|' + xm(b) + '| = ' + b + ' - x') + ', άρα A = ' + (b - a) }); const ans = T(lin(2, -(a + b))); return Q('Αν ' + T(a + ' < x < ' + b) + ', απλοποίησε την ' + T('A = ' + x) + '.', ans, { ch: mc(ans, [T(String(b - a)), T(String(a - b)), T(lin(2, a + b)), T(lin(-2, a + b))]), at: 'text', ex: T('A = (' + xm(a) + ') - (' + b + ' - x) = ' + lin(2, -(a + b))) }); };
+  /* εξισώσεις με απόλυτα */
+  G.absEq2 = () => { const kind = pick(['lin', 'two']); if (kind === 'lin') { const k = pick([1, 2, 3]); const r1 = rnz(-6, 6), r2 = rnz(-6, 6); if (r1 === r2) return G.absEq2(); // |kx − m| = c με ρίζες r1, r2: k r1 − m = −(k r2 − m) ⇒ m = k(r1 + r2)/2
+      const m2 = k * (r1 + r2); if (m2 % 2) return G.absEq2(); const m = m2 / 2, c = Math.abs(k * r1 - m); if (!c) return G.absEq2(); return Q('Λύσε την εξίσωση ' + T('|' + lin(k, -m) + '| = ' + c) + '. (Γράψε τις λύσεις χωρισμένες με κόμμα και κενό.)', [r1, r2], { at: 'set', show: [r1, r2].sort((x, y) => x - y).join(', '), ex: T(lin(k, -m) + ' = ' + c) + ' ή ' + T(lin(k, -m) + ' = ' + -c) }); }
+    const a = rnz(-6, 6), b = rnz(-6, 6); if (a === b || (a + b) % 2) return G.absEq2(); return Q('Λύσε την εξίσωση ' + T('|' + xm(a) + '| = |' + xm(b) + '|') + '.', (a + b) / 2, { ex: T(xm(a) + ' = -(' + xm(b) + ')') + ', άρα x = ' + (a + b) / 2 + ' (το μέσο των ' + a + ' και ' + b + ')' }); };
+  /* πίνακας προσήμων γινομένου ή πηλίκου */
+  G.signTable = () => {
+    const kind = pick(['prod2', 'prod2', 'quot', 'prod3', 'neg']);
+    const n = kind === 'prod3' ? 3 : 2; const roots = []; while (roots.length < n) { const r = ri(-5, 5); if (!roots.includes(r)) roots.push(r); } roots.sort((x, y) => x - y);
+    const facs = roots.map((r) => ({ tex: xm(r), r, s: 1 })); // πρόσημο του x − r: − πριν, + μετά
+    if (kind === 'neg') { const i = ri(0, 1); facs[i] = { tex: (facs[i].r === 0 ? '-x' : facs[i].r > 0 ? facs[i].r + ' - x' : '-' + -facs[i].r + ' - x'), r: facs[i].r, s: -1 }; }
+    const cols = []; cols.push(T('(' + NINF + ', ' + roots[0] + ')')); for (let i = 0; i < roots.length - 1; i++) cols.push(T('(' + roots[i] + ', ' + roots[i + 1] + ')')); cols.push(T('(' + roots[roots.length - 1] + ', ' + INF + ')'));
+    const mid = cols.map((_, j) => (j === 0 ? roots[0] - 1 : j === roots.length ? roots[roots.length - 1] + 1 : (roots[j - 1] + roots[j]) / 2));
+    const sg = (v) => (v > 0 ? '+' : '-');
+    const ok = facs.map((f) => mid.map((x) => sg(f.s * (x - f.r))));
+    ok.push(mid.map((_, j) => sg(ok.reduce((p, row) => p * (row[j] === '+' ? 1 : -1), 1))));
+    const name = kind === 'quot' ? 'Π(x) = \\frac{' + facs[0].tex + '}{' + facs[1].tex + '}' : 'P(x) = ' + facs.map((f) => '(' + f.tex + ')').join('');
+    return { q: 'Συμπλήρωσε τον πίνακα προσήμων της ' + T(name) + '.', mode: 'sign', corner: T('x'), cols, rows: facs.map((f) => T(f.tex)).concat([T(kind === 'quot' ? 'Π(x)' : 'P(x)')]), ok, total: facs.length };
+  };
+  /* ανίσωση γινομένου από τον πίνακα προσήμων */
+  G.prodIneq = () => { const a = ri(-6, 2), b = a + ri(1, 6); const op = pick(['<', '\\le', '>', '\\ge']); const inner = op === '<' || op === '\\le', cl = op === '\\le' || op === '\\ge'; const ins = T(iv(cl, a, b, cl)); const out = T('(' + NINF + ', ' + a + (cl ? ']' : ')') + ' \\cup ' + (cl ? '[' : '(') + b + ', ' + INF + ')'); const ans = inner ? ins : out; return Q('Λύσε την ανίσωση ' + T('(' + xm(a) + ')(' + xm(b) + ') ' + op + ' 0') + '.', ans, { ch: mc(ans, [inner ? out : ins, T(iv(!cl, a, b, !cl)), T(iv(cl, -b, -a, cl))]), at: 'text', ex: 'Το γινόμενο είναι αρνητικό ανάμεσα στις ρίζες ' + a + ' και ' + b + ' και θετικό έξω από αυτές.' }); };
+
+  /* =================== Β΄ ΛΥΚΕΙΟΥ =================== */
+  /* --- Συστήματα --- */
+  G.sysParamQ = () => { const B = [['λx + y = 1', 'x + λy = 1', 'λ = −1', 'λ = 1'], ['λx + y = 2', 'x + λy = 2', 'λ = −1', 'λ = 1'], ['x + λy = 1', 'λx + 4y = 2', 'λ = −2', 'λ = 2']]; const [e1, e2, imp, inf] = pick(B); const askImp = M.chance(0.5); const ans = askImp ? imp : inf; return Q('Για ποια τιμή του λ το σύστημα ' + T('\\begin{cases} ' + e1.replace('λ', '\\lambda ') + ' \\\\ ' + e2.replace('λ', '\\lambda ') + ' \\end{cases}') + (askImp ? ' είναι αδύνατο;' : ' έχει άπειρες λύσεις;'), ans, { ch: mc(ans, [imp, inf, 'λ = 0', 'λ = 2', 'λ = −2']), at: 'text', ex: 'Βρίσκουμε τα λ με D = 0 και ελέγχουμε το καθένα στο σύστημα.' }); };
+  G.sys3Q = () => { const x = rnz(-4, 4), y = rnz(-4, 4), z = rnz(-4, 4); const rows = [[1, 1, 1], [1, -1, pick([1, 2])], [pick([2, 3]), 1, -1]]; const rhs = rows.map((r) => r[0] * x + r[1] * y + r[2] * z); const D = rows[0][0] * (rows[1][1] * rows[2][2] - rows[1][2] * rows[2][1]) - rows[0][1] * (rows[1][0] * rows[2][2] - rows[1][2] * rows[2][0]) + rows[0][2] * (rows[1][0] * rows[2][1] - rows[1][1] * rows[2][0]); if (!D) return G.sys3Q(); const ask = pick(['x', 'y', 'z']); return Q('Λύσε το σύστημα ' + T('\\begin{cases} ' + rows.map((r, i) => M.tlin([[r[0], 'x'], [r[1], 'y'], [r[2], 'z']]) + ' = ' + rhs[i]).join(' \\\\ ') + ' \\end{cases}') + ' και γράψε την τιμή του ' + ask + '.', { x, y, z }[ask], { ex: 'Λύση (x, y, z) = (' + x + ', ' + y + ', ' + z + ')' }); };
+  /* --- Συναρτήσεις --- */
+  G.fnDomain = () => { const a = rnz(-5, 5), b = rnz(-5, 5); const B = [[T('f(x) = \\sqrt{' + xm(a) + '}'), T('[' + a + ', ' + INF + ')')], [T('f(x) = \\ln(' + xm(a) + ')'), T('(' + a + ', ' + INF + ')')], [T('f(x) = \\frac{1}{' + xm(a) + '}'), T('\\mathbb{R} - \\{' + a + '\\}')], [T('f(x) = \\frac{\\sqrt{x + ' + 9 + '}}{x}'), T('[-9, 0) \\cup (0, ' + INF + ')')], [T('f(x) = \\frac{1}{x^2 - ' + a * a + '}'), T('\\mathbb{R} - \\{' + -Math.abs(a) + ', ' + Math.abs(a) + '\\}')]]; const [f, ans] = pick(B); return Q('Ποιο είναι το πεδίο ορισμού της ' + f + ';', ans, { ch: mc(ans, B.map((x) => x[1]).concat([T('\\mathbb{R}'), T('(' + NINF + ', ' + a + ']')])).slice(0, 4).concat([]), at: 'text' }); };
+  const _fd = G.fnDomain; G.fnDomain = (p) => { const q = _fd(p); if (!q.ch.includes(q.a)) q.ch[0] = q.a; q.ch = shuffle([...new Set(q.ch)]); return q; };
+  G.fnMonoKind = () => { const B = [['-3x + 2', 'γνησίως φθίνουσα'], ['2x - 7', 'γνησίως αύξουσα'], ['e^{x}', 'γνησίως αύξουσα'], ['\\left(\\frac{1}{2}\\right)^{x}', 'γνησίως φθίνουσα'], ['\\ln x', 'γνησίως αύξουσα'], ['-x^{3}', 'γνησίως φθίνουσα'], ['\\sqrt{x}', 'γνησίως αύξουσα'], ['\\log_{\\frac{1}{3}} x', 'γνησίως φθίνουσα'], ['x^{3} + x', 'γνησίως αύξουσα'], ['e^{-x}', 'γνησίως φθίνουσα']]; const [f, a] = pick(B); return Q('Η συνάρτηση ' + T('f(x) = ' + f) + ' στο πεδίο ορισμού της είναι:', a, { ch: ['γνησίως αύξουσα', 'γνησίως φθίνουσα'], at: 'text' }); };
+  G.fnMinMax = () => { const a = pick([1, 2, 3, -1, -2]), h = rnz(-4, 4), k = rnz(-6, 6); const co = [a, -2 * a * h, a * h * h + k]; const askV = M.chance(0.5); return Q('Η συνάρτηση ' + T('f(x) = ' + M.tpoly(co)) + ' έχει ' + (a > 0 ? 'ελάχιστο' : 'μέγιστο') + '. ' + (askV ? 'Ποια είναι η ' + (a > 0 ? 'ελάχιστη' : 'μέγιστη') + ' τιμή της;' : 'Σε ποιο x το παρουσιάζει;'), askV ? k : h, { ex: T('f(x) = ' + (a === 1 ? '' : a === -1 ? '-' : a) + '(' + xm(h) + ')^2 ' + (k < 0 ? '- ' + -k : '+ ' + k)) + ', κορυφή ' + T('(' + h + ', ' + k + ')') }); };
+  G.fnParity2 = () => { const B = [['x^4 - 2x^2', 'άρτια'], ['x^3 - x', 'περιττή'], ['\\frac{x}{x^2 + 1}', 'περιττή'], ['x^2 + |x|', 'άρτια'], ['x^2 + x', 'ούτε άρτια ούτε περιττή'], ['e^x', 'ούτε άρτια ούτε περιττή'], ['\\text{συν}\\,x', 'άρτια'], ['\\text{ημ}\\,x', 'περιττή'], ['\\sqrt{x}', 'ούτε άρτια ούτε περιττή'], ['x|x|', 'περιττή']]; const [f, a] = pick(B); return Q('Η συνάρτηση ' + T('f(x) = ' + f) + ' είναι:', a, { ch: ['άρτια', 'περιττή', 'ούτε άρτια ούτε περιττή'], at: 'text', ex: a === 'ούτε άρτια ούτε περιττή' ? 'Ή δεν έχει συμμετρικό πεδίο ορισμού ή f(−x) ≠ ±f(x)' : a === 'άρτια' ? 'f(−x) = f(x)' : 'f(−x) = −f(x)' }); };
+  /* --- Τριγωνομετρία --- */
+  const TRIP = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25]];
+  G.trigFromOne = () => { const [p, q, h] = pick(TRIP); const quad = ri(1, 4); const sS = quad <= 2 ? 1 : -1, sC = quad === 1 || quad === 4 ? 1 : -1; const giveSin = M.chance(0.5); const s = sS * p, c = sC * q; const QD = ['', '0 < x < \\frac{π}{2}', '\\frac{π}{2} < x < π', 'π < x < \\frac{3π}{2}', '\\frac{3π}{2} < x < 2π'][quad]; const ask = pick(giveSin ? ['συν', 'εφ'] : ['ημ', 'εφ']); const ans = ask === 'συν' ? [c, h] : ask === 'ημ' ? [s, h] : [s, c]; return Q('Αν ' + T((giveSin ? '\\text{ημ}x = ' + frac(s, h) : '\\text{συν}x = ' + frac(c, h)) + '\\,\\text{ και }\\,' + QD) + ', πόσο είναι το ' + T('\\text{' + ask + '}x') + ';', ans, { at: 'frac', show: T(frac(ans[0], ans[1])), ex: 'Από την ημ²x + συν²x = 1 και το πρόσημο στο ' + quad + 'ο τεταρτημόριο' }); };
+  G.trigDouble = () => { const [p, q, h] = pick(TRIP); const cq = pick([1, -1]) * q; const kind = pick(['cos2', 'cos2s']); if (kind === 'cos2') return Q('Αν ' + T('\\text{συν}x = ' + frac(cq, h)) + ', πόσο είναι το ' + T('\\text{συν}2x') + ';', [2 * cq * cq - h * h, h * h], { at: 'frac', show: T(frac(2 * cq * cq - h * h, h * h)), ex: 'συν2x = 2συν²x − 1' }); return Q('Αν ' + T('\\text{ημ}x = ' + frac(p, h)) + ', πόσο είναι το ' + T('\\text{συν}2x') + ';', [h * h - 2 * p * p, h * h], { at: 'frac', show: T(frac(h * h - 2 * p * p, h * h)), ex: 'συν2x = 1 − 2ημ²x' }); };
+  G.trigAddVal = () => { const B = [['\\text{ημ}75^{\\circ}', '\\frac{\\sqrt{6} + \\sqrt{2}}{4}'], ['\\text{συν}75^{\\circ}', '\\frac{\\sqrt{6} - \\sqrt{2}}{4}'], ['\\text{ημ}15^{\\circ}', '\\frac{\\sqrt{6} - \\sqrt{2}}{4}'], ['\\text{συν}15^{\\circ}', '\\frac{\\sqrt{6} + \\sqrt{2}}{4}'], ['\\text{συν}105^{\\circ}', '\\frac{\\sqrt{2} - \\sqrt{6}}{4}']]; const [e, a] = pick(B); const ans = T(a); return Q('Με τους τύπους αθροίσματος, πόσο είναι το ' + T(e) + ';', ans, { ch: mc(ans, ['\\frac{\\sqrt{6} + \\sqrt{2}}{4}', '\\frac{\\sqrt{6} - \\sqrt{2}}{4}', '\\frac{\\sqrt{2} - \\sqrt{6}}{4}', '\\frac{\\sqrt{3} + 1}{2}'].map(T)), at: 'text', ex: '75° = 45° + 30°, 15° = 45° − 30°, 105° = 60° + 45°' }); };
+  G.trigEqSol = () => { const B = [['2\\text{ημ}x - 1 = 0', '\\frac{π}{6}, \\frac{5π}{6}'], ['2\\text{συν}x + \\sqrt{2} = 0', '\\frac{3π}{4}, \\frac{5π}{4}'], ['\\text{εφ}x = \\sqrt{3}', '\\frac{π}{3}, \\frac{4π}{3}'], ['2\\text{ημ}x + \\sqrt{3} = 0', '\\frac{4π}{3}, \\frac{5π}{3}'], ['\\text{συν}x = \\frac{1}{2}', '\\frac{π}{3}, \\frac{5π}{3}'], ['\\text{εφ}x = -1', '\\frac{3π}{4}, \\frac{7π}{4}']]; const [e, a] = pick(B); const ans = T(a); return Q('Ποιες είναι οι λύσεις της ' + T(e) + ' στο ' + T('[0, 2π)') + ';', ans, { ch: mc(ans, B.map((x) => T(x[1]))), at: 'text' }); };
+  G.trigMaxMin = () => { const r = ri(1, 5), c = rnz(-4, 4), w = pick([1, 2, 3]); const f = (r === 1 ? '' : r) + '\\text{ημ}(' + (w === 1 ? '' : w) + 'x)' + (c > 0 ? ' + ' + c : ' - ' + -c); const askMax = M.chance(0.5); return Q('Ποια είναι η ' + (askMax ? 'μέγιστη' : 'ελάχιστη') + ' τιμή της ' + T('f(x) = ' + f) + ';', askMax ? r + c : -r + c, { ex: T('-1 \\le \\text{ημ}(' + (w === 1 ? '' : w) + 'x) \\le 1') + ', άρα ' + T((-r + c) + ' \\le f(x) \\le ' + (r + c)) }); };
+  /* --- Πολυώνυμα --- */
+  G.polyParam = () => { const r = rnz(-3, 3), b = rnz(-4, 4), c = rnz(-5, 5); // P(x) = x³ + αx² + βx + γ με P(r) = 0
+    const num = -(r * r * r + b * r + c); if (num % (r * r)) return G.polyParam(); const a = num / (r * r); return Q('Βρες το α ώστε το ' + T(xm(r)) + ' να είναι παράγοντας του ' + T('P(x) = x^3 + αx^2 ' + (b < 0 ? '- ' + (b === -1 ? '' : -b) + 'x' : '+ ' + (b === 1 ? '' : b) + 'x') + (c < 0 ? ' - ' + -c : ' + ' + c)) + '.', a, { ex: 'P(' + r + ') = 0 δίνει α = ' + a }); };
+  G.polyRemLin = () => { const a = rnz(-3, 3), b = rnz(-3, 3); if (a === b) return G.polyRemLin(); const k = rnz(-5, 5), l = rnz(-6, 6); const Pa = k * a + l, Pb = k * b + l; const ans = T(lin(k, l)); return Q('Για ένα πολυώνυμο είναι ' + T('P(' + a + ') = ' + Pa) + ' και ' + T('P(' + b + ') = ' + Pb) + '. Ποιο είναι το υπόλοιπο της διαίρεσής του με το ' + T('(' + xm(a) + ')(' + xm(b) + ')') + ';', ans, { ch: mc(ans, [T(lin(l, k)), T(lin(-k, l)), T(lin(k, -l)), T(String(Pa))]), at: 'text', ex: 'υ(x) = κx + λ με ' + T(a + 'κ + λ = ' + Pa) + ' και ' + T(b + 'κ + λ = ' + Pb) }); };
+  G.polyIneq3 = () => { const r = []; while (r.length < 3) { const v = ri(-5, 5); if (!r.includes(v)) r.push(v); } r.sort((x, y) => x - y); const gt = M.chance(0.5); const A = T('(' + r[0] + ', ' + r[1] + ') \\cup (' + r[2] + ', ' + INF + ')'), B = T('(' + NINF + ', ' + r[0] + ') \\cup (' + r[1] + ', ' + r[2] + ')'); const ans = gt ? A : B; return Q('Λύσε την ανίσωση ' + T(r.map((v) => '(' + xm(v) + ')').join('') + (gt ? ' > 0' : ' < 0')) + '.', ans, { ch: mc(ans, [gt ? B : A, T('(' + r[0] + ', ' + r[2] + ')'), T('(' + r[1] + ', ' + INF + ')')]), at: 'text', ex: 'Πίνακας προσήμων με ρίζες ' + r.join(', ') + ': το γινόμενο είναι θετικό δεξιά από τη μεγαλύτερη ρίζα και αλλάζει πρόσημο σε κάθε απλή ρίζα.' }); };
+  /* --- Εκθετική και λογαριθμική --- */
+  G.expSub = () => { const base = pick([2, 3]); const e1 = ri(0, 3), e2 = ri(0, 3); if (e1 === e2) return G.expSub(); const r1 = base ** e1, r2 = base ** e2; const S = r1 + r2, P = r1 * r2; return Q('Λύσε την εξίσωση ' + T(base * base + '^{x} - ' + S + ' \\cdot ' + base + '^{x} + ' + P + ' = 0') + '. (Γράψε τις λύσεις χωρισμένες με κόμμα και κενό.)', [e1, e2], { at: 'set', show: [e1, e2].sort().join(', '), ex: 'Θέτουμε y = ' + base + '^x > 0: y² − ' + S + 'y + ' + P + ' = 0, y = ' + r1 + ' ή y = ' + r2 }); };
+  G.logEqQ = () => { const k = ri(1, 6), x = k + ri(1, 8); const m = x * (x - k); const other = -m / x; // η άλλη ρίζα x(x − k) = m είναι k − x < 0
+    return Q('Λύσε την εξίσωση ' + T('\\log x + \\log(x - ' + k + ') = \\log ' + m) + '.', x, { ex: 'Περιορισμός x > ' + k + '. x(x − ' + k + ') = ' + m + ', ρίζες ' + x + ' και ' + (k - x) + ', δεκτή μόνο η ' + x }); };
+  G.expLogIneq = () => { const B = [['\\left(\\frac{1}{2}\\right)^{x} > 8', 'x < -3'], ['3^{x - 1} \\le 27', 'x \\le 4'], ['2^{x} > 32', 'x > 5'], ['\\ln(2x - 1) \\le 0', '\\frac{1}{2} < x \\le 1'], ['\\log(x - 2) < 1', '2 < x < 12'], ['e^{2x} \\ge e^{x + 3}', 'x \\ge 3'], ['\\log_{\\frac{1}{2}} x > 1', '0 < x < \\frac{1}{2}']]; const [e, a] = pick(B); const ans = T(a); const flip = (t) => t.replace('<', '§').replace('>', '<').replace('§', '>').replace('\\le', '§').replace('\\ge', '\\le').replace('§', '\\ge'); return Q('Λύσε την ανίσωση ' + T(e) + '.', ans, { ch: mc(ans, [T(flip(a))].concat(B.map((x) => T(x[1])))).slice(0, 4), at: 'text', ex: 'Βάση μεγαλύτερη του 1: η φορά μένει. Βάση ανάμεσα στο 0 και το 1: η φορά αλλάζει. Στους λογαρίθμους προσέχουμε και τους περιορισμούς.' }); };
+  const _eli = G.expLogIneq; G.expLogIneq = (p) => { const q = _eli(p); if (!q.ch.includes(q.a)) q.ch[0] = q.a; q.ch = shuffle([...new Set(q.ch)]); return q; };
+  G.logCalc = () => { const B = [['\\log_2 32 - \\log_3 9', 3], ['\\log 1000 + \\log_5 25', 5], ['\\log_2 8 + \\log_2 4', 5], ['\\log_3 81 - \\log_2 2', 3], ['\\ln e^{4} + \\log 0{,}1', 3], ['\\log_2 40 - \\log_2 5', 3], ['\\log 4 + \\log 25', 2], ['\\log_6 4 + \\log_6 9', 2], ['2\\log_3 6 - \\log_3 4', 2]]; const [e, a] = pick(B); return Q('Υπολόγισε ' + T(e) + '.', a, { ex: 'Ιδιότητες: log(αβ) = logα + logβ, log(α/β) = logα − logβ, log αᵏ = k logα' }); };
+  G.logDomainQ = () => { const a = ri(1, 6); const B = [['\\ln(x^2 - ' + a * a + ')', '(' + NINF + ', ' + -a + ') \\cup (' + a + ', ' + INF + ')'], ['\\log(' + a + ' - x)', '(' + NINF + ', ' + a + ')'], ['\\ln(x + ' + a + ')', '(' + -a + ', ' + INF + ')'], ['\\log_2(x^2 + ' + a + ')', '\\mathbb{R}']]; const [f, d] = pick(B); const ans = T(d); return Q('Ποιο είναι το πεδίο ορισμού της ' + T('f(x) = ' + f) + ';', ans, { ch: mc(ans, B.map((x) => T(x[1])).concat([T('(' + -a + ', ' + a + ')')])), at: 'text', ex: 'Η ποσότητα μέσα στον λογάριθμο πρέπει να είναι θετική.' }); };
 })();
 
 </script>
@@ -2747,6 +3143,7 @@ window.mmBack = function () {
     numline: { icon: 'fa-ruler-horizontal', name: 'Αριθμογραμμή' },
     pop: { icon: 'fa-burst', name: 'Σκάσε τα μπαλόνια' },
     tune: { icon: 'fa-sliders', name: 'Εργαστήριο γραφήματος' },
+    grid: { icon: 'fa-table-cells', name: 'Πίνακας' },
   };
 
   /* ---------- θέμα (φωτεινό ή σκοτεινό), ίδιο με την αρχική σελίδα ---------- */
@@ -2805,8 +3202,8 @@ window.mmBack = function () {
     if (!gen) throw new Error('Άγνωστη γεννήτρια ' + act.gen);
     const p = act.p || {}; const items = []; const seen = new Set();
     const one = (t) => gen(p, t);
-    if (act.type === 'order' || act.type === 'pop' || act.type === 'tune') {
-      let g = 0; while (items.length < act.n && g++ < 60) { const q = one(); const k = JSON.stringify(q.steps || q.items || q.q); if (!seen.has(k) || g > 30) { seen.add(k); items.push(q); } }
+    if (act.type === 'order' || act.type === 'pop' || act.type === 'tune' || act.type === 'grid') {
+      let g = 0; while (items.length < act.n && g++ < 60) { const q = one(); const k = JSON.stringify(q.steps || q.items || q.rows || q.q); if (!seen.has(k) || g > 30) { seen.add(k); items.push(q); } }
       return { items };
     }
     if (act.type === 'color') {
@@ -3961,7 +4358,11 @@ TAB ν άρτιος, $α < 0$ :: αδύνατη
 ## Εξισώσεις 2ου βαθμού
 THM Τύπος λύσεων :: Η $αx^2 + βx + γ = 0$, $α \ne 0$, με $Δ = β^2 - 4αγ$: αν $Δ > 0$ έχει δύο ρίζες $x_{1,2} = \frac{-β \pm \sqrt{Δ}}{2α}$, αν $Δ = 0$ μία διπλή $-\frac{β}{2α}$, αν $Δ < 0$ καμία πραγματική. :: Με συμπλήρωση τετραγώνου η εξίσωση γράφεται $\left(x + \frac{β}{2α}\right)^2 = \frac{Δ}{4α^2}$ και εξετάζουμε το πρόσημο του Δ.
 THM Τύποι Vieta :: Αν $x_1, x_2$ οι ρίζες της $αx^2 + βx + γ = 0$, τότε $S = x_1 + x_2 = -\frac{β}{α}$ και $P = x_1x_2 = \frac{γ}{α}$. :: Από τον τύπο: $x_1 + x_2 = \frac{-β + \sqrt{Δ} - β - \sqrt{Δ}}{2α} = -\frac{β}{α}$ και $x_1x_2 = \frac{β^2 - Δ}{4α^2} = \frac{4αγ}{4α^2} = \frac{γ}{α}$.
-P Ανάποδα: δύο αριθμοί με άθροισμα S και γινόμενο P είναι ρίζες της $x^2 - Sx + P = 0$.
+P Ανάποδα: δύο αριθμοί με άθροισμα S και γινόμενο P είναι ρίζες της $x^2 - Sx + P = 0$, που έχει διακρίνουσα $Δ = S^2 - 4P$.
+- Αν $S^2 > 4P$, υπάρχουν δύο διαφορετικοί πραγματικοί αριθμοί.
+- Αν $S^2 = 4P$, οι δύο αριθμοί είναι ίσοι, ο καθένας $\frac{S}{2}$.
+- Αν $S^2 < 4P$, δεν υπάρχουν πραγματικοί αριθμοί με αυτό το άθροισμα και γινόμενο.
+EX Υπάρχουν δύο πραγματικοί αριθμοί με άθροισμα 2 και γινόμενο 5; :: Θα ήταν ρίζες της $x^2 - 2x + 5 = 0$ με $Δ = 4 - 20 = -16 < 0$. Άρα δεν υπάρχουν.
 ## Εξισώσεις που ανάγονται σε 2ου βαθμού
 P Διτετράγωνες $αx^4 + βx^2 + γ = 0$: θέτουμε $x^2 = ω \ge 0$. Εξισώσεις με απόλυτα: θέτουμε $|x| = ω \ge 0$.
 EX Λύσε $x^4 - 5x^2 + 4 = 0$. :: Με $ω = x^2$: $ω^2 - 5ω + 4 = 0$, $ω = 1$ ή $ω = 4$. Άρα $x = \pm 1$ ή $x = \pm 2$.
@@ -4039,7 +4440,7 @@ EX Υπάρχει τρίγωνο με πλευρές 3, 4, 8; :: Όχι, για�
   B.la09 = K(R`
 ## Παράλληλες ευθείες
 DEF Παράλληλες ευθείες :: Ευθείες του ίδιου επιπέδου που δεν έχουν κοινό σημείο.
-THM Αίτημα παραλληλίας (Ευκλείδειο) :: Από σημείο εκτός ευθείας άγεται μία μόνο παράλληλη προς αυτήν.
+DEF Αίτημα παραλληλίας (Ευκλείδειο) :: Από σημείο εκτός ευθείας άγεται μία μόνο παράλληλη προς αυτήν. Είναι αίτημα, δηλαδή το δεχόμαστε χωρίς απόδειξη.
 THM Γωνίες παραλλήλων τεμνόμενων από τρίτη :: Αν δύο παράλληλες τέμνονται από τρίτη ευθεία, σχηματίζουν τις εντός εναλλάξ ίσες, τις εντός εκτός και επί τα αυτά ίσες και τις εντός και επί τα αυτά παραπληρωματικές. Ισχύει και το αντίστροφο.
 ## Άθροισμα γωνιών
 THM Άθροισμα γωνιών τριγώνου :: $\widehat{Α} + \widehat{Β} + \widehat{Γ} = 180^{\circ}$. :: Από την κορυφή Α φέρνουμε ευθεία ε ∥ ΒΓ. Οι γωνίες που σχηματίζει η ε με τις ΑΒ, ΑΓ είναι ίσες με τις $\widehat{Β}$ και $\widehat{Γ}$ ως εντός εναλλάξ, και μαζί με την $\widehat{Α}$ σχηματίζουν ευθεία γωνία.
@@ -4070,6 +4471,7 @@ P Ισοσκελές τραπέζιο: οι γωνίες κάθε βάσης ε�
 DEF Ορίζουσα :: Για το σύστημα $αx + βy = γ$, $α′x + β′y = γ′$ ορίζουμε $D = \begin{vmatrix} α & β \\ α′ & β′ \end{vmatrix} = αβ′ - α′β$, $D_x = γβ′ - γ′β$, $D_y = αγ′ - α′γ$.
 THM Κανόνας του Cramer :: Αν $D \ne 0$, το σύστημα έχει μοναδική λύση $x = \frac{D_x}{D}$, $y = \frac{D_y}{D}$. Αν $D = 0$, το σύστημα είναι αδύνατο ή έχει άπειρες λύσεις. :: Πολλαπλασιάζουμε την πρώτη εξίσωση με β′ και τη δεύτερη με −β και προσθέτουμε: $(αβ′ - α′β)x = γβ′ - γ′β$, δηλαδή $Dx = D_x$. Ομοίως $Dy = D_y$. Αν $D \ne 0$ παίρνουμε τη μοναδική λύση. Αν $D = 0$ και κάποια από τις $D_x, D_y$ δεν είναι 0, είναι αδύνατο.
 TAB Γεωμετρική ερμηνεία :: $D \ne 0$: οι ευθείες τέμνονται. $D = 0$: είναι παράλληλες ή ταυτίζονται.
+WARN Η ορίζουσα D του συστήματος δεν είναι η διακρίνουσα $Δ = β^2 - 4αγ$ της εξίσωσης 2ου βαθμού. Στο σύστημα: $D \ne 0$ μοναδική λύση, $D = 0$ αδύνατο ή άπειρες λύσεις. Στην εξίσωση 2ου βαθμού: $Δ > 0$ δύο ρίζες, $Δ = 0$ μία διπλή ρίζα, $Δ < 0$ καμία πραγματική ρίζα.
 ## Συστήματα 3 × 3 και μη γραμμικά
 P Τα λύνουμε με αντικατάσταση ή με αντίθετους συντελεστές, απαλείφοντας διαδοχικά αγνώστους. Στα μη γραμμικά συνήθως λύνουμε τη γραμμική εξίσωση ως προς έναν άγνωστο και αντικαθιστούμε.
 EX Λύσε $2x + y = 5$, $x - y = 1$. :: $D = -2 - 1 = -3$, $D_x = -5 - 1 = -6$, $D_y = 2 - 5 = -3$, άρα $x = 2$, $y = 1$.
@@ -4454,11 +4856,14 @@ WARN $\sqrt{x^2} = |x|$ και όχι x. Για παράδειγμα $\sqrt{(-3)
   D.la03 = M(R`
 METH Εξίσωση 1ου βαθμού με παράμετρο $αx = β$ :: Φέρνω την εξίσωση στη μορφή $αx = β$ και παραγοντοποιώ τα α και β. :: Αν $α \ne 0$, έχει μοναδική λύση $x = \frac{β}{α}$. :: Αν $α = 0$ και $β \ne 0$, είναι αδύνατη. Αν $α = 0$ και $β = 0$, είναι ταυτότητα (κάθε x είναι λύση).
 METH Εξίσωση 2ου βαθμού :: Τη φέρνω στη μορφή $αx^2 + βx + γ = 0$ με $α \ne 0$. :: Αν λείπει το β ή το γ, λύνω με παραγοντοποίηση ή με $x^2 = κ$. :: Αλλιώς υπολογίζω $Δ = β^2 - 4αγ$. Για $Δ > 0$ δύο ρίζες $x = \frac{-β \pm \sqrt{Δ}}{2α}$, για $Δ = 0$ μία διπλή ρίζα, για $Δ < 0$ καμία πραγματική ρίζα.
-METH Τύποι Vieta :: Αν η εξίσωση έχει ρίζες $ρ_1, ρ_2$, τότε $S = ρ_1 + ρ_2 = -\frac{β}{α}$ και $P = ρ_1 ρ_2 = \frac{γ}{α}$. :: Παραστάσεις των ριζών τις γράφω με S και P, π.χ. $ρ_1^2 + ρ_2^2 = S^2 - 2P$ και $\frac{1}{ρ_1} + \frac{1}{ρ_2} = \frac{S}{P}$. :: Εξίσωση με ρίζες $ρ_1, ρ_2$: $x^2 - Sx + P = 0$.
+METH Τύποι Vieta :: Αν η εξίσωση έχει ρίζες $ρ_1, ρ_2$, τότε $S = ρ_1 + ρ_2 = -\frac{β}{α}$ και $P = ρ_1 ρ_2 = \frac{γ}{α}$. :: Παραστάσεις των ριζών τις γράφω με S και P, π.χ. $ρ_1^2 + ρ_2^2 = S^2 - 2P$ και $\frac{1}{ρ_1} + \frac{1}{ρ_2} = \frac{S}{P}$. :: Εξίσωση με ρίζες $ρ_1, ρ_2$: $x^2 - Sx + P = 0$. :: Ελέγχω τη διακρίνουσα $Δ = S^2 - 4P$: αν $Δ > 0$ υπάρχουν δύο διαφορετικοί αριθμοί, αν $Δ = 0$ δύο ίσοι, αν $Δ < 0$ κανένας πραγματικός.
 METH Ειδικές μορφές :: Διτετράγωνη $αx^4 + βx^2 + γ = 0$: θέτω $y = x^2 \ge 0$. :: Κλασματική: βρίσκω πρώτα τους περιορισμούς (παρονομαστές διάφοροι του μηδενός), κάνω απαλοιφή και στο τέλος ελέγχω τις λύσεις. :: Με απόλυτα: $|f(x)| = θ$ με $θ > 0$ δίνει $f(x) = θ$ ή $f(x) = -θ$ και $|f(x)| = |g(x)|$ δίνει $f(x) = g(x)$ ή $f(x) = -g(x)$.
 SOLVED Λύσε την $(λ - 1)x = λ^2 - 1$ για όλες τις τιμές του λ. :: Αν $λ \ne 1$: $x = \frac{(λ - 1)(λ + 1)}{λ - 1} = λ + 1$. :: Αν $λ = 1$: γίνεται $0x = 0$, ταυτότητα. Κάθε πραγματικός αριθμός είναι λύση.
 SOLVED Λύσε την $x^4 - 5x^2 + 4 = 0$. :: Θέτουμε $y = x^2 \ge 0$: $y^2 - 5y + 4 = 0$, με λύσεις $y = 1$ και $y = 4$ (δεκτές). :: $x^2 = 1$ δίνει $x = \pm 1$ και $x^2 = 4$ δίνει $x = \pm 2$.
 SOLVED Βρες το λ ώστε η $x^2 - 2λx + λ + 2 = 0$ να έχει διπλή ρίζα. :: $Δ = 4λ^2 - 4(λ + 2) = 4(λ^2 - λ - 2) = 4(λ - 2)(λ + 1)$. :: $Δ = 0$ για $λ = 2$ ή $λ = -1$.
+SOLVED Βρες δύο αριθμούς με άθροισμα 10 και γινόμενο 21. :: Είναι ρίζες της $x^2 - 10x + 21 = 0$ με $Δ = 100 - 84 = 16 > 0$. :: $x = \frac{10 \pm 4}{2}$, δηλαδή οι αριθμοί είναι 7 και 3.
+SOLVED Υπάρχουν δύο πραγματικοί αριθμοί με άθροισμα 2 και γινόμενο 5; Και με άθροισμα 6 και γινόμενο 9; :: Για $S = 2$, $P = 5$: η $x^2 - 2x + 5 = 0$ έχει $Δ = S^2 - 4P = 4 - 20 = -16 < 0$, άρα δεν υπάρχουν τέτοιοι πραγματικοί αριθμοί. :: Για $S = 6$, $P = 9$: $Δ = 36 - 36 = 0$, διπλή ρίζα $x = 3$. Οι αριθμοί είναι ίσοι, 3 και 3.
+WARN Πριν γράψεις την $x^2 - Sx + P = 0$ ως απάντηση, έλεγξε το πρόσημο της $S^2 - 4P$. Αν είναι αρνητικό, δεν υπάρχουν πραγματικοί αριθμοί με αυτό το άθροισμα και γινόμενο.
 SOLVED Αν $ρ_1, ρ_2$ οι ρίζες της $x^2 - 3x - 1 = 0$, βρες την $ρ_1^2 + ρ_2^2$. :: $Δ = 9 + 4 = 13 > 0$, άρα υπάρχουν δύο ρίζες. :: $S = 3$ και $P = -1$. :: $ρ_1^2 + ρ_2^2 = S^2 - 2P = 9 + 2 = 11$.
 SOLVED Λύσε την $|2x - 1| = |x + 2|$. :: $2x - 1 = x + 2$ δίνει $x = 3$. :: $2x - 1 = -(x + 2)$ δίνει $3x = -1$, άρα $x = -\frac{1}{3}$.
 `);
@@ -4544,6 +4949,7 @@ METH Σύστημα 3x3 :: Απαλείφω έναν άγνωστο συνδυά
 SOLVED Λύσε με ορίζουσες το σύστημα $2x + 3y = 7$, $x - y = 1$. :: $D = 2(-1) - 3 \times 1 = -5$, $D_x = 7(-1) - 3 \times 1 = -10$, $D_y = 2 \times 1 - 7 \times 1 = -5$. :: $x = \frac{-10}{-5} = 2$ και $y = \frac{-5}{-5} = 1$.
 SOLVED Να λυθεί για όλες τις τιμές του λ το σύστημα $λx + y = 1$, $x + λy = 1$. :: $D = λ^2 - 1 = (λ - 1)(λ + 1)$, $D_x = λ - 1$, $D_y = λ - 1$. :: Αν $λ \ne \pm 1$: μοναδική λύση $x = y = \frac{λ - 1}{(λ - 1)(λ + 1)} = \frac{1}{λ + 1}$. :: Αν $λ = 1$: και οι δύο εξισώσεις γίνονται $x + y = 1$, άπειρες λύσεις $(x, 1 - x)$. :: Αν $λ = -1$: $-x + y = 1$ και $x - y = 1$, δηλαδή $x - y = -1$ και $x - y = 1$, αδύνατο.
 SOLVED Λύσε το σύστημα $x + y + z = 6$, $x - y + z = 2$, $2x + y - z = 1$. :: Αφαιρούμε τη δεύτερη από την πρώτη: $2y = 4$, άρα $y = 2$. :: Τότε $x + z = 4$ και $2x - z = -1$. Προσθέτοντας: $3x = 3$, άρα $x = 1$ και $z = 3$.
+WARN Μην μπερδεύεις την ορίζουσα D του συστήματος με τη διακρίνουσα Δ της εξίσωσης 2ου βαθμού. Στο σύστημα μετράει μόνο αν $D \ne 0$ (μοναδική λύση) ή $D = 0$ (αδύνατο ή άπειρες λύσεις), όχι αν είναι θετική ή αρνητική.
 TIP Γεωμετρικά, ένα σύστημα 2x2 είναι δύο ευθείες. Μοναδική λύση σημαίνει ότι τέμνονται, αδύνατο ότι είναι παράλληλες και άπειρες λύσεις ότι ταυτίζονται.
 `);
 
@@ -5020,7 +5426,7 @@ SOLVED Ποια είναι η μέγιστη τιμή της $y = -x^2 + 6x$; ::
   D.gg07 = M(R`
 METH Πιθανότητα με τον κλασικό ορισμό :: Γράφω τον δειγματικό χώρο Ω, όλα τα δυνατά αποτελέσματα. Για δύο διαδοχικά πειράματα χρησιμοποιώ πίνακα ή δεντροδιάγραμμα. :: Βρίσκω τα ευνοϊκά αποτελέσματα του ενδεχομένου Α. :: $P(Α) = \frac{Ν(Α)}{Ν(Ω)}$, ένας αριθμός από 0 ως 1.
 METH Αντίθετο ενδεχόμενο :: Αν είναι πιο εύκολο να μετρήσω τα αποτελέσματα που δεν ανήκουν στο Α, υπολογίζω $P(Α′)$. :: $P(Α) = 1 - P(Α′)$.
-SOLVED Ρίχνουμε ένα ζάρι. Βρες την πιθανότητα να φέρουμε άρτιο ή αριθμό μεγαλύτερο από 4. :: $Ω = \{1, 2, 3, 4, 5, 6\}$. :: Άρτιοι: $\{2, 4, 6\}$, $P = \frac{3}{6} = \frac{1}{2}$. :: Μεγαλύτερος από 4: $\{5, 6\}$, $P = \frac{2}{6} = \frac{1}{3}$.
+SOLVED Ρίχνουμε ένα ζάρι. Βρες την πιθανότητα να φέρουμε άρτιο ή αριθμό μεγαλύτερο από 4. :: $Ω = \{1, 2, 3, 4, 5, 6\}$. :: Άρτιοι: $\{2, 4, 6\}$. Μεγαλύτεροι από 4: $\{5, 6\}$. :: Το «ή» σημαίνει ότι συμβαίνει τουλάχιστον ένα από τα δύο, δηλαδή η ένωση $\{2, 4, 5, 6\}$ (το 6 το μετράμε μία φορά). :: $P = \frac{4}{6} = \frac{2}{3}$.
 SOLVED Ρίχνουμε δύο νομίσματα. Ποια είναι η πιθανότητα να φέρουμε τουλάχιστον μία φορά κεφαλή; :: $Ω = \{ΚΚ, ΚΓ, ΓΚ, ΓΓ\}$. :: Το αντίθετο είναι «καμία κεφαλή» $= \{ΓΓ\}$ με πιθανότητα $\frac{1}{4}$. :: $P = 1 - \frac{1}{4} = \frac{3}{4}$.
 SOLVED Ένα κουτί έχει 5 κόκκινες, 3 μπλε και 2 πράσινες μπάλες. Παίρνουμε μία στην τύχη. Ποια η πιθανότητα να μην είναι κόκκινη; :: Συνολικά 10 μπάλες, κόκκινες 5. :: $P(\text{όχι κόκκινη}) = 1 - \frac{5}{10} = \frac{1}{2}$.
 `);
@@ -5190,6 +5596,276 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
 })();
 
 </script>
+<script>/* assets/booklets-extra.js */
+/* Mathimagika: επιπλέον φυλλάδια (θεωρία, φύλλο εργασίας, λύσεις) για επιλεγμένα κεφάλαια.
+   Κάθε φυλλάδιο είναι συνάρτηση που επιστρέφει φύλλα .sheet. Τα κουμπιά ορίζονται στο EXTRA_DOCS_META του data.js. */
+(function () {
+  const R = String.raw;
+  const D = (window.EXTRA_DOCS = window.EXTRA_DOCS || {});
+  const K = (s) => window.mmMethods(s);
+  const head = (cls, title, sub) => `<div class="flex items-center justify-between gap-4 mb-2"><div class="font-extrabold text-sm" style="color:#4f46e5">Mathimagika</div><div class="text-sm font-bold">${cls}</div></div><h1>${title}</h1><div class="text-sm font-semibold mb-2" style="color:#4b5563">${sub}</div><div style="border-bottom:2px solid #111827;margin-bottom:.8rem"></div>`;
+  const sheet = (cls, title, sub, body, name) => `<div class="sheet book">${head(cls, title, sub)}${name ? '<div class="meta"><b>Όνομα:</b><span></span><b>Ημερομηνία:</b><span></span></div>' : ''}${body}</div>`;
+  const tbl = (headRow, rows, o = {}) => `<table class="bk-tab xb-tab" style="${o.style || ''}"><tr>${headRow.map((h) => `<th>${h}</th>`).join('')}</tr>${rows.map((r) => `<tr>${r.map((c) => `<td${o.h ? ` style="height:${o.h}"` : ''}>${c}</td>`).join('')}</tr>`).join('')}</table>`;
+  const ex = (n, html) => `<div class="xb-ex"><b>${n}.</b> ${html}</div>`;
+  const lines = (k) => `<div class="xb-lines">${'<div></div>'.repeat(k)}</div>`;
+  const fig = (svg, w) => `<div class="xb-fig" style="max-width:${w || 300}px">${svg}</div>`;
+  const row2 = (a, b) => `<div class="xb-row">${a}${b}</div>`;
+
+  /* ===================== Α΄ Γυμνασίου: διαιρετότητα και ευκλείδεια διαίρεση ===================== */
+  D.divis = function () {
+    const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 1: Οι φυσικοί αριθμοί';
+    const crit = tbl(['Διαιρέτης', 'Κριτήριο', 'Παράδειγμα'], [
+      ['2', 'Ο αριθμός λήγει σε 0, 2, 4, 6 ή 8 (είναι άρτιος).', '3.718'], ['3', 'Το άθροισμα των ψηφίων του διαιρείται με το 3.', '4.125, γιατί 4 + 1 + 2 + 5 = 12'],
+      ['4', 'Τα δύο τελευταία ψηφία του σχηματίζουν πολλαπλάσιο του 4 ή είναι 00.', '7.316, γιατί 16 = 4 × 4'], ['5', 'Λήγει σε 0 ή 5.', '1.235'],
+      ['6', 'Διαιρείται και με το 2 και με το 3.', '534: άρτιος και 5 + 3 + 4 = 12'], ['9', 'Το άθροισμα των ψηφίων του διαιρείται με το 9.', '4.716, γιατί 4 + 7 + 1 + 6 = 18'],
+      ['10', 'Λήγει σε 0.', '980'], ['25', 'Τα δύο τελευταία ψηφία του είναι 00, 25, 50 ή 75.', '1.475'], ['7 και 8', 'Δεν χρησιμοποιούμε κριτήριο. Κάνουμε τη διαίρεση.', '91 : 7 = 13']]);
+    let h = sheet(cls, 'Κριτήρια διαιρετότητας και ευκλείδεια διαίρεση', sub + ' (θεωρία και μέθοδος)', `<h3 class="bk-h">Τα κριτήρια διαιρετότητας</h3>${crit}` + K(R`
+WARN Κάθε πολλαπλάσιο του 9 είναι και πολλαπλάσιο του 3, όχι όμως το αντίστροφο. Για παράδειγμα το 12 διαιρείται με το 3 αλλά όχι με το 9.
+TIP Για το 6 πρέπει να ισχύουν και τα δύο κριτήρια, του 2 και του 3. Δεν αρκεί μόνο το ένα.
+## Η ευκλείδεια διαίρεση
+DEF Ταυτότητα της ευκλείδειας διαίρεσης :: Για κάθε διαιρετέο Δ και διαιρέτη $δ \ne 0$ υπάρχουν μοναδικοί φυσικοί, το πηλίκο π και το υπόλοιπο υ, ώστε $Δ = δ \times π + υ$ με $0 \le υ < δ$. Αν $υ = 0$, η διαίρεση λέγεται τέλεια.
+METH Είναι ευκλείδεια διαίρεση; :: Ελέγχω αν ισχύει η ισότητα (κάνω τις πράξεις στο δεύτερο μέλος). :: Ελέγχω αν το υπόλοιπο είναι μικρότερο από τον διαιρέτη. :: Μόνο αν ισχύουν και τα δύο είναι ταυτότητα ευκλείδειας διαίρεσης.
+SOLVED Ένας αριθμός διαιρούμενος με το 9 δίνει πηλίκο 73 και υπόλοιπο 4. Ποιος είναι ο αριθμός; :: $Δ = δ \times π + υ = 9 \times 73 + 4 = 657 + 4 = 661$.
+SOLVED Η ισότητα $762 = 38 \times 19 + 40$ είναι ταυτότητα ευκλείδειας διαίρεσης με διαιρέτη 38; :: Η ισότητα ισχύει, γιατί $38 \times 19 + 40 = 722 + 40 = 762$. :: Όμως το υπόλοιπο 40 δεν είναι μικρότερο από τον διαιρέτη 38. Άρα δεν είναι ευκλείδεια διαίρεση.
+SOLVED Κάνε την ευκλείδεια διαίρεση $487 : 12$. :: Το 12 χωράει 40 φορές στο 487, γιατί $12 \times 40 = 480$, και περισσεύουν 7. :: $487 = 12 \times 40 + 7$ με $7 < 12$. Πηλίκο 40, υπόλοιπο 7.
+`));
+    const nums = ['250', '382', '90.000', '581', '108', '1.053', '8.034', '2.492', '105'], cols = ['2', '3', '4', '5', '6', '9', '10', '25'];
+    const grid = tbl([':'].concat(cols), nums.map((n) => [n].concat(cols.map(() => ''))), { h: '1.5rem' });
+    h += sheet(cls, 'Φύλλο εργασίας: διαιρετότητα και ευκλείδεια διαίρεση', sub, ex(1, 'Βάλε ✓ αν ο αριθμός διαιρείται με τον αριθμό της στήλης.' + grid) +
+      ex(2, 'Συμπλήρωσε το κουτάκι με όλα τα ψηφία που ταιριάζουν: α) $4\\square8$ να διαιρείται με το 3, β) $7\\square5$ να διαιρείται με το 9, γ) $31\\square$ να διαιρείται με το 4, δ) $2\\square0$ να διαιρείται με το 6.' + lines(2)) +
+      ex(3, 'Ένας αριθμός διαιρούμενος με το 7 δίνει πηλίκο 58 και υπόλοιπο 6. Ποιος είναι ο αριθμός;' + lines(1)) +
+      ex(4, 'Κάνε τις ευκλείδειες διαιρέσεις και γράψε την ταυτότητα: α) $1.250 : 17$, β) $999 : 25$.' + lines(2)) +
+      ex(5, 'Ποιες είναι ταυτότητες ευκλείδειας διαίρεσης; α) $100 = 9 \\times 11 + 1$ (διαιρέτης 9), β) $100 = 8 \\times 11 + 12$ (διαιρέτης 8), γ) $85 = 6 \\times 13 + 7$ (διαιρέτης 6), δ) $85 = 13 \\times 6 + 7$ (διαιρέτης 13).' + lines(2)) +
+      ex(6, 'Ποια υπόλοιπα μπορεί να αφήσει μια διαίρεση με διαιρέτη 6;' + lines(1)) +
+      ex(7, 'Βρες όλους τους διψήφιους αριθμούς που διαιρούνται και με το 5 και με το 9.' + lines(1)), true);
+    const ans = { '250': [2, 5, 10, 25], '382': [2], '90.000': [2, 3, 4, 5, 6, 9, 10, 25], '581': [], '108': [2, 3, 4, 6, 9], '1.053': [3, 9], '8.034': [2, 3, 6], '2.492': [2, 4], '105': [3, 5] };
+    const grid2 = tbl([':'].concat(cols), nums.map((n) => [n].concat(cols.map((c) => (ans[n].includes(+c) ? '✓' : '')))));
+    h += sheet(cls, 'Λύσεις', sub, ex(1, grid2 + '<div class="text-sm">Ο 581 δεν διαιρείται με κανέναν από αυτούς (581 = 7 × 83).</div>') +
+      ex(2, 'α) 0, 3, 6, 9 (άθροισμα 12 + □ πολλαπλάσιο του 3), β) 6 (7 + 6 + 5 = 18), γ) 2 ή 6 (12 και 16 πολλαπλάσια του 4), δ) 1, 4, 7 (άρτιος και 2 + □ πολλαπλάσιο του 3).') +
+      ex(3, '$Δ = 7 \\times 58 + 6 = 412$.') + ex(4, 'α) $1.250 = 17 \\times 73 + 9$, β) $999 = 25 \\times 39 + 24$.') +
+      ex(5, 'α) Ναι. β) Όχι, γιατί 12 > 8. γ) Όχι, γιατί 7 > 6. δ) Ναι, γιατί 7 < 13.') + ex(6, '0, 1, 2, 3, 4, 5 (το υπόλοιπο είναι πάντα μικρότερο από τον διαιρέτη).') +
+      ex(7, 'Πρέπει να διαιρούνται με το 45: οι αριθμοί 45 και 90.'));
+    return h;
+  };
+
+  /* ===================== Α΄ Γυμνασίου: κλάσματα ===================== */
+  D.fracs = function () {
+    const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 2: Τα κλάσματα';
+    let h = sheet(cls, 'Κλάσματα', sub + ' (θεωρία και μέθοδος)', K(R`
+DEF Κλάσμα :: Ο αριθμός $\frac{α}{β}$ με $β \ne 0$. Ο β (παρονομαστής) δείχνει σε πόσα ίσα μέρη χωρίσαμε τη μονάδα και ο α (αριθμητής) πόσα πήραμε.
+DEF Ισοδύναμα κλάσματα :: Αν πολλαπλασιάσουμε ή διαιρέσουμε αριθμητή και παρονομαστή με τον ίδιο αριθμό (διάφορο του 0), παίρνουμε ίσο κλάσμα: $\frac{2}{3} = \frac{4}{6} = \frac{10}{15}$.
+METH Απλοποίηση σε ανάγωγο :: Βρίσκω τον Μ.Κ.Δ. αριθμητή και παρονομαστή. :: Διαιρώ και τους δύο με αυτόν. Το κλάσμα που προκύπτει είναι ανάγωγο, δεν απλοποιείται άλλο.
+METH Σύγκριση κλασμάτων :: Ίδιος παρονομαστής: μεγαλύτερο είναι αυτό με τον μεγαλύτερο αριθμητή. :: Ίδιος αριθμητής: μεγαλύτερο είναι αυτό με τον μικρότερο παρονομαστή. :: Αλλιώς τα κάνω ομώνυμα με το Ε.Κ.Π. των παρονομαστών.
+METH Πράξεις :: Πρόσθεση και αφαίρεση: κάνω τα κλάσματα ομώνυμα και προσθέτω ή αφαιρώ τους αριθμητές. :: Πολλαπλασιασμός: $\frac{α}{β} \times \frac{γ}{δ} = \frac{αγ}{βδ}$. Απλοποιώ πριν πολλαπλασιάσω. :: Διαίρεση: πολλαπλασιάζω με το αντίστροφο, $\frac{α}{β} : \frac{γ}{δ} = \frac{α}{β} \times \frac{δ}{γ}$.
+METH Μεικτοί αριθμοί :: Από μεικτό σε κλάσμα: $2\frac{3}{4} = \frac{2 \times 4 + 3}{4} = \frac{11}{4}$. :: Από κλάσμα σε μεικτό: κάνω τη διαίρεση, $17 : 5 = 3$ και υπόλοιπο 2, άρα $\frac{17}{5} = 3\frac{2}{5}$.
+METH Κλάσμα ποσότητας :: Τα $\frac{3}{4}$ του 36: $36 : 4 \times 3 = 27$. :: Αντίστροφα, αν τα $\frac{2}{5}$ ενός αριθμού είναι 12, το $\frac{1}{5}$ είναι $12 : 2 = 6$ και ο αριθμός $6 \times 5 = 30$.
+SOLVED Ένας μαθητής ξόδεψε τα $\frac{2}{5}$ των χρημάτων του για βιβλία και το $\frac{1}{3}$ για ένα παιχνίδι. Του έμειναν 16 €. Πόσα χρήματα είχε; :: Ξόδεψε $\frac{2}{5} + \frac{1}{3} = \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$, άρα έμειναν τα $\frac{4}{15}$. :: Τα $\frac{4}{15}$ είναι 16 €, άρα το $\frac{1}{15}$ είναι 4 € και όλα τα χρήματα $4 \times 15 = 60$ €.
+WARN $\frac{α}{β} + \frac{γ}{δ} \ne \frac{α + γ}{β + δ}$. Για παράδειγμα $\frac{1}{2} + \frac{1}{2} = 1$ και όχι $\frac{2}{4}$.
+`));
+    h += sheet(cls, 'Φύλλο εργασίας: κλάσματα', sub, ex(1, 'Απλοποίησε σε ανάγωγα: α) $\\frac{18}{24}$ β) $\\frac{45}{60}$ γ) $\\frac{56}{84}$ δ) $\\frac{125}{1.000}$' + lines(1)) +
+      ex(2, 'Βάλε το σωστό σύμβολο (<, = ή >): α) $\\frac{5}{7} \\;\\square\\; \\frac{7}{10}$ β) $\\frac{3}{8} \\;\\square\\; \\frac{3}{11}$ γ) $\\frac{11}{12} \\;\\square\\; \\frac{13}{15}$' + lines(1)) +
+      ex(3, 'Κάνε τις πράξεις: α) $\\frac{2}{3} + \\frac{3}{4}$ β) $\\frac{5}{6} - \\frac{1}{4}$ γ) $\\frac{4}{9} \\times \\frac{3}{8}$ δ) $\\frac{2}{5} : \\frac{4}{15}$' + lines(2)) +
+      ex(4, 'Γράψε τον μεικτό $2\\frac{3}{4}$ ως κλάσμα και το κλάσμα $\\frac{17}{5}$ ως μεικτό.' + lines(1)) +
+      ex(5, 'α) Πόσο είναι τα $\\frac{3}{4}$ του 36; β) Τα $\\frac{2}{5}$ ενός αριθμού είναι 12. Ποιος είναι ο αριθμός;' + lines(2)) +
+      ex(6, 'Μια δεξαμενή είναι γεμάτη κατά τα $\\frac{3}{8}$. Αν προσθέσουμε 150 λίτρα, γεμίζει κατά τα $\\frac{5}{8}$. Πόσα λίτρα χωράει;' + lines(2)), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, 'α) $\\frac{3}{4}$ β) $\\frac{3}{4}$ γ) $\\frac{2}{3}$ δ) $\\frac{1}{8}$') + ex(2, 'α) $\\frac{50}{70} > \\frac{49}{70}$, άρα > β) > (ίδιος αριθμητής, μικρότερος παρονομαστής) γ) $\\frac{55}{60} > \\frac{52}{60}$, άρα >') +
+      ex(3, 'α) $\\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12}$ β) $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$ γ) $\\frac{12}{72} = \\frac{1}{6}$ δ) $\\frac{2}{5} \\times \\frac{15}{4} = \\frac{30}{20} = \\frac{3}{2}$') +
+      ex(4, '$2\\frac{3}{4} = \\frac{11}{4}$ και $\\frac{17}{5} = 3\\frac{2}{5}$.') + ex(5, 'α) $36 : 4 \\times 3 = 27$ β) $12 : 2 \\times 5 = 30$') +
+      ex(6, 'Τα 150 λίτρα είναι τα $\\frac{5}{8} - \\frac{3}{8} = \\frac{2}{8}$, άρα το $\\frac{1}{8}$ είναι 75 λίτρα και η δεξαμενή χωράει $75 \\times 8 = 600$ λίτρα.'));
+    return h;
+  };
+
+  /* ===================== Α΄ Γυμνασίου: γωνίες ===================== */
+  D.angles = function () {
+    const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 1: Βασικές γεωμετρικές έννοιες';
+    const fComp = fig(M.raysFig([[0, 'Α'], [35, 'Γ'], [90, 'Β']], [[0, 90, null, true], [0, 35, 'ω'], [35, 90, 'φ']], { cy: 180, cx: 110 }), 240);
+    const fSupp = fig(M.raysFig([[0, 'Β'], [65, 'Γ'], [180, 'Α']], [[0, 65, 'ω'], [65, 180, 'φ']]), 260);
+    const fVert = fig(M.crossFig(55, ['ω', 'φ', 'ω', 'φ']), 260);
+    let h = sheet(cls, 'Γωνίες: συμπληρωματικές, παραπληρωματικές, κατακορυφήν', sub + ' (θεωρία και μέθοδος)',
+      row2(fComp, K(R`
+DEF Συμπληρωματικές γωνίες :: Δύο γωνίες με άθροισμα $90^{\circ}$. Η συμπληρωματική της ω είναι η $90^{\circ} - ω$. Στο σχήμα $ω + φ = 90^{\circ}$.
+`)) + row2(fSupp, K(R`
+DEF Παραπληρωματικές γωνίες :: Δύο γωνίες με άθροισμα $180^{\circ}$. Η παραπληρωματική της ω είναι η $180^{\circ} - ω$. Δύο εφεξής γωνίες με τις μη κοινές πλευρές αντικείμενες ημιευθείες είναι παραπληρωματικές.
+`)) + row2(fVert, K(R`
+DEF Κατακορυφήν γωνίες :: Όταν δύο ευθείες τέμνονται, οι απέναντι γωνίες λέγονται κατακορυφήν και είναι ίσες. Δύο διαδοχικές γωνίες είναι παραπληρωματικές.
+`)) + K(R`
+- Οι γωνίες γύρω από ένα σημείο έχουν άθροισμα $360^{\circ}$.
+- Αμβλεία γωνία δεν έχει συμπληρωματική. Η παραπληρωματική μιας οξείας είναι αμβλεία.
+METH Άσκηση με x σε σχήμα :: Βρίσκω ποια σχέση συνδέει τις γωνίες: άθροισμα $90^{\circ}$, $180^{\circ}$, $360^{\circ}$ ή ισότητα κατακορυφήν. :: Γράφω την εξίσωση και τη λύνω. :: Αντικαθιστώ το x για να βρω τις γωνίες και ελέγχω το άθροισμα.
+METH Πρόβλημα με λόγια :: Ονομάζω x τη μία γωνία και γράφω την άλλη με το x (π.χ. «τριπλάσια» $3x$, «κατά $20^{\circ}$ μεγαλύτερη» $x + 20^{\circ}$, «ανάλογες των 5 και 4» $5κ$ και $4κ$). :: Γράφω την εξίσωση από το άθροισμα.
+SOLVED Δύο γωνίες είναι συμπληρωματικές και η μία είναι πενταπλάσια της άλλης. :: $x + 5x = 90^{\circ}$, άρα $x = 15^{\circ}$. Οι γωνίες είναι $15^{\circ}$ και $75^{\circ}$.
+SOLVED Δύο ευθείες τέμνονται και δύο κατακορυφήν γωνίες είναι $2x$ και $x + 35^{\circ}$. :: $2x = x + 35^{\circ}$, άρα $x = 35^{\circ}$. Οι κατακορυφήν είναι $70^{\circ}$ και οι άλλες δύο $180^{\circ} - 70^{\circ} = 110^{\circ}$.
+SOLVED Δύο γωνίες είναι συμπληρωματικές και ανάλογες των αριθμών 5 και 4. :: $5κ + 4κ = 90^{\circ}$, άρα $κ = 10^{\circ}$. Οι γωνίες είναι $50^{\circ}$ και $40^{\circ}$.
+`));
+    const f1 = fig(M.raysFig([[0, 'Α'], [30, 'Γ'], [90, 'Β']], [[0, 90, null, true], [0, 30, 'x'], [30, 90, '2x']], { cy: 180, cx: 110 }), 220);
+    const f2 = fig(M.raysFig([[0, 'Β'], [60, 'Γ'], [180, 'Α']], [[0, 60, 'x + 20°'], [60, 180, '3x']]), 240);
+    const f3 = fig(M.crossFig(110, ['3x − 10°', 'y', '2x + 30°', null]), 240);
+    const f4 = fig(M.raysFig([[0, 'Α'], [80, 'Β'], [200, 'Γ']], [[0, 80, '2x'], [80, 200, '3x'], [200, 360, '4x']], { cy: 105 }), 220);
+    h += sheet(cls, 'Φύλλο εργασίας: γωνίες', sub, `<div class="xb-grid2">${ex(1, 'Βρες το x.' + f1)}${ex(2, 'Βρες το x και τις δύο γωνίες.' + f2)}${ex(3, 'Οι ευθείες τέμνονται. Βρες το x και τη γωνία y.' + f3)}${ex(4, 'Βρες το x.' + f4)}</div>` +
+      ex(5, 'α) Μια γωνία είναι κατά $24^{\\circ}$ μικρότερη από τη συμπληρωματική της. Βρες τις δύο γωνίες. β) Δύο γωνίες είναι παραπληρωματικές και η μία είναι πενταπλάσια της άλλης. γ) Δύο γωνίες είναι παραπληρωματικές και ανάλογες των 2 και 7. δ) Δύο ευθείες τέμνονται και μια από τις γωνίες είναι τριπλάσια μιας άλλης. Βρες και τις τέσσερις.' + lines(3)) +
+      ex(6, 'Σωστό (Σ) ή Λάθος (Λ); α) Αν δύο γωνίες έχουν κοινή κορυφή είναι κατακορυφήν. β) Η συμπληρωματική μιας οξείας γωνίας είναι οξεία. γ) Η παραπληρωματική μιας οξείας γωνίας είναι οξεία. δ) Δύο ίσες παραπληρωματικές γωνίες είναι ορθές. ε) Μια αμβλεία γωνία έχει συμπληρωματική.' + tbl(['α', 'β', 'γ', 'δ', 'ε'], [['', '', '', '', '']], { h: '1.6rem', style: 'width:auto' })), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, '$x + 2x = 90^{\\circ}$, άρα $x = 30^{\\circ}$.') + ex(2, '$x + 20^{\\circ} + 3x = 180^{\\circ}$, άρα $4x = 160^{\\circ}$ και $x = 40^{\\circ}$. Οι γωνίες είναι $60^{\\circ}$ και $120^{\\circ}$.') +
+      ex(3, 'Κατακορυφήν: $3x - 10^{\\circ} = 2x + 30^{\\circ}$, άρα $x = 40^{\\circ}$ και η γωνία είναι $110^{\\circ}$. Τότε $y = 180^{\\circ} - 110^{\\circ} = 70^{\\circ}$.') + ex(4, '$2x + 3x + 4x = 360^{\\circ}$, άρα $x = 40^{\\circ}$.') +
+      ex(5, 'α) $x + x + 24^{\\circ} = 90^{\\circ}$, $x = 33^{\\circ}$: οι γωνίες είναι $33^{\\circ}$ και $57^{\\circ}$. β) $x + 5x = 180^{\\circ}$: $30^{\\circ}$ και $150^{\\circ}$. γ) $2κ + 7κ = 180^{\\circ}$, $κ = 20^{\\circ}$: $40^{\\circ}$ και $140^{\\circ}$. δ) $x + 3x = 180^{\\circ}$: $45^{\\circ}$, $135^{\\circ}$, $45^{\\circ}$, $135^{\\circ}$.') +
+      ex(6, 'α) Λ β) Σ γ) Λ δ) Σ ε) Λ'));
+    return h;
+  };
+
+  /* ===================== Α΄ Γυμνασίου: παράλληλες και τέμνουσα ===================== */
+  D.parallels = function () {
+    const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 2: Παράλληλες ευθείες που τέμνονται από τρίτη';
+    const all = fig(M.parFig(62, [[1], [2], [3], [4], [5], [6], [7], [8]]), 320);
+    const pairs = tbl(['Ζεύγος γωνιών', 'Πώς λέγονται', 'Σχέση'], [['3 και 5, 4 και 6', 'εντός εναλλάξ', 'ίσες'], ['1 και 5, 2 και 6, 3 και 7, 4 και 8', 'εντός εκτός και επί τα αυτά', 'ίσες'], ['3 και 6, 4 και 5', 'εντός και επί τα αυτά', 'παραπληρωματικές'], ['1 και 7, 2 και 8', 'εκτός εναλλάξ', 'ίσες'], ['1 και 3, 2 και 4, 5 και 7, 6 και 8', 'κατακορυφήν', 'ίσες']]);
+    let h = sheet(cls, 'Παράλληλες ευθείες που τέμνονται από τρίτη', sub + ' (θεωρία και μέθοδος)', row2(all, K(R`
+P Οι ευθείες $ε_1$ και $ε_2$ είναι παράλληλες και η ε τις τέμνει. Σχηματίζονται 8 γωνίες.
+- <b>Εντός</b>: ανάμεσα στις παράλληλες (3, 4, 5, 6). <b>Εκτός</b>: έξω από αυτές (1, 2, 7, 8).
+- <b>Εναλλάξ</b>: από διαφορετική μεριά της ε. <b>Επί τα αυτά</b>: από την ίδια μεριά της ε.
+`)) + pairs + K(R`
+THM Παράλληλες και τέμνουσα :: Αν δύο παράλληλες ευθείες τέμνονται από τρίτη, οι εντός εναλλάξ γωνίες είναι ίσες, οι εντός εκτός και επί τα αυτά είναι ίσες και οι εντός και επί τα αυτά είναι παραπληρωματικές.
+P Ισχύει και το αντίστροφο: αν δύο εντός εναλλάξ γωνίες είναι ίσες, τότε οι ευθείες είναι παράλληλες.
+METH Πώς βρίσκω μια γωνία :: Εντοπίζω τη γνωστή γωνία και τη ζητούμενη στο σχήμα. :: Βρίσκω πώς λέγονται (από τον πίνακα). :: Αν είναι ίσες, γράφω την ίδια τιμή. Αν είναι παραπληρωματικές, αφαιρώ από τις $180^{\circ}$.
+TIP Στο σχήμα όλες οι γωνίες είναι είτε ίσες με τη γωνία 1 είτε παραπληρωματικές της. Οι 1, 3, 5, 7 είναι ίσες μεταξύ τους και οι 2, 4, 6, 8 επίσης.
+SOLVED Αν η γωνία 1 είναι $70^{\circ}$, βρες όλες τις γωνίες. :: Οι 1, 3, 5, 7 είναι ίσες: $70^{\circ}$. :: Οι 2, 4, 6, 8 είναι παραπληρωματικές της 1: $180^{\circ} - 70^{\circ} = 110^{\circ}$.
+SOLVED Οι εντός εναλλάξ γωνίες 3 και 5 είναι $3x + 10^{\circ}$ και $5x - 30^{\circ}$. Βρες το x. :: Είναι ίσες: $3x + 10 = 5x - 30$, άρα $2x = 40$ και $x = 20^{\circ}$. Κάθε γωνία είναι $70^{\circ}$.
+`));
+    const w1 = fig(M.parFig(65, [[1, '1: 65°'], [2], [3], [4], [5], [6], [7], [8]]), 300);
+    const w3 = fig(M.parFig(70, [[3, '3x + 10°'], [5, '5x − 30°']]), 280);
+    const w4 = fig(M.parFig(80, [[4, '2x + 40°'], [5, '3x − 10°']]), 280);
+    h += sheet(cls, 'Φύλλο εργασίας: παράλληλες και τέμνουσα', sub, row2(ex(1, 'Οι $ε_1$ και $ε_2$ είναι παράλληλες και η γωνία 1 είναι $65^{\\circ}$. Συμπλήρωσε τον πίνακα.' + tbl(['1', '2', '3', '4', '5', '6', '7', '8'], [['65°', '', '', '', '', '', '', '']], { h: '1.6rem' })), w1) +
+      ex(2, 'Πώς λέγονται οι γωνίες; α) 3 και 5 β) 2 και 6 γ) 4 και 5 δ) 1 και 7 ε) 2 και 4' + lines(2)) +
+      `<div class="xb-grid2">${ex(3, 'Οι $ε_1$, $ε_2$ είναι παράλληλες. Βρες το x και τη γωνία 3.' + w3)}${ex(4, 'Οι $ε_1$, $ε_2$ είναι παράλληλες. Βρες το x και τις γωνίες 4 και 5.' + w4)}</div>` +
+      ex(5, 'Σωστό (Σ) ή Λάθος (Λ); α) Οι εντός και επί τα αυτά γωνίες είναι ίσες. β) Οι εντός εναλλάξ γωνίες είναι ίσες. γ) Αν δύο εντός εναλλάξ γωνίες είναι ίσες, οι ευθείες είναι παράλληλες. δ) Οι εκτός εναλλάξ γωνίες είναι παραπληρωματικές.' + tbl(['α', 'β', 'γ', 'δ'], [['', '', '', '']], { h: '1.6rem', style: 'width:auto' })), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, tbl(['1', '2', '3', '4', '5', '6', '7', '8'], [['65°', '115°', '65°', '115°', '65°', '115°', '65°', '115°']])) +
+      ex(2, 'α) εντός εναλλάξ β) εντός εκτός και επί τα αυτά γ) εντός και επί τα αυτά δ) εκτός εναλλάξ ε) κατακορυφήν') +
+      ex(3, 'Εντός εναλλάξ, άρα ίσες: $3x + 10 = 5x - 30$, $x = 20^{\\circ}$ και η γωνία 3 είναι $70^{\\circ}$.') + ex(4, 'Εντός και επί τα αυτά, άρα παραπληρωματικές: $2x + 40 + 3x - 10 = 180$, $5x = 150$, $x = 30^{\\circ}$. Γωνία 4: $100^{\\circ}$, γωνία 5: $80^{\\circ}$.') +
+      ex(5, 'α) Λ (είναι παραπληρωματικές) β) Σ γ) Σ δ) Λ (είναι ίσες)'));
+    return h;
+  };
+
+  /* ===================== Α΄ Γυμνασίου: γωνίες τριγώνου ===================== */
+  D.triangles = function () {
+    const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 3: Τρίγωνα';
+    const fSum = fig(M.svg(300, 170, `<polygon points="40,150 260,150 120,40" fill="#fde68a" fill-opacity=".45" stroke="currentColor" stroke-width="2.4"/><line x1="10" y1="40" x2="290" y2="40" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 5"/>` + M.txt(120, 26, 'Α', { fs: 15 }) + M.txt(30, 160, 'Β', { fs: 15 }) + M.txt(270, 160, 'Γ', { fs: 15 }) + M.txt(285, 28, 'ε', { fs: 14, fill: '#2563eb' }) + M.txt(66, 140, 'β', { fs: 14, fill: '#dc2626' }) + M.txt(236, 140, 'γ', { fs: 14, fill: '#16a34a' }) + M.txt(88, 50, 'β', { fs: 14, fill: '#dc2626' }) + M.txt(154, 50, 'γ', { fs: 14, fill: '#16a34a' }) + M.txt(121, 58, 'α', { fs: 14, fill: '#d97706' })), 280);
+    let h = sheet(cls, 'Γωνίες τριγώνου', sub + ' (θεωρία και μέθοδος)', row2(fSum, K(R`
+THM Άθροισμα γωνιών τριγώνου :: Σε κάθε τρίγωνο $\hat{Α} + \hat{Β} + \hat{Γ} = 180^{\circ}$. :: Από το Α φέρνουμε την ευθεία ε παράλληλη στη ΒΓ. Οι γωνίες που σχηματίζει με τις ΑΒ και ΑΓ είναι ίσες με τις β και γ (εντός εναλλάξ). Μαζί με την α σχηματίζουν ευθεία γωνία, άρα $α + β + γ = 180^{\circ}$.
+`)) + K(R`
+THM Εξωτερική γωνία :: Κάθε εξωτερική γωνία τριγώνου ισούται με το άθροισμα των δύο απέναντι εσωτερικών γωνιών. :: Η εξωτερική γωνία στο Γ είναι $180^{\circ} - \hat{Γ} = \hat{Α} + \hat{Β}$.
+- <b>Ισοσκελές</b> ($ΑΒ = ΑΓ$): οι γωνίες της βάσης είναι ίσες, $\hat{Β} = \hat{Γ} = \frac{180^{\circ} - \hat{Α}}{2}$.
+- <b>Ισόπλευρο</b>: κάθε γωνία είναι $60^{\circ}$.
+- <b>Ορθογώνιο</b>: οι δύο οξείες γωνίες είναι συμπληρωματικές.
+- Ένα τρίγωνο είναι <b>οξυγώνιο</b> αν έχει τρεις οξείες, <b>ορθογώνιο</b> αν έχει μια ορθή και <b>αμβλυγώνιο</b> αν έχει μια αμβλεία. Δεν μπορεί να έχει δύο ορθές ή αμβλείες.
+METH Πώς βρίσκω γωνίες σε τρίγωνο :: Γράφω τι ξέρω: άθροισμα $180^{\circ}$, ίσες γωνίες σε ισοσκελές, εξωτερική γωνία. :: Αν υπάρχει x, γράφω την εξίσωση και τη λύνω. :: Ελέγχω ότι οι γωνίες έχουν άθροισμα $180^{\circ}$.
+SOLVED Οι γωνίες ενός τριγώνου είναι $x$, $2x$ και $3x$. Τι είδους τρίγωνο είναι; :: $6x = 180^{\circ}$, άρα $x = 30^{\circ}$. Οι γωνίες είναι $30^{\circ}$, $60^{\circ}$, $90^{\circ}$, άρα είναι ορθογώνιο.
+SOLVED Σε ισοσκελές τρίγωνο ΑΒΓ με $ΑΒ = ΑΓ$ είναι $\hat{Α} = 40^{\circ}$. Βρες τις άλλες γωνίες και την εξωτερική στο Γ. :: $\hat{Β} = \hat{Γ} = \frac{180^{\circ} - 40^{\circ}}{2} = 70^{\circ}$. :: Η εξωτερική στο Γ είναι $180^{\circ} - 70^{\circ} = 110^{\circ}$, ίση με $40^{\circ} + 70^{\circ}$.
+`));
+    const w4 = fig(M.triExtFig(50, 60, [null, '50°', null], 'x'), 280);
+    const w5 = fig(M.triExtFig(55, 55, ['70°', null, null], 'φ', { iso: true }), 280);
+    h += sheet(cls, 'Φύλλο εργασίας: γωνίες τριγώνου', sub, ex(1, 'Ένα τρίγωνο έχει γωνίες $52^{\\circ}$ και $68^{\\circ}$. Πόση είναι η τρίτη γωνία;' + lines(1)) +
+      ex(2, 'Οι γωνίες ενός τριγώνου είναι $x$, $2x$ και $3x$. Βρες τις γωνίες και το είδος του τριγώνου.' + lines(1)) +
+      ex(3, 'Σε ισοσκελές τρίγωνο: α) η γωνία της κορυφής είναι $40^{\\circ}$, πόση είναι κάθε γωνία της βάσης; β) κάθε γωνία της βάσης είναι $35^{\\circ}$, πόση είναι η γωνία της κορυφής;' + lines(2)) +
+      `<div class="xb-grid2">${ex(4, 'Στο τρίγωνο είναι $\\hat{Γ} = 60^{\\circ}$. Βρες τη γωνία Α και την εξωτερική γωνία x.' + w4)}${ex(5, 'Το τρίγωνο είναι ισοσκελές με $ΑΒ = ΑΓ$. Βρες τη γωνία φ.' + w5)}</div>` +
+      ex(6, 'Σε ορθογώνιο τρίγωνο η μία οξεία γωνία είναι $34^{\\circ}$. Πόση είναι η άλλη;' + lines(1)) +
+      ex(7, 'Μπορεί ένα τρίγωνο να έχει γωνίες $100^{\\circ}$ και $90^{\\circ}$; Εξήγησε.' + lines(1)), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, '$180^{\\circ} - 52^{\\circ} - 68^{\\circ} = 60^{\\circ}$.') + ex(2, '$6x = 180^{\\circ}$, $x = 30^{\\circ}$: γωνίες $30^{\\circ}$, $60^{\\circ}$, $90^{\\circ}$, ορθογώνιο.') +
+      ex(3, 'α) $\\frac{180^{\\circ} - 40^{\\circ}}{2} = 70^{\\circ}$ β) $180^{\\circ} - 2 \\times 35^{\\circ} = 110^{\\circ}$') + ex(4, '$\\hat{Α} = 180^{\\circ} - 50^{\\circ} - 60^{\\circ} = 70^{\\circ}$ και $x = 70^{\\circ} + 50^{\\circ} = 120^{\\circ}$ (ή $180^{\\circ} - 60^{\\circ}$).') +
+      ex(5, 'Γωνίες βάσης $\\frac{180^{\\circ} - 70^{\\circ}}{2} = 55^{\\circ}$, άρα $φ = 180^{\\circ} - 55^{\\circ} = 125^{\\circ}$.') + ex(6, '$90^{\\circ} - 34^{\\circ} = 56^{\\circ}$.') + ex(7, 'Όχι, γιατί $100^{\\circ} + 90^{\\circ} = 190^{\\circ} > 180^{\\circ}$.'));
+    return h;
+  };
+
+  /* ===================== Β΄ Γυμνασίου: πρόσημα ===================== */
+  D.signs = function () {
+    const cls = 'Β΄ Γυμνασίου', sub = 'Πράξεις με ρητούς και δυνάμεις';
+    const tree = `<div class="xb-tree"><div class="xb-q">Έχω πολλαπλασιασμό ή διαίρεση;</div><div class="xb-branches">
+      <div><div class="xb-yes">ΝΑΙ</div><div class="xb-q">Έχω ίδια πρόσημα;</div><div class="xb-branches"><div><div class="xb-yes">ΝΑΙ</div><div class="xb-res">Το αποτέλεσμα είναι <b>+</b><br>$(-)(-) = +$, $(+)(+) = +$</div></div><div><div class="xb-no">ΟΧΙ</div><div class="xb-res">Το αποτέλεσμα είναι <b>−</b><br>$(-)(+) = -$</div></div></div></div>
+      <div><div class="xb-no">ΟΧΙ (πρόσθεση)</div><div class="xb-q">Έχω ίδια πρόσημα;</div><div class="xb-branches"><div><div class="xb-yes">ΝΑΙ</div><div class="xb-res">Κρατώ το <b>κοινό πρόσημο</b> και προσθέτω<br>$-3 - 5 = -8$</div></div><div><div class="xb-no">ΟΧΙ</div><div class="xb-res">Κρατώ το πρόσημο του <b>μεγαλύτερου</b> σε απόλυτη τιμή και αφαιρώ<br>$-9 + 4 = -5$</div></div></div></div></div></div>`;
+    let h = sheet(cls, 'Πρόσημα', sub + ' (θεωρία και μέθοδος)', `<h3 class="bk-h">Το δέντρο των προσήμων</h3>${tree}` + `<h3 class="bk-h">Όταν έχω παρένθεση</h3>` + tbl(['Γράφω', 'Γίνεται'], [['$-(-α)$', '$+α$'], ['$+(-α)$', '$-α$'], ['$-(+α)$', '$-α$'], ['$+(+α)$', '$+α$']], { style: 'width:auto' }) + K(R`
+TIP Μείον μπροστά από παρένθεση αλλάζει το πρόσημο κάθε όρου μέσα στην παρένθεση: $-(3 - x + 5) = -3 + x - 5$.
+- Σε γινόμενο με πολλούς παράγοντες μετράω τα μείον: <b>άρτιο πλήθος</b> δίνει <b>+</b>, <b>περιττό πλήθος</b> δίνει <b>−</b>. Για παράδειγμα $(-1)(-2)(-3) = -6$.
+## Πρόσημα και δυνάμεις
+- $α^2 = α \times α$ και $α^3 = α \times α \times α$.
+- Αν το μείον είναι <b>μέσα στην παρένθεση</b> μαζί με τη βάση: ο άρτιος εκθέτης «τρώει» το μείον, ο περιττός όχι. $(-2)^4 = +2^4 = 16$, $(-2)^3 = -2^3 = -8$.
+- Αν το μείον <b>δεν είναι μέσα στην παρένθεση</b> με τη βάση, ο εκθέτης δεν το επηρεάζει: $-2^2 = -(2 \times 2) = -4$.
+TAB $(-α)^2 = (-α)(-α) = +α^2$ :: $-α^2 = -(α \times α)$
+TAB $(-α)^3 = (-α)(-α)(-α) = -α^3$ :: $-α^3 = -(α \times α \times α)$
+SOLVED Υπολόγισε $-(-2)^4$, $+(-2)^3$ και $-(-2)^3$. :: $-(-2)^4 = -(+2^4) = -16$. :: $+(-2)^3 = +(-2^3) = -8$. :: $-(-2)^3 = -(-2^3) = +8$.
+WARN $-3^2 = -9$ ενώ $(-3)^2 = 9$. Και $(-1)^{\text{άρτιος}} = 1$, $(-1)^{\text{περιττός}} = -1$.
+`));
+    h += sheet(cls, 'Φύλλο εργασίας: πρόσημα', sub, ex(1, 'Κάνε τις πράξεις: α) $(-7) + (-5)$ β) $(-9) + (+4)$ γ) $(+6) - (-8)$ δ) $-3 - 7$ ε) $(-4)(-6)$ στ) $(-36) : (+9)$ ζ) $(+5)(-3)(-2)$ η) $(-1)(-1)(-1)(-1)(-1)$' + lines(2)) +
+      ex(2, 'Υπολόγισε: α) $(-3)^2$ β) $-3^2$ γ) $(-2)^3$ δ) $-(-2)^3$ ε) $(-1)^{10}$ στ) $(-1)^7$ ζ) $-(-2)^4$ η) $\\left(-\\frac{1}{2}\\right)^3$' + lines(2)) +
+      ex(3, 'Βγάλε τις παρενθέσεις και υπολόγισε: α) $5 - (-3) + (-2) - (+4)$ β) $-(-6) - (+2) + (-(-1))$' + lines(2)) +
+      ex(4, 'Υπολόγισε τις παραστάσεις: α) $(-2)^3 - (-3)^2 + (-1)^5$ β) $-2^2 \\times (-3) + (-4)^2 : (-2)$' + lines(2)) +
+      ex(5, 'Αν $α < 0$ και $β > 0$, βρες το πρόσημο: α) $α \\times β$ β) $α^2 \\times β$ γ) $α^3$ δ) $-α$ ε) $α : β$' + tbl(['α', 'β', 'γ', 'δ', 'ε'], [['', '', '', '', '']], { h: '1.6rem', style: 'width:auto' })), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, 'α) −12 β) −5 γ) 14 δ) −10 ε) 24 στ) −4 ζ) 30 η) −1 (πέντε μείον, περιττό πλήθος)') + ex(2, 'α) 9 β) −9 γ) −8 δ) 8 ε) 1 στ) −1 ζ) −16 η) $-\\frac{1}{8}$') +
+      ex(3, 'α) $5 + 3 - 2 - 4 = 2$ β) $6 - 2 + 1 = 5$') + ex(4, 'α) $-8 - 9 - 1 = -18$ β) $-4 \\times (-3) + 16 : (-2) = 12 - 8 = 4$') + ex(5, 'α) − β) + γ) − δ) + ε) −'));
+    return h;
+  };
+
+  /* ===================== Α΄ Λυκείου: απόλυτες τιμές ===================== */
+  D.abs = function () {
+    const cls = 'Α΄ Λυκείου', sub = 'Κεφ. 2: Οι πραγματικοί αριθμοί';
+    const t = tbl(['Γράφω', 'Σημαίνει', 'Λύσεις'], [['$|x| = θ$, $θ > 0$', 'η απόσταση του x από το 0 είναι θ', '$x = θ$ ή $x = -θ$'], ['$|x - x_0| < ρ$', 'η απόσταση του x από το $x_0$ είναι μικρότερη από ρ', '$x_0 - ρ < x < x_0 + ρ$'], ['$|x - x_0| \\le ρ$', 'η απόσταση είναι το πολύ ρ', '$x_0 - ρ \\le x \\le x_0 + ρ$'], ['$|x - x_0| > ρ$', 'η απόσταση είναι μεγαλύτερη από ρ', '$x < x_0 - ρ$ ή $x > x_0 + ρ$'], ['$|x - x_0| \\ge ρ$', 'η απόσταση είναι τουλάχιστον ρ', '$x \\le x_0 - ρ$ ή $x \\ge x_0 + ρ$']]);
+    let h = sheet(cls, 'Απόλυτες τιμές', sub + ' (θεωρία και μέθοδος)', K(R`
+DEF Απόλυτη τιμή :: $|α| = α$ αν $α \ge 0$ και $|α| = -α$ αν $α < 0$. Γεωμετρικά, η $|α|$ είναι η απόσταση του α από το 0 και η $|α - β|$ η απόσταση των α και β στον άξονα.
+- $|α| \ge 0$, $|-α| = |α|$, $|α|^2 = α^2$, $\sqrt{α^2} = |α|$.
+- $|αβ| = |α||β|$, $\left|\frac{α}{β}\right| = \frac{|α|}{|β|}$ και $|α + β| \le |α| + |β|$.
+`) + t + K(R`
+METH Απαλοιφή απολύτων :: Βρίσκω το πρόσημο της παράστασης μέσα στο απόλυτο από τα δεδομένα. :: Αν είναι θετική ή μηδέν τη γράφω όπως είναι, αν είναι αρνητική γράφω την αντίθετή της. :: Κάνω τις πράξεις.
+METH Εξισώσεις και ανισώσεις με απόλυτα :: Φέρνω την εξίσωση ή ανίσωση σε μία από τις μορφές του πίνακα. :: Γράφω την ισοδύναμη χωρίς απόλυτο και λύνω. :: Για $|f(x)| = |g(x)|$ γράφω $f(x) = g(x)$ ή $f(x) = -g(x)$.
+SOLVED Αν $1 < x < 4$, απλοποίησε $A = |x - 1| + |x - 4|$ και $B = |x - 1| - |x - 4|$. :: $x - 1 > 0$ και $x - 4 < 0$, άρα $|x - 1| = x - 1$ και $|x - 4| = 4 - x$. :: $A = x - 1 + 4 - x = 3$ και $B = x - 1 - 4 + x = 2x - 5$.
+SOLVED Λύσε $|2x - 4| \le 6$. :: $-6 \le 2x - 4 \le 6$, άρα $-2 \le 2x \le 10$ και $-1 \le x \le 5$, δηλαδή $x \in [-1, 5]$.
+WARN Η εξίσωση $|x + 1| = -3$ είναι αδύνατη, γιατί η απόλυτη τιμή δεν είναι ποτέ αρνητική.
+`));
+    h += sheet(cls, 'Φύλλο εργασίας: απόλυτες τιμές', sub, ex(1, 'Υπολόγισε: α) $|-7| + |3 - 8|$ β) $|\\sqrt{2} - 2|$ γ) $|π - 3|$' + lines(1)) +
+      ex(2, 'Αν $1 < x < 4$, απλοποίησε: α) $A = |x - 1| + |x - 4|$ β) $B = |x - 1| - |x - 4|$' + lines(2)) +
+      ex(3, 'Λύσε τις εξισώσεις: α) $|x - 3| = 5$ β) $|2x + 1| = 7$ γ) $|x - 2| = |x + 4|$ δ) $|x + 1| = -3$' + lines(3)) +
+      ex(4, 'Λύσε τις ανισώσεις και γράψε τη λύση ως διάστημα: α) $|x - 2| < 3$ β) $|x + 1| \\ge 4$ γ) $|2x - 4| \\le 6$' + lines(3)) +
+      ex(5, 'Γράψε με απόλυτη τιμή: α) η απόσταση του x από το 2 είναι το πολύ 3 β) $-1 < x < 7$' + lines(2)), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, 'α) $7 + 5 = 12$ β) $2 - \\sqrt{2}$ (γιατί $\\sqrt{2} < 2$) γ) $π - 3$') + ex(2, 'α) $A = 3$ β) $B = 2x - 5$') +
+      ex(3, 'α) $x = 8$ ή $x = -2$ β) $2x + 1 = \\pm 7$, $x = 3$ ή $x = -4$ γ) $x - 2 = -(x + 4)$, $x = -1$ δ) αδύνατη') +
+      ex(4, 'α) $-1 < x < 5$, δηλαδή $(-1, 5)$ β) $x \\le -5$ ή $x \\ge 3$, δηλαδή $(-\\infty, -5] \\cup [3, +\\infty)$ γ) $[-1, 5]$') + ex(5, 'α) $|x - 2| \\le 3$ β) κέντρο 3 και απόσταση 4: $|x - 3| < 4$'));
+    return h;
+  };
+
+  /* ===================== Α΄ Λυκείου: διπλές ανισώσεις και πίνακες προσήμων ===================== */
+  const st = (rootsTex, rows, opts = {}) => {
+    // rows: [ετικέτα, [πρόσημα ανά διάστημα]]. Πρώτη γραμμή: τα διαστήματα
+    const n = rootsTex.length + 1; const head = ['$x$'];
+    for (let i = 0; i < n; i++) head.push(i === 0 ? '$(-\\infty, ' + rootsTex[0] + ')$' : i === n - 1 ? '$(' + rootsTex[n - 2] + ', +\\infty)$' : '$(' + rootsTex[i - 1] + ', ' + rootsTex[i] + ')$');
+    return `<table class="bk-tab xb-tab xb-sign"><tr>${head.map((x) => `<th>${x}</th>`).join('')}</tr>${rows.map(([l, s], k) => `<tr class="${k === rows.length - 1 ? 'tot' : ''}"><th>${l}</th>${s.map((v) => `<td>${v === '-' ? '−' : v}</td>`).join('')}</tr>`).join('')}</table>`;
+  };
+  D.signtab = function () {
+    const cls = 'Α΄ Λυκείου', sub = 'Κεφ. 4: Ανισώσεις';
+    let h = sheet(cls, 'Διπλές ανισώσεις και πίνακες προσήμων', sub + ' (θεωρία και μέθοδος)', K(R`
+## Διπλές ανισώσεις
+METH Πώς λύνω μια διπλή ανίσωση :: Κάνω την ίδια πράξη και στα τρία μέλη, ώστε στη μέση να μείνει μόνο το x. :: Αν πολλαπλασιάσω ή διαιρέσω με αρνητικό αριθμό, αλλάζουν και οι δύο φορές. :: Γράφω τη λύση ως διάστημα: παρένθεση για < και >, αγκύλη για ≤ και ≥.
+SOLVED Λύσε $1 \le 5 - 2x < 9$. :: Αφαιρούμε 5: $-4 \le -2x < 4$. :: Διαιρούμε με $-2$ και αλλάζουμε φορές: $2 \ge x > -2$, δηλαδή $-2 < x \le 2$ ή $x \in (-2, 2]$.
+TIP Οι κοινές λύσεις δύο ανισώσεων βρίσκονται σχεδιάζοντας τις λύσεις τους στον ίδιο άξονα και παίρνοντας το κοινό μέρος.
+## Πίνακας προσήμων
+METH Πώς φτιάχνω πίνακα προσήμων :: Παραγοντοποιώ και βρίσκω τη ρίζα κάθε παράγοντα (και τους περιορισμούς, αν υπάρχει παρονομαστής). :: Γράφω τις ρίζες με αύξουσα σειρά στην πρώτη γραμμή. Χωρίζουν τον άξονα σε διαστήματα. :: Για κάθε παράγοντα: το $x - ρ$ είναι αρνητικό αριστερά από το ρ και θετικό δεξιά. Το $ρ - x$ είναι το αντίθετο. :: Στην τελευταία γραμμή βάζω το πρόσημο του γινομένου ή του πηλίκου (κανόνας προσήμων). :: Διαβάζω τη λύση της ανίσωσης. Τις ρίζες του παρονομαστή τις εξαιρώ πάντα.
+`) + '<p><b>Παράδειγμα:</b> $P(x) = (x - 1)(x + 3)$, ρίζες $-3$ και $1$.</p>' + st(['-3', '1'], [['$x + 3$', ['-', '+', '+']], ['$x - 1$', ['-', '-', '+']], ['$P(x)$', ['+', '-', '+']]]) + K(R`
+P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x > 1$.
+- Τριώνυμο με $Δ > 0$: ομόσημο του α έξω από τις ρίζες και ετερόσημο ανάμεσα. Με $Δ = 0$ ομόσημο του α εκτός από τη ρίζα. Με $Δ < 0$ ομόσημο του α παντού.
+`));
+    const blank = (rootsTex, labels) => st(rootsTex, labels.map((l) => [l, rootsTex.concat(['']).map(() => '')]));
+    h += sheet(cls, 'Φύλλο εργασίας: διπλές ανισώσεις και πίνακες προσήμων', sub, ex(1, 'Λύσε τις διπλές ανισώσεις: α) $-3 < 2x + 1 \\le 7$ β) $1 \\le 5 - 2x < 9$ γ) $-2 \\le \\frac{x - 1}{3} < 1$' + lines(3)) +
+      ex(2, 'Βρες τις κοινές λύσεις των $2x - 1 > 3$ και $x + 4 \\le 10$.' + lines(1)) +
+      ex(3, 'Συμπλήρωσε τον πίνακα προσήμων της $P(x) = (x - 1)(x + 3)$ και λύσε την $P(x) < 0$.' + blank(['-3', '1'], ['$x + 3$', '$x - 1$', '$P(x)$'])) +
+      ex(4, 'Λύσε την $(2 - x)(x + 1) \\ge 0$ με πίνακα προσήμων.' + blank(['-1', '2'], ['$x + 1$', '$2 - x$', '$P(x)$'])) +
+      ex(5, 'Λύσε την $\\frac{x - 2}{x + 4} \\le 0$.' + blank(['-4', '2'], ['$x + 4$', '$x - 2$', '$Π(x)$'])) +
+      ex(6, 'Λύσε την $x(x - 1)(x + 2) > 0$.' + blank(['-2', '0', '1'], ['$x + 2$', '$x$', '$x - 1$', '$P(x)$'])), true);
+    h += sheet(cls, 'Λύσεις', sub, ex(1, 'α) $-4 < 2x \\le 6$, $(-2, 3]$ β) $(-2, 2]$ γ) $-6 \\le x - 1 < 3$, $[-5, 4)$') + ex(2, '$x > 2$ και $x \\le 6$: $(2, 6]$') +
+      ex(3, st(['-3', '1'], [['$x + 3$', ['-', '+', '+']], ['$x - 1$', ['-', '-', '+']], ['$P(x)$', ['+', '-', '+']]]) + 'Λύση: $(-3, 1)$') +
+      ex(4, st(['-1', '2'], [['$x + 1$', ['-', '+', '+']], ['$2 - x$', ['+', '+', '-']], ['$P(x)$', ['-', '+', '-']]]) + 'Λύση: $[-1, 2]$') +
+      ex(5, st(['-4', '2'], [['$x + 4$', ['-', '+', '+']], ['$x - 2$', ['-', '-', '+']], ['$Π(x)$', ['+', '-', '+']]]) + 'Λύση: $(-4, 2]$ (το $-4$ εξαιρείται, μηδενίζει τον παρονομαστή)') +
+      ex(6, st(['-2', '0', '1'], [['$x + 2$', ['-', '+', '+', '+']], ['$x$', ['-', '-', '+', '+']], ['$x - 1$', ['-', '-', '-', '+']], ['$P(x)$', ['-', '+', '-', '+']]]) + 'Λύση: $(-2, 0) \\cup (1, +\\infty)$'));
+    return h;
+  };
+
+  /* ο τριγωνομετρικός κύκλος της Β΄ Λυκείου μέσα από τον ίδιο μηχανισμό */
+  D.circle = () => (typeof window.TRIGCIRCLE === 'function' ? window.TRIGCIRCLE() : '');
+})();
+
+</script>
 <script>/* assets/typologia.js */
 /* Mathimagika: τυπολόγια ανά τάξη για την επανάληψη εξετάσεων */
 (function () {
@@ -5331,7 +6007,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     ] },
     { h: 'Εξισώσεις και ανισώσεις', rows: [
       ['2ου βαθμού', '$Δ = β^2 - 4αγ$, $x_{1,2} = \\frac{-β \\pm \\sqrt{Δ}}{2α}$'],
-      ['Vieta', '$S = -\\frac{β}{α}$, $P = \\frac{γ}{α}$, εξίσωση $x^2 - Sx + P = 0$'],
+      ['Vieta', '$S = -\\frac{β}{α}$, $P = \\frac{γ}{α}$, εξίσωση $x^2 - Sx + P = 0$ (πραγματικοί αριθμοί υπάρχουν μόνο αν $S^2 \\ge 4P$)'],
       ['$x^ν = α$', 'ν περιττός: μία λύση, ν άρτιος και $α > 0$: $\\pm\\sqrt[ν]{α}$'],
       ['Πρόσημο τριωνύμου', 'ομόσημο του α έξω από τις ρίζες, ετερόσημο ανάμεσα, πάντα ομόσημο αν $Δ < 0$'],
     ] },
@@ -5480,7 +6156,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'splitNum', 1, 'Χωρίζω τον αριθμό', { min: 2, max: 5 }, 4],
       ['mcq', 'add', 2, 'Πρόσθεση ως το 5', { max: 5 }, 6],
       ['pop', 'popSum', 2, 'Σκάσε τα μπαλόνια που κάνουν 5', { min: 4, max: 5 }, 2],
-      ['color', 'add', 3, 'Χρωμάτισε το καραβάκι', { max: 5, pic: 'boat' }],
+      ['color', 'add', 3, 'Χρωμάτισε την πεταλούδα', { max: 5, pic: 'butterfly' }],
       ['input', 'missAdd', 3, 'Τι λείπει;', { min: 2, max: 5 }, 6],
     ],
   };
@@ -5576,7 +6252,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'compareSize', 1, 'Ποιο είναι μεγαλύτερο;', {}, 6],
       ['mcq', 'massCompare', 2, 'Ποιο ζυγίζει περισσότερο;', {}, 4],
       ['input', 'gridArea', 3, 'Πόσα κουτάκια πιάνει;', {}, 4],
-      ['mcq', 'measureEst', 3, 'Μάντεψε σωστά', {}, 4],
+      ['mcq', 'measureEst', 3, 'Μάντεψε σωστά', { kid: true }, 4],
     ],
   };
   C.da14 = {
@@ -5958,7 +6634,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     ],
   };
   C.dg16 = {
-    th: t('Δεκαδικά κλάσματα είναι αυτά με παρονομαστή 10 ή 100. Γράφονται και ως δεκαδικοί αριθμοί.', ['$\\frac{7}{10} = 0{,}7$ (εφτά δέκατα).', '$\\frac{35}{100} = 0{,}35$ (τριάντα πέντε εκατοστά).', 'Το κόμμα χωρίζει το ακέραιο μέρος από το δεκαδικό.'], [['$2{,}5$ €', '2 ευρώ και 50 λεπτά'], ['$0{,}4 = \\frac{4}{10}$', '']]),
+    th: t('Δεκαδικά κλάσματα είναι αυτά με παρονομαστή 10, 100, 1.000 και γενικά δύναμη του 10. Γράφονται και ως δεκαδικοί αριθμοί.', ['$\\frac{7}{10} = 0{,}7$ (εφτά δέκατα).', '$\\frac{35}{100} = 0{,}35$ (τριάντα πέντε εκατοστά).', 'Το κόμμα χωρίζει το ακέραιο μέρος από το δεκαδικό.'], [['$2{,}5$ €', '2 ευρώ και 50 λεπτά'], ['$0{,}4 = \\frac{4}{10}$', '']]),
     acts: [
       ['input', 'decFrac', 1, 'Από κλάσμα σε δεκαδικό', { dens: [10, 100] }, 5],
       ['match', 'decFracMatch', 2, 'Κλάσμα και δεκαδικός', {}, 5],
@@ -6053,7 +6729,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     ],
   };
   C.dg26 = {
-    th: t('Μετράμε τον χρόνο σε ώρες, λεπτά και δευτερόλεπτα.', ['1 ώρα = 60 λεπτά, 1 λεπτό = 60 δευτερόλεπτα.', 'Κάθε αριθμός στο ρολόι αντιστοιχεί σε 5 λεπτά για τον μεγάλο δείκτη.', '1 ημέρα = 24 ώρες, 1 εβδομάδα = 7 ημέρες.'], [['🕗', '8:20, δηλαδή οχτώ και είκοσι']]),
+    th: t('Μετράμε τον χρόνο σε ώρες, λεπτά και δευτερόλεπτα.', ['1 ώρα = 60 λεπτά, 1 λεπτό = 60 δευτερόλεπτα.', 'Κάθε αριθμός στο ρολόι αντιστοιχεί σε 5 λεπτά για τον μεγάλο δείκτη.', '1 ημέρα = 24 ώρες, 1 εβδομάδα = 7 ημέρες.'], [['🕗', '8:00, δηλαδή οχτώ ακριβώς'], ['8:20', 'ο μεγάλος δείκτης δείχνει το 4, δηλαδή 20 λεπτά']]),
     acts: [
       ['mcq', 'clock', 1, 'Διαβάζω το ρολόι ανά 5 λεπτά', { mode: '5min' }, 5],
       ['input', 'units', 2, 'Ώρες και λεπτά', { pairs: ['h-min', 'min-s', 'd-h'], max: 5 }, 5],
@@ -6272,7 +6948,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'volBox', 3, 'Πόσα κυβάκια χωράει;', {}, 4],
     ],
   };
-  const bigTh = (top) => t('Οι αριθμοί ως το ' + top + ' χωρίζονται σε τάξεις: μονάδες και χιλιάδες, ανά τρία ψηφία.', ['Στο 384.560: 384 χιλιάδες και 560 μονάδες.', 'Τάξη χιλιάδων: εκατοντάδες, δεκάδες και μονάδες χιλιάδων.', 'Η τελεία μπαίνει μετά τις χιλιάδες για να διαβάζουμε εύκολα.'], [['$384.560$', 'τριακόσιες ογδόντα τέσσερις χιλιάδες πεντακόσια εξήντα']]);
+  const bigTh = (top, ex = top === '200.000' ? ['184.560', '184', '560', 'εκατόν ογδόντα τέσσερις χιλιάδες πεντακόσια εξήντα'] : ['384.560', '384', '560', 'τριακόσιες ογδόντα τέσσερις χιλιάδες πεντακόσια εξήντα']) => t('Οι αριθμοί ως το ' + top + ' χωρίζονται σε τάξεις: μονάδες και χιλιάδες, ανά τρία ψηφία.', ['Στο ' + ex[0] + ': ' + ex[1] + ' χιλιάδες και ' + ex[2] + ' μονάδες.', 'Τάξη χιλιάδων: εκατοντάδες, δεκάδες και μονάδες χιλιάδων.', 'Η τελεία μπαίνει μετά τις χιλιάδες για να διαβάζουμε εύκολα.'], [['$' + ex[0] + '$', ex[3]]]);
   C.dd21 = {
     th: bigTh('200.000'),
     acts: [
@@ -6333,7 +7009,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     ],
   };
   C.dd27 = {
-    th: t('Ο χρόνος μετριέται σε δευτερόλεπτα, λεπτά, ώρες, ημέρες, εβδομάδες, μήνες, χρόνια.', ['1 ώρα = 60 λεπτά, 1 λεπτό = 60 δευτερόλεπτα.', '1 ημέρα = 24 ώρες. Το 24ωρο: 3 το απόγευμα = 15:00.', '1 χρόνος = 12 μήνες = 365 ή 366 ημέρες.'], [['14:45', 'τρεις παρά τέταρτο το μεσημέρι']]),
+    th: t('Ο χρόνος μετριέται σε δευτερόλεπτα, λεπτά, ώρες, ημέρες, εβδομάδες, μήνες, χρόνια.', ['1 ώρα = 60 λεπτά, 1 λεπτό = 60 δευτερόλεπτα.', '1 ημέρα = 24 ώρες. Το 24ωρο: 3 το απόγευμα = 15:00.', '1 χρόνος = 12 μήνες = 365 ή 366 ημέρες.'], [['14:45', 'τρεις παρά τέταρτο το απόγευμα']]),
     acts: [
       ['mcq', 'clock', 1, 'Διαβάζω το ρολόι', { mode: 'min' }, 5],
       ['input', 'units', 2, 'Μετατροπές χρόνου', { pairs: ['h-min', 'min-s', 'd-h'] }, 5],
@@ -6916,7 +7592,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     ].concat([['input', 'chart', 1, 'Εύκολο ραβδόγραμμα', { k: 3 }, 3]]),
   };
   C.ds30 = {
-    th: t('Εκτός από ράβδους, χρησιμοποιούμε κυκλικά διαγράμματα και γραμμικά γραφήματα.', ['Κυκλικό διάγραμμα: δείχνει μέρη ενός όλου. Ολόκληρος ο κύκλος είναι 100%.', 'Γραμμικό γράφημα: δείχνει πώς αλλάζει κάτι με τον χρόνο.'], [['◔', 'Το μισό του κύκλου είναι 50%.']]),
+    th: t('Εκτός από ράβδους, χρησιμοποιούμε κυκλικά διαγράμματα και γραμμικά γραφήματα.', ['Κυκλικό διάγραμμα: δείχνει μέρη ενός όλου. Ολόκληρος ο κύκλος είναι 100%.', 'Γραμμικό γράφημα: δείχνει πώς αλλάζει κάτι με τον χρόνο.'], [['◑', 'Το μισό του κύκλου είναι 50%.'], ['◔', 'Το ένα τέταρτο του κύκλου είναι 25%.']]),
     acts: [
       ['input', 'chart', 1, 'Κυκλικό διάγραμμα', { kind: 'pie', k: 4 }, 4],
       ['input', 'pctGrid', 2, 'Ποσοστά σε πλέγμα', {}, 4],
@@ -7030,7 +7706,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'solidName', 1, 'Αναγνωρίζω στερεά', {}, 4],
       ['input', 'solidProps', 2, 'Έδρες, ακμές, κορυφές', {}, 5],
       ['mcq', 'netSolid', 2, 'Αναπτύγματα', {}, 4],
-      ['input', 'prismArea', 3, 'Εμβαδόν επιφάνειας', {}, 4],
+      ['input', 'prismArea', 3, 'Εμβαδόν παράπλευρης επιφάνειας', {}, 4],
     ],
   };
   C.ds43 = {
@@ -7039,7 +7715,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'objectShape', 1, 'Στερεά στην καθημερινότητα', {}, 4],
       ['mcq', 'netSolid', 2, 'Ανάπτυγμα κυλίνδρου', {}, 4],
       ['input', 'circleLen', 3, 'Μήκος βάσης', {}, 4],
-      ['input', 'cylArea', 3, 'Εμβαδόν επιφάνειας κυλίνδρου', {}, 3],
+      ['input', 'cylArea', 3, 'Παράπλευρη επιφάνεια κυλίνδρου', {}, 3],
     ],
   };
   C.ds44 = {
@@ -7082,6 +7758,13 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'lcmQ', 3, 'Ε.Κ.Π.', {}, 4],
       ['input', 'gcdQ', 3, 'Μ.Κ.Δ.', {}, 4],
       ['input', 'orderOps', 3, 'Σύνθετες παραστάσεις', { level: 3 }, 5],
+      ['grid', 'divGrid', 2, 'Βάλε ✓ αν διαιρείται', {}, 2],
+      ['input', 'divDigit', 2, 'Το ψηφίο που λείπει', {}, 4],
+      ['mcq', 'divWhy', 2, 'Ποιο κριτήριο το δείχνει;', {}, 4],
+      ['input', 'euclidRem', 1, 'Τα υπόλοιπα μιας διαίρεσης', {}, 4],
+      ['input', 'euclidFindD', 2, 'Βρες τον διαιρετέο', {}, 4],
+      ['input', 'euclidPQ', 2, 'Πηλίκο και υπόλοιπο', {}, 4],
+      ['mcq', 'euclidIs', 3, 'Είναι ευκλείδεια διαίρεση;', {}, 5],
     ],
   };
   C.ga02 = {
@@ -7095,6 +7778,10 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'fracMul', 3, 'Πολλαπλασιασμός', {}, 5],
       ['input', 'fracDiv', 3, 'Διαίρεση', {}, 5],
       ['input', 'fracUnitProblem', 3, 'Προβλήματα με κλάσματα', {}, 4],
+      ['mcq', 'fracIrreducible', 1, 'Ανάγωγα κλάσματα', {}, 4],
+      ['sort', 'fracHalfSort', 1, 'Μικρότερο ή μεγαλύτερο από το μισό;', {}, 8],
+      ['input', 'fracMixed', 2, 'Μεικτοί αριθμοί', {}, 4],
+      ['input', 'fracWhole', 3, 'Βρες τον αριθμό από ένα μέρος του', {}, 4],
     ],
   };
   C.ga03 = {
@@ -7182,7 +7869,13 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'compSupp', 2, 'Συμπληρωματικές και παραπληρωματικές', {}, 5],
       ['input', 'vertical', 2, 'Κατακορυφήν γωνίες', {}, 4],
       ['input', 'aroundPoint', 3, 'Γωνίες γύρω από σημείο', {}, 4],
-      ['input', 'circleLen', 3, 'Μήκος κύκλου', {}, 4],
+      ['input', 'segLen', 3, 'Μήκη τμημάτων', {}, 4],
+      ['mcq', 'angTF', 1, 'Σωστό ή Λάθος για τις γωνίες', {}, 6],
+      ['input', 'angAdjFig', 2, 'Εφεξής γωνίες στο σχήμα', {}, 4],
+      ['input', 'angCrossFig', 2, 'Τεμνόμενες ευθείες στο σχήμα', {}, 4],
+      ['input', 'angCrossXY', 3, 'Κατακορυφήν με εξισώσεις', {}, 4],
+      ['input', 'angWord', 3, 'Προβλήματα με γωνίες', {}, 5],
+      ['input', 'angFour', 3, 'Οι τέσσερις γωνίες δύο ευθειών', {}, 3],
     ],
   };
   C.ga10 = {
@@ -7193,6 +7886,10 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['sort', 'centralSym', 2, 'Κέντρο συμμετρίας', {}, 6],
       ['input', 'symComplete', 3, 'Συμπλήρωσε συμμετρικά', {}, 3],
       ['input', 'midpoint', 3, 'Συμμετρικό στον άξονα', {}, 4],
+      ['mcq', 'parPairKind', 1, 'Παράλληλες: πώς λέγονται οι γωνίες;', {}, 5],
+      ['sort', 'parEqSupp', 2, 'Ίσες ή παραπληρωματικές;', {}, 8],
+      ['input', 'parAngleFind', 2, 'Παράλληλες: υπολόγισε τη γωνία', {}, 5],
+      ['input', 'parEquation', 3, 'Παράλληλες με εξισώσεις', {}, 4],
     ],
   };
   C.ga11 = {
@@ -7205,6 +7902,10 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'quadType', 2, 'Είδη τετραπλεύρων', {}, 4],
       ['mcq', 'quadProp', 3, 'Ιδιότητες τετραπλεύρων', {}, 6],
       ['input', 'polyAngleSum', 3, 'Άθροισμα γωνιών', {}, 4],
+      ['sort', 'triKindSort', 1, 'Είδος τριγώνου από τις γωνίες', {}, 6],
+      ['input', 'triExtFig', 2, 'Εξωτερική γωνία τριγώνου', {}, 4],
+      ['input', 'triExpr', 3, 'Γωνίες τριγώνου με x', {}, 4],
+      ['input', 'isoExtFig', 3, 'Ισοσκελές και εξωτερική γωνία', {}, 4],
     ],
   };
 })();
@@ -7294,7 +7995,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     th: t('Τριγωνομετρικοί αριθμοί οξείας γωνίας ορθογωνίου τριγώνου, και διανύσματα.', ['$ημω = \\frac{απέναντι}{υποτείνουσα}$, $συνω = \\frac{προσκείμενη}{υποτείνουσα}$, $εφω = \\frac{απέναντι}{προσκείμενη}$.', 'Οι τριγωνομετρικοί αριθμοί εξαρτώνται μόνο από τη γωνία.', 'Διάνυσμα: έχει μέτρο, διεύθυνση και φορά. Πρόσθεση με τον κανόνα του παραλληλογράμμου ή διαδοχικά.'], [['κάθετες 3, 4, υποτείνουσα 5', '$ημω = \\frac{3}{5}$, $εφω = \\frac{3}{4}$']]),
     acts: [
       ['input', 'trigRatio', 1, 'Τριγωνομετρικοί αριθμοί', {}, 5],
-      ['mcq', 'trigSpecial', 2, 'Γνωστές γωνίες', {}, 5],
+      ['mcq', 'trigSpecial', 2, 'Γνωστές γωνίες', { angles: [30, 45, 60] }, 5],
       ['input', 'trigSide', 2, 'Υπολογισμός πλευράς', {}, 4],
       ['input', 'shadow', 3, 'Προβλήματα με σκιές', {}, 3],
       ['input', 'vecSum', 3, 'Πρόσθεση διανυσμάτων', {}, 4],
@@ -7420,7 +8121,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['sort', 'probKind', 1, 'Βέβαιο, αδύνατο ή πιθανό;', {}, 6],
       ['input', 'sampleSpace', 1, 'Δειγματικός χώρος', {}, 4],
       ['input', 'prob', 2, 'Υπολόγισε την πιθανότητα', {}, 5],
-      ['input', 'dice2', 2, 'Δύο ζάρια', {}, 3],
+      ['input', 'prob2dice', 2, 'Δύο ζάρια', {}, 4],
       ['input', 'probCompl', 3, 'Αντίθετο ενδεχόμενο', {}, 4],
     ],
   };
@@ -7480,11 +8181,15 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'absIneq', 2, 'Ανισώσεις με απόλυτα', {}, 4],
       ['input', 'rootSimplify', 3, 'Απλοποίηση ριζών', {}, 4],
       ['mcq', 'rootRat', 3, 'Ρητοποίηση', {}, 4],
-      ['input', 'powRule2', 3, 'Δυνάμεις με ρητό εκθέτη', {}, 4],
+      ['input', 'powRule2', 3, 'Δυνάμεις με ακέραιο εκθέτη', {}, 4],
+      ['mcq', 'absWord', 1, 'Απόσταση και απόλυτη τιμή', {}, 4],
+      ['input', 'absSimplify', 2, 'Απαλοιφή απολύτων', {}, 4],
+      ['input', 'absEq2', 2, 'Εξισώσεις με απόλυτα, 2ο μέρος', {}, 4],
+      ['mcq', 'absIneq2', 3, 'Ανισώσεις |αx + β|', {}, 4],
     ],
   };
   C.la03 = {
-    th: t('Εξισώσεις 1ου και 2ου βαθμού, εξισώσεις $x^ν = α$, τύποι Vieta.', ['$αx + β = 0$: μία λύση αν α ≠ 0, αλλιώς αδύνατη ή ταυτότητα. Παραμετρικές: διερεύνηση.', '$x^ν = α$: για ν περιττό μία λύση, για ν άρτιο και α > 0 δύο αντίθετες.', '$αx^2 + βx + γ = 0$: $Δ = β^2 - 4αγ$, $x = \\frac{-β ± \\sqrt{Δ}}{2α}$.', 'Vieta: $S = x_1 + x_2 = -\\frac{β}{α}$, $P = x_1x_2 = \\frac{γ}{α}$.'], [['$x^2 - Sx + P = 0$', 'εξίσωση με ρίζες άθροισμα S και γινόμενο P']]),
+    th: t('Εξισώσεις 1ου και 2ου βαθμού, εξισώσεις $x^ν = α$, τύποι Vieta.', ['$αx + β = 0$: μία λύση αν α ≠ 0, αλλιώς αδύνατη ή ταυτότητα. Παραμετρικές: διερεύνηση.', '$x^ν = α$: για ν περιττό μία λύση, για ν άρτιο και α > 0 δύο αντίθετες.', '$αx^2 + βx + γ = 0$: $Δ = β^2 - 4αγ$, $x = \\frac{-β ± \\sqrt{Δ}}{2α}$.', 'Vieta: $S = x_1 + x_2 = -\\frac{β}{α}$, $P = x_1x_2 = \\frac{γ}{α}$.'], [['$x^2 - Sx + P = 0$', 'εξίσωση με ρίζες άθροισμα S και γινόμενο P. Αν $S^2 > 4P$ οι αριθμοί είναι δύο και διαφορετικοί, αν $S^2 = 4P$ είναι ίσοι, αν $S^2 < 4P$ δεν υπάρχουν πραγματικοί αριθμοί']]),
     acts: [
       ['input', 'eqLin', 1, 'Εξισώσεις 1ου βαθμού', { level: 3 }, 4],
       ['input', 'paramEq', 2, 'Παραμετρικές', {}, 3],
@@ -7493,6 +8198,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['order', 'quadSteps', 2, 'Βήματα επίλυσης', {}, 2],
       ['input', 'vietaSum', 3, 'Τύποι Vieta', {}, 4],
       ['mcq', 'quadForm', 3, 'Εξίσωση από S και P', {}, 4],
+      ['mcq', 'spExist', 3, 'Υπάρχουν αριθμοί με αυτό το S και P;', {}, 4],
     ],
   };
   C.la04 = {
@@ -7503,6 +8209,11 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'quadSign', 2, 'Πρόσημο τριωνύμου', {}, 4],
       ['order', 'quadIneqSteps', 3, 'Βήματα ανίσωσης 2ου βαθμού', {}, 2],
       ['mcq', 'absIneq', 3, 'Ανισώσεις με απόλυτα', {}, 4],
+      ['mcq', 'dblIneq2', 2, 'Διπλές ανισώσεις, και με αρνητικό συντελεστή', {}, 5],
+      ['input', 'dblIneqInt', 2, 'Ακέραιες λύσεις διπλής ανίσωσης', {}, 4],
+      ['grid', 'signTable', 2, 'Πίνακας προσήμων', {}, 3],
+      ['mcq', 'prodIneq', 2, 'Ανισώσεις γινομένου', {}, 4],
+      ['mcq', 'absIneq2', 3, 'Ανισώσεις με απόλυτα, 2ο μέρος', {}, 4],
     ],
   };
   C.la05 = {
@@ -7587,6 +8298,8 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['input', 'sysSolve', 2, 'Λύσε το σύστημα', {}, 4],
       ['mcq', 'sysKind', 3, 'Πλήθος λύσεων', {}, 4],
       ['input', 'sysWord', 3, 'Προβλήματα', {}, 3],
+      ['mcq', 'sysParamQ', 3, 'Παράμετρος και πλήθος λύσεων', {}, 3],
+      ['input', 'sys3Q', 3, 'Σύστημα 3x3', {}, 3],
     ],
   };
   C.lb02 = {
@@ -7597,6 +8310,10 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'shift', 2, 'Μετατοπίσεις', {}, 4],
       ['tune', 'tuneShift', 3, 'Μετατόπισε την παραβολή', {}, 2],
       ['input', 'fGraphRead', 3, 'Διαβάζω τη γραφική παράσταση', {}, 4],
+      ['mcq', 'fnDomain', 1, 'Πεδίο ορισμού', {}, 5],
+      ['mcq', 'fnMonoKind', 1, 'Μονοτονία βασικών συναρτήσεων', {}, 6],
+      ['input', 'fnMinMax', 2, 'Ακρότατα τριωνύμου', {}, 4],
+      ['mcq', 'fnParity2', 2, 'Άρτια ή περιττή, 2ο μέρος', {}, 5],
     ],
   };
   C.lb03 = {
@@ -7612,6 +8329,11 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'period', 2, 'Περίοδος', {}, 4],
       ['tune', 'tuneSin', 3, 'Ρύθμισε την ημιτονοειδή', {}, 2],
       ['mcq', 'trigEq', 3, 'Τριγωνομετρικές εξισώσεις', {}, 4],
+      ['input', 'trigFromOne', 2, 'Από έναν τριγωνομετρικό αριθμό στους άλλους', {}, 4],
+      ['input', 'trigMaxMin', 2, 'Μέγιστο και ελάχιστο', {}, 4],
+      ['input', 'trigDouble', 3, 'Διπλάσια γωνία', {}, 4],
+      ['mcq', 'trigAddVal', 3, 'Τύποι αθροίσματος', {}, 4],
+      ['mcq', 'trigEqSol', 3, 'Λύσεις σε διάστημα', {}, 4],
     ],
   };
   C.lb04 = {
@@ -7622,6 +8344,9 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'polyRoot', 2, 'Είναι ρίζα;', {}, 4],
       ['mcq', 'polyDivide', 2, 'Διαίρεση πολυωνύμων', {}, 4],
       ['input', 'cubicRoots', 3, 'Πολυωνυμικές εξισώσεις', {}, 3],
+      ['input', 'polyParam', 2, 'Παράμετρος από παράγοντα', {}, 4],
+      ['mcq', 'polyRemLin', 3, 'Υπόλοιπο με (x − α)(x − β)', {}, 3],
+      ['mcq', 'polyIneq3', 3, 'Πολυωνυμικές ανισώσεις', {}, 4],
     ],
   };
   C.lb05 = {
@@ -7632,6 +8357,11 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       ['mcq', 'expMono', 2, 'Μονοτονία', {}, 4],
       ['input', 'logProps', 3, 'Ιδιότητες λογαρίθμων', {}, 4],
       ['input', 'expGrowth', 3, 'Εκθετική αύξηση', {}, 3],
+      ['input', 'logCalc', 2, 'Υπολογισμοί με λογαρίθμους', {}, 5],
+      ['mcq', 'logDomainQ', 2, 'Πεδίο ορισμού λογαρίθμου', {}, 4],
+      ['input', 'expSub', 3, 'Εκθετικές με αντικατάσταση', {}, 4],
+      ['input', 'logEqQ', 3, 'Λογαριθμικές εξισώσεις', {}, 4],
+      ['mcq', 'expLogIneq', 3, 'Εκθετικές και λογαριθμικές ανισώσεις', {}, 5],
     ],
   };
   C.lb06 = {
@@ -7765,7 +8495,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     acts: [
       ['input', 'contingency', 1, 'Πίνακας συνάφειας', {}, 3],
       ['mcq', 'scatter', 2, 'Είδος συσχέτισης', {}, 4],
-      ['input', 'contingency', 3, 'Πιθανότητες από πίνακα', {}, 3],
+      ['input', 'contingency', 3, 'Ερωτήσεις από πίνακα συνάφειας', {}, 3],
     ].concat([['sort', 'varType', 1, 'Τι μεταβλητές είναι;', {}, 6]]),
   };
   C.lg06 = {
@@ -7986,6 +8716,7 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     sort: () => (S.kid ? 'Σύρε κάθε κάρτα στο σωστό κουτί (ή πάτησε την κάρτα και μετά το κουτί).' : 'Σύρε κάθε στοιχείο στη σωστή κατηγορία ή πάτησε το στοιχείο και μετά τον τίτλο της κατηγορίας.'),
     order: () => 'Σύρε τα βήματα (ή χρησιμοποίησε τα βελάκια) ώστε να μπουν στη σωστή σειρά.',
     numline: () => 'Πάτησε πάνω στην ευθεία για να τοποθετήσεις τον αριθμό. Μπορείς να αλλάξεις θέση πατώντας ξανά.',
+    grid: (a, d) => (d.items[0] && d.items[0].mode === 'sign' ? 'Πάτησε κάθε κελί για να γράψεις το πρόσημο. Κάθε πάτημα αλλάζει το κελί σε +, μετά σε − και μετά το σβήνει.' : 'Πάτησε τα κελιά όπου ισχύει, για να μπει ✓. Αν κάνεις λάθος, πάτησε ξανά για να το σβήσεις.'),
     pop: () => 'Διάβασε την οδηγία και πάτησε τα σωστά μπαλόνια. Αν κάνεις λάθος, πάτησε ξανά για να το αναιρέσεις.',
     tune: () => 'Μετακίνησε τους δρομείς και παρατήρησε πώς αλλάζει η γραφική παράσταση. Όταν πιστεύεις ότι βρήκες τις σωστές τιμές, πάτησε Έλεγχος.',
   };
@@ -8142,6 +8873,19 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     };
   };
 
+  /* πίνακας: κελιά με ✓ (mode 'check') ή με πρόσημα + και − (mode 'sign') */
+  R.grid = function (body, a, d) {
+    const sign = (q) => q.mode === 'sign';
+    const st = d.items.map((q) => q.rows.map(() => q.cols.map(() => (sign(q) ? '' : false))));
+    const show = (q, v) => (sign(q) ? (v === '+' ? '+' : v === '-' ? '−' : '') : v ? '✓' : '');
+    body.innerHTML = d.items.map((q, s) => `<div class="mm-item mb-6" data-s="${s}"><span class="mm-num">${s + 1}</span><div class="mm-q mb-3">${q.q}</div><div class="mm-gridwrap"><table class="mm-grid ${sign(q) ? 'sign' : ''}"><tr><th>${q.corner || ''}</th>${q.cols.map((c) => `<th>${c}</th>`).join('')}</tr>${q.rows.map((r, i) => `<tr class="${q.total === i ? 'tot' : ''}"><th>${r}</th>${q.cols.map((_, j) => `<td><button type="button" class="mm-cell" data-i="${i}" data-j="${j}" aria-label="κελί"></button></td>`).join('')}</tr>`).join('')}</table></div></div>`).join('');
+    $$('.mm-item', body).forEach((box) => { const s = +box.dataset.s, q = d.items[s]; $$('.mm-cell', box).forEach((b) => (b.onclick = () => { const i = +b.dataset.i, j = +b.dataset.j; const v = st[s][i][j]; st[s][i][j] = sign(q) ? (v === '' ? '+' : v === '+' ? '-' : '') : !v; b.textContent = show(q, st[s][i][j]); b.classList.remove('ok', 'bad', 'miss'); box.classList.remove('ok', 'bad'); })); });
+    return {
+      check() { let ok = 0, tot = 0; d.items.forEach((q, s) => { const box = body.querySelector(`[data-s="${s}"]`); let all = true; q.rows.forEach((_, i) => q.cols.forEach((__, j) => { tot++; const b = box.querySelector(`.mm-cell[data-i="${i}"][data-j="${j}"]`); const v = st[s][i][j], w = q.ok[i][j]; const good = v === w; b.classList.remove('ok', 'bad', 'miss'); if (good) { ok++; if (sign(q) || v) b.classList.add('ok'); } else { all = false; b.classList.add(sign(q) || v ? 'bad' : 'miss'); } })); box.classList.remove('ok', 'bad'); box.classList.add(all ? 'ok' : 'bad'); }); return { ok, total: tot }; },
+      reveal() { d.items.forEach((q, s) => { const box = body.querySelector(`[data-s="${s}"]`); q.rows.forEach((_, i) => q.cols.forEach((__, j) => { st[s][i][j] = q.ok[i][j]; box.querySelector(`.mm-cell[data-i="${i}"][data-j="${j}"]`).textContent = show(q, q.ok[i][j]); })); }); this.check(); },
+    };
+  };
+
   R.tune = function (body, a, d) {
     const views = d.items.map((q) => ({ q, P: q.params.map((p) => p.v) }));
     body.innerHTML = views.map((v, s) => `<div class="mm-item mb-6" data-s="${s}"><span class="mm-num">${s + 1}</span><div class="mm-q mb-3">${v.q.q}</div><div class="mm-tune"><div class="plot"></div><div class="flex flex-col gap-4 justify-center">${v.q.params.map((p, k) => `<label class="mm-slider"><span class="w-6">${p.n}</span><input type="range" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.v}" data-k="${k}"><output>${M.fmt(p.v)}</output></label>`).join('')}<div class="mm-fb"></div></div></div></div>`).join('');
@@ -8228,14 +8972,21 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
 
   /* φυλλάδια: theory, meth, ex, circle (μόνο Β΄ Λυκείου Τριγωνομετρία) ή όλα μαζί ('') */
   const hasMeth = () => !!(window.METHODS || {})[S.id];
-  const hasCircle = () => S.id === 'lb03' && typeof window.TRIGCIRCLE === 'function';
-  const noEx = () => ['theory', 'meth', 'circle'].includes(S.doc);
+  const extras = () => ((window.EXTRA_DOCS_META || {})[S.id] || []).filter((x) => typeof (window.EXTRA_DOCS || {})[x.key] === 'function');
+  const isExtra = (d) => extras().some((x) => x.key === d);
+  const noEx = () => ['theory', 'meth'].includes(S.doc) || isExtra(S.doc);
   function docBtns(b, st) {
     const one = (d, icon, t) => `<button data-doc="${d}" class="${b(S.doc === d ? st.btnPri : st.btnSec)}"><i class="fa-solid ${icon}"></i> ${t}</button>`;
     return one('theory', 'fa-book-open', 'Φυλλάδιο θεωρίας') + (hasMeth() ? one('meth', 'fa-list-ol', 'Μεθοδολογία') : '') + one('ex', 'fa-pen-to-square', 'Φυλλάδιο ασκήσεων')
-      + (hasCircle() ? one('circle', 'fa-circle-notch', 'Τριγωνομετρικός κύκλος') : '') + one('', 'fa-layer-group', 'Όλα μαζί');
+      + extras().map((x) => one(x.key, x.icon, x.t)).join('') + one('', 'fa-layer-group', 'Όλα μαζί');
   }
 
+  /* αριθμός για τις λύσεις: κλάσμα όταν δεν είναι ακέραιος (π.χ. 1/3 αντί για 0,3333) */
+  function fracTxt(x) {
+    if (Math.abs(x * 100 - Math.round(x * 100)) < 1e-9) return M.fmt(x); /* ακέραιος ή δεκαδικός με ως 2 ψηφία */
+    for (let d = 2; d <= 12; d++) { const n = x * d; if (Math.abs(n - Math.round(n)) < 1e-9) return '$' + (n < 0 ? '-' : '') + '\\frac{' + Math.abs(Math.round(n)) + '}{' + d + '}$'; }
+    return M.fmt(M.round(x, 4));
+  }
   function header(title, withName) {
     return `<div class="flex items-center justify-between gap-4 mb-2"><div class="font-extrabold text-sm" style="color:#4f46e5">Mathimagika</div><div class="text-sm font-bold">${S.cls.title}</div></div>
       <h1>${title}</h1><div class="text-sm font-semibold mb-2" style="color:#4b5563">${S.ch.t}</div>
@@ -8246,14 +8997,14 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
     const root = $('#app'); history.replaceState(null, '', '?page=ektyposimo&id=' + S.id + '&s=' + S.seed + (S.exam ? '&mode=acts' : '') + (S.doc ? '&doc=' + S.doc : '') + (U.params.get('print') === '0' ? '&print=0' : ''));
     let html = toolbar();
     const book = (window.BOOKS || {})[S.id];
-    if (S.doc === 'circle' && hasCircle()) { html += window.TRIGCIRCLE(); finish(root, html); return; }
+    if (isExtra(S.doc)) { html += window.EXTRA_DOCS[S.doc](S); finish(root, html); return; }
     if (S.content && S.content.th && (S.doc === '' || S.doc === 'theory')) {
       html += `<div class="sheet th-box book">${header(S.secondary ? 'Φυλλάδιο θεωρίας' : 'Θεωρία', false)}${S.secondary ? '<h2 class="bk-h">Σύνοψη</h2>' : ''}${U.theoryHTML(S.content.th, { cols: true })}
         ${S.content.th.more ? `<div class="mt-4">${S.content.th.more}</div>` : ''}${book ? `<div class="bk">${book}</div>` : ''}
         <div class="mt-6 p-3" style="border:2px dashed #9ca3af;border-radius:10px"><b>Οι σημειώσεις μου:</b><div style="height:5.5rem"></div></div></div>`;
     }
     if (hasMeth() && (S.doc === '' || S.doc === 'meth')) html += `<div class="sheet book">${header('Μεθοδολογία και λυμένα παραδείγματα', false)}${window.METHODS[S.id]}</div>`;
-    if (S.doc === '' && hasCircle()) html += window.TRIGCIRCLE();
+    if (S.doc === '') extras().forEach((x) => (html += window.EXTRA_DOCS[x.key](S)));
     if (noEx()) { finish(root, html); return; }
     const acts = S.acts.filter((a) => S.levels[a.level] && a.type !== 'tune');
     let n = 0; const answers = []; let body = '';
@@ -8395,14 +9146,22 @@ SOLVED Αν $\text{συν}ω = -\frac{3}{5}$ και $π < ω < \frac{3π}{2}$, �
       return {
         instr: 'Σημείωσε κάθε αριθμό πάνω στην αριθμογραμμή.',
         html: d.items.map((q, i) => `<div class="pitem"><b>${L[i]})</b> ${q.q}${M.numberLine(q.min, q.max, q.step, { hideLabels: q.labels === 'int' && (q.max - q.min) / q.step > 12, show: M.range(q.min, q.max) }, 460)}</div>`).join(''),
-        ans: d.items.map((q, i) => L[i] + ') ' + M.fmt(M.round(q.a, 4))).join(', '),
+        ans: d.items.map((q, i) => L[i] + ') ' + (q.show != null ? q.show : fracTxt(q.a))).join(', '),
+      };
+    },
+    grid(a, d) {
+      const sign = d.items[0] && d.items[0].mode === 'sign';
+      return {
+        instr: sign ? 'Συμπλήρωσε τον πίνακα με τα πρόσημα + ή −.' : 'Βάλε ✓ στα κελιά όπου ισχύει.',
+        html: d.items.map((q, s) => `<div class="pitem"><b>${L[s]})</b> ${q.q}<table class="ptable" style="margin-top:.3rem"><tr><th>${q.corner || ''}</th>${q.cols.map((c) => `<th>${c}</th>`).join('')}</tr>${q.rows.map((r) => `<tr><th>${r}</th>${q.cols.map(() => '<td style="height:1.6rem;min-width:2.2rem"></td>').join('')}</tr>`).join('')}</table></div>`).join(''),
+        ans: d.items.map((q, s) => L[s] + ') ' + q.rows.map((r, i) => (sign ? r + ': ' + q.ok[i].map((v) => (v === '-' ? '−' : v)).join(' ') : r + ': ' + (q.cols.filter((_, j) => q.ok[i][j]).join(', ') || 'κανένα'))).join('&nbsp; | &nbsp;')).join('<br>'),
       };
     },
     pop(a, d) {
       return {
         instr: 'Κύκλωσε τα σωστά.',
         html: d.items.map((q) => `<div class="mb-2"><div class="font-semibold">${q.q.replace(/Πάτησε/g, 'Κύκλωσε').replace(/τα μπαλόνια που/g, 'όσα').replace(/μπαλόνια/g, '').replace(/!/g, '.')}</div><div class="flex flex-wrap gap-3 mt-1">${q.items.map((it) => `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:3.2rem;min-height:3rem;border:1.5px solid #6b7280;border-radius:50%;padding:.2rem .5rem">${it.t}</span>`).join('')}</div></div>`).join(''),
-        ans: d.items.map((q) => q.items.filter((it) => it.ok).map((it) => (it.t.startsWith('<svg') ? 'σχήμα' : it.t)).join(', ')).join('<br>'),
+        ans: d.items.map((q) => q.items.filter((it) => it.ok).map((it) => (it.t.startsWith('<svg') ? it.t.replace('<svg', '<svg style="width:30px;height:30px;vertical-align:middle"') : it.t)).join(', ')).join('<br>'),
       };
     },
   };
