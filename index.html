@@ -1008,6 +1008,7 @@ window.EXTRA_DOCS_META = {
   ga10: [{ key: 'parallels', t: 'Παράλληλες και τέμνουσα', icon: 'fa-grip-lines' }],
   ga11: [{ key: 'triangles', t: 'Γωνίες τριγώνου', icon: 'fa-shapes' }],
   gb01: [{ key: 'signs', t: 'Πρόσημα', icon: 'fa-plus-minus' }],
+  gb02: [{ key: 'eqfrac', t: 'Εξισώσεις με κλάσματα', icon: 'fa-equals' }],
   la02: [{ key: 'abs', t: 'Απόλυτες τιμές', icon: 'fa-arrows-left-right' }],
   la04: [{ key: 'signtab', t: 'Διπλές ανισώσεις και πίνακες προσήμων', icon: 'fa-table' }],
   lb03: [{ key: 'circle', t: 'Τριγωνομετρικός κύκλος', icon: 'fa-circle-notch' }],
@@ -3084,6 +3085,7 @@ window.EXTRA_DOCS_META = {
     const [x, y] = two();
     return { q: cap(x) + ' έφαγε ' + art(f1) + FTd(f1) + ' μιας πίτσας και ' + y + ' ' + art(f2) + FTd(f2) + '. Διάλεξε στην πίτσα των ' + n + ' κομματιών όσα κομμάτια έφαγαν μαζί.', pies: [{ n, pre: 0, want: s1 + s2 }], ans: (s1 + s2) + ' από τα ' + n + ' κομμάτια', ex: T(fr(f1[0], f1[1]) + ' + ' + fr(f2[0], f2[1]) + ' = ' + fr(s1, n) + ' + ' + fr(s2, n) + ' = ' + fr(s1 + s2, n)) + ', άρα ' + (s1 + s2) + ' κομμάτια.' };
   };
+
 })();
 
 </script>
@@ -3181,6 +3183,445 @@ window.EXTRA_DOCS_META = {
   const _eli = G.expLogIneq; G.expLogIneq = (p) => { const q = _eli(p); if (!q.ch.includes(q.a)) q.ch[0] = q.a; q.ch = shuffle([...new Set(q.ch)]); return q; };
   G.logCalc = () => { const B = [['\\log_2 32 - \\log_3 9', 3], ['\\log 1000 + \\log_5 25', 5], ['\\log_2 8 + \\log_2 4', 5], ['\\log_3 81 - \\log_2 2', 3], ['\\ln e^{4} + \\log 0{,}1', 3], ['\\log_2 40 - \\log_2 5', 3], ['\\log 4 + \\log 25', 2], ['\\log_6 4 + \\log_6 9', 2], ['2\\log_3 6 - \\log_3 4', 2]]; const [e, a] = pick(B); return Q('Υπολόγισε ' + T(e) + '.', a, { ex: 'Ιδιότητες: log(αβ) = logα + logβ, log(α/β) = logα − logβ, log αᵏ = k logα' }); };
   G.logDomainQ = () => { const a = ri(1, 6); const B = [['\\ln(x^2 - ' + a * a + ')', '(' + NINF + ', ' + -a + ') \\cup (' + a + ', ' + INF + ')'], ['\\log(' + a + ' - x)', '(' + NINF + ', ' + a + ')'], ['\\ln(x + ' + a + ')', '(' + -a + ', ' + INF + ')'], ['\\log_2(x^2 + ' + a + ')', '\\mathbb{R}']]; const [f, d] = pick(B); const ans = T(d); return Q('Ποιο είναι το πεδίο ορισμού της ' + T('f(x) = ' + f) + ';', ans, { ch: mc(ans, B.map((x) => T(x[1])).concat([T('(' + -a + ', ' + a + ')')])), at: 'text', ex: 'Η ποσότητα μέσα στον λογάριθμο πρέπει να είναι θετική.' }); };
+  /* =================== Β΄ ΓΥΜΝΑΣΙΟΥ: εξισώσεις με κλάσματα (πιο απαιτητικές, πάντα ακέραια λύση) =================== */
+  const fr2 = (n, d) => '\\frac{' + n + '}{' + d + '}';
+  const sgnT = (c, first) => (c < 0 ? (first ? '-' : ' - ') : first ? '' : ' + ');
+  const cx = (k) => (k === 1 ? 'x' : k === -1 ? '-x' : k + 'x');
+  G.eqMinusFrac = () => {
+    const p = pick([2, 3, 4, 5]); const L = p * pick([2, 3]); const m = L / p; const a = pick([1, 2, 3]), b = rnz(-7, 7);
+    const ok = lin(-m * a, -m * b); const w = [lin(-m * a, m * b), lin(-m * a, -b), lin(-L * a, -L * b), lin(m * a, -m * b), lin(-a, -m * b)];
+    return Q('Σε μια εξίσωση πολλαπλασιάζουμε κάθε όρο με το Ε.Κ.Π. ' + L + '. Τι γίνεται ο όρος ' + T('-' + fr2(lin(a, b), p)) + ';', T(ok),
+      { ch: mc(T(ok), w.map(T)), at: 'text', ex: T(L + ' : ' + p + ' = ' + m) + ', άρα ' + T('-' + m + '(' + lin(a, b) + ') = ' + ok) + '. Το μείον αλλάζει το πρόσημο και των δύο όρων του αριθμητή.' });
+  };
+  G.eqFrac3 = () => {
+    const D = pick([[2, 3, 4], [2, 3, 6], [3, 4, 6], [2, 4, 8], [2, 5, 10], [3, 4, 12], [4, 6, 12], [2, 3, 12]]);
+    for (let g = 0; g < 200; g++) {
+      const x0 = rnz(-6, 9); const L = D.reduce((u, v) => M.lcm(u, v));
+      const sg = shuffle([1, -1, M.chance(0.5) ? 1 : -1]);
+      const ks = D.map(() => pick([1, 1, 2, 3])); const ms = D.map((p, i) => p * ri(-3, 4) - ks[i] * x0);
+      if (ms.some((m) => Math.abs(m) > 12)) continue;
+      const r = pick([0, 0, 1, 2]); const t = r ? ri(-5, 5) : 0;
+      let k = r * x0 + t; D.forEach((p, i) => { k -= (sg[i] * (ks[i] * x0 + ms[i])) / p; });
+      const A = D.reduce((u, p, i) => u + (sg[i] * L * ks[i]) / p, 0) - L * r; if (!A || !k || !Number.isInteger(k) || Math.abs(k) > 20) continue;
+      let lhs = String(k); D.forEach((p, i) => { lhs += (sg[i] < 0 ? ' - ' : ' + ') + fr2(lin(ks[i], ms[i]), p); });
+      const rhs = r ? lin(r, t) : '0';
+      let mult = String(L * k); D.forEach((p, i) => { mult += (sg[i] < 0 ? ' - ' : ' + ') + (L / p === 1 ? '(' + lin(ks[i], ms[i]) + ')' : (L / p) + '(' + lin(ks[i], ms[i]) + ')'); });
+      const C = L * t - L * k - D.reduce((u, p, i) => u + (sg[i] * L * ms[i]) / p, 0);
+      return Q('Λύσε την εξίσωση: ' + T(lhs + ' = ' + rhs), x0, { ex: 'Ε.Κ.Π. ' + L + ': ' + T(mult + ' = ' + (r ? L + '(' + rhs + ')' : '0')) + '. Μετά τις πράξεις: ' + T(cx(A) + ' = ' + C) + ', άρα ' + T('x = ' + x0) + '.' });
+    }
+    return G.eqFrac3();
+  };
+  /* ρητός αριθμός [n, d] */
+  const Rr = (n, d = 1) => { if (d < 0) { n = -n; d = -d; } const g = M.gcd(Math.abs(n), d) || 1; return [n / g, d / g]; };
+  const rA = (a, b) => Rr(a[0] * b[1] + b[0] * a[1], a[1] * b[1]), rM = (a, b) => Rr(a[0] * b[0], a[1] * b[1]), rS = (a, b) => rA(a, [-b[0], b[1]]);
+  const rT = ([n, d]) => (d === 1 ? String(n) : (n < 0 ? '-' : '') + fr2(Math.abs(n), d));
+  const rPlus = (r) => (r[0] === 0 ? '' : (r[0] < 0 ? ' - ' : ' + ') + rT([Math.abs(r[0]), r[1]]));
+  G.eqNested = () => {
+    for (let g = 0; g < 300; g++) {
+      const p = pick([2, 3]), q = pick([2, 3]), r = pick([2, 3, 4]), s = ri(1, 6), u = ri(0, 4), t = ri(1, 5); const x0 = rnz(-8, 8);
+      /* (1/p)[(1/q)(x/r - s) - u] - t = x + C */
+      const lhsAt = (x) => rS(rM([1, p], rS(rM([1, q], rS(Rr(x, r), [s, 1])), [u, 1])), [t, 1]);
+      const C = rS(lhsAt(x0), [x0, 1]); if (C[1] > 12 || Math.abs(C[0]) > 40) continue;
+      const inner = fr2('1', q) + '\\left(' + fr2('x', r) + ' - ' + s + '\\right)' + (u ? ' - ' + u : '');
+      const lhs = fr2('1', p) + '\\left[' + inner + '\\right] - ' + t; const rhs = 'x' + rPlus(C);
+      const P = p * q * r; const K = rS([0, 1], rA(rM([1, p], rA(Rr(s, q), [u, 1])), [t, 1]));
+      return Q('Λύσε την εξίσωση: ' + T(lhs + ' = ' + rhs), x0, { ex: 'Από μέσα προς τα έξω: ' + T(inner + ' = ' + fr2('x', q * r) + rPlus(rS([0, 1], rA(Rr(s, q), [u, 1])))) + ', άρα το πρώτο μέλος είναι ' + T(fr2('x', P) + rPlus(K)) + '. Πολλαπλασιάζω με ' + P + ' και βρίσκω ' + T('x = ' + x0) + '.' });
+    }
+    return G.eqNested();
+  };
+  G.eqComplexFr = () => {
+    for (let g = 0; g < 400; g++) {
+      const [a, c] = pick([[2, 3], [3, 6], [2, 4], [4, 8], [2, 6], [3, 4]]); const d = pick([2, 3, 4]); const b = rnz(-6, 6); const x0 = rnz(-9, 12); const sgn = pick([1, -1]);
+      /* x ± ( x/a - (x + b)/c ) / d = e */
+      const num = (x) => rS(Rr(x, a), Rr(x + b, c)); const at = (x) => rA([x, 1], rM([sgn, d], num(x)));
+      const e = at(x0); if (e[1] !== 1 || Math.abs(e[0]) > 30) continue;
+      const slope = rS(at(1), at(0)); if (slope[0] === 0) continue;
+      const L = M.lcm(a, c); const nn = rS(Rr(x0, a), Rr(x0 + b, c));
+      const top = fr2('x', a) + ' - ' + fr2(xm(-b), c);
+      const numSimp = (() => { const ca = L / a, cc = L / c; return fr2(lin(ca - cc, -cc * b), L); })();
+      return Q('Λύσε την εξίσωση: ' + T('x ' + (sgn > 0 ? '+' : '-') + ' \\dfrac{' + top + '}{' + d + '} = ' + e[0]), x0,
+        { ex: 'Αριθμητής του σύνθετου: ' + T(top + ' = ' + numSimp) + '. Άκρους με άκρους: ' + T('\\dfrac{' + numSimp + '}{' + d + '} = ' + fr2(lin(L / a - L / c, -(L / c) * b), L * d)) + '. Πολλαπλασιάζω με ' + L * d + ' και βρίσκω ' + T('x = ' + x0) + '.' });
+    }
+    return G.eqComplexFr();
+  };
+  G.eqExprAB = (p = {}) => {
+    for (let g = 0; g < 300; g++) {
+      const a1 = rnz(-4, 4), b1 = ri(-9, 9), c1 = rnz(-5, 5), d1 = rnz(-4, 4), e1 = rnz(-6, 6); const f = rnz(-12, 12), gx = rnz(-4, 4), h = rnz(-6, 6), i = rnz(-15, 15);
+      const al = a1 + c1 * d1, be = b1 + c1 * e1; const ga = -gx - h, de = f - i; if (!al || !ga) continue;
+      const m = pick([2, 3, -2]), n = rnz(-4, 4); const x0 = rnz(-5, 6); const coef = al - m * ga - n; if (!coef) continue;
+      const cst = coef * x0 + be - m * de; if (Math.abs(cst) > 40) continue;
+      const k = pick([2, 3, -2]); const Av = al * x0 + be, Bv = ga * x0 + de; const P = Av - k * Bv;
+      const Atx = lin(a1, b1) + (c1 < 0 ? ' - ' : ' + ') + (Math.abs(c1) === 1 ? '' : Math.abs(c1)) + '(' + lin(d1, e1) + ')';
+      const Btx = f + ' ' + (gx < 0 ? '+ ' + cx(-gx) : '- ' + cx(gx)) + ' - (' + lin(h, i) + ')';
+      const eqtx = 'Α = ' + m + 'Β' + (n ? (n < 0 ? ' - ' : ' + ') + cx(Math.abs(n)) : '') + (cst ? (cst < 0 ? ' - ' : ' + ') + Math.abs(cst) : '');
+      const askX = p.ask ? p.ask === 'x' : M.chance(0.5);
+      const head = 'Έστω ' + T('Α = ' + Atx) + ' και ' + T('Β = ' + Btx) + '. ';
+      const ex = 'Απλοποιώ: ' + T('Α = ' + lin(al, be)) + ', ' + T('Β = ' + lin(ga, de)) + '. Η εξίσωση ' + T(eqtx) + ' δίνει ' + T(cx(coef) + ' = ' + coef * x0) + ', άρα ' + T('x = ' + x0) + '.';
+      if (askX) return Q(head + 'Λύσε την εξίσωση ' + T(eqtx) + '.', x0, { ex });
+      return Q(head + 'Αν x είναι η λύση της εξίσωσης ' + T(eqtx) + ', βρες την τιμή της παράστασης ' + T('Π = Α ' + (k < 0 ? '+ ' + -k : '- ' + k) + 'Β') + '.', P, { ex: ex + ' Τότε ' + T('Α = ' + Av) + ', ' + T('Β = ' + Bv) + ' και ' + T('Π = ' + Av + (k < 0 ? ' + ' + -k : ' - ' + k) + '(' + Bv + ') = ' + P) + '.' });
+    }
+    return G.eqExprAB(p);
+  };
+})();
+</script>
+<script>/* assets/gens9.js */
+/* Mathimagika: «Προκλήσεις». Πιο απαιτητικές παραστάσεις και εξισώσεις για όλες τις τάξεις,
+   που καταλήγουν πάντα σε ακέραιο αποτέλεσμα (ή ακέραιες λύσεις). */
+(function () {
+  const G = window.G;
+  const { ri, rnz, pick, shuffle } = M;
+  const Q = (q, a, o) => Object.assign({ q, a }, o || {});
+  const T = (tex) => '$' + tex + '$';
+  const lin = (a, b) => M.tlin([[a, 'x'], [b, '']]);
+  const fr = (n, d) => '\\frac{' + n + '}{' + d + '}';
+  const cx = (k) => (k === 1 ? 'x' : k === -1 ? '-x' : k + 'x');
+  const sgn = (c) => (c < 0 ? ' - ' + -c : ' + ' + c);
+  const SET = ' (Γράψε τις λύσεις χωρισμένες με κόμμα και κενό.)';
+  const par = (c, e) => { const comp = /[+-]/.test(e.slice(1)); return c === 1 ? (comp ? '(' + e + ')' : e) : c + (comp || e.startsWith('-') ? '(' + e + ')' : e); };
+  const setShow = (a) => a.slice().sort((x, y) => x - y).join(', ');
+
+  /* ---------- ρητοί αριθμοί [αριθμητής, παρονομαστής] ---------- */
+  const R = (n, d = 1) => { if (d < 0) { n = -n; d = -d; } const g = M.gcd(Math.abs(n), d) || 1; return [n / g, d / g]; };
+  const add = (a, b) => R(a[0] * b[1] + b[0] * a[1], a[1] * b[1]);
+  const sub = (a, b) => add(a, [-b[0], b[1]]);
+  const mul = (a, b) => R(a[0] * b[0], a[1] * b[1]);
+  const div = (a, b) => (b[0] === 0 ? null : R(a[0] * b[1], a[1] * b[0]));
+  const pw = (a, e) => (e >= 0 ? R(Math.pow(a[0], e), Math.pow(a[1], e)) : a[0] === 0 ? null : R(Math.pow(a[1], -e), Math.pow(a[0], -e)));
+  const rT = ([n, d]) => (d === 1 ? String(n) : (n < 0 ? '-' : '') + fr(Math.abs(n), d));
+  const decT = (v) => String(M.fmt(v[0] / v[1])).replace(/,/g, '{,}');
+
+  /* ================= δέντρο παράστασης ================= */
+  const PR = { '+': 1, '-': 1, '*': 2, ':': 2 };
+  const OPT = { '+': '+', '-': '-', '*': '\\times', ':': ':' };
+  const BR = [['\\left(', '\\right)'], ['\\left[', '\\right]'], ['\\left\\{', '\\right\\}']];
+  const leafN = (v, t, o = {}) => Object.assign({ k: 'leaf', v, t }, o);
+  const ev = (nd) => {
+    if (nd.k === 'leaf') return nd.v;
+    if (nd.k === '^') { const b = ev(nd.b); return b && pw(b, nd.e); }
+    const l = ev(nd.l), r = ev(nd.r); if (!l || !r) return null;
+    return nd.k === '+' ? add(l, r) : nd.k === '-' ? sub(l, r) : nd.k === '*' ? mul(l, r) : div(l, r);
+  };
+  const one = (v) => v[1] === 1 && Math.abs(v[0]) === 1;
+  const allOk = (nd, chk) => {
+    if (nd.k === 'leaf') return true; if (nd.k === '^') return allOk(nd.b, chk) && chk(ev(nd));
+    const v = ev(nd), l = ev(nd.l), r = ev(nd.r); if (!v || !l || !r || !chk(v) || v[0] === 0) return false;
+    /* χωρίς τετριμμένες πράξεις: επί 1, διά 1, x : x */
+    if (nd.k === '*' && (one(l) || one(r))) return false; if (nd.k === ':' && (one(r) || (l[0] === r[0] && l[1] === r[1]))) return false;
+    return allOk(nd.l, chk) && allOk(nd.r, chk);
+  };
+  /* απόδοση σε TeX: ελάχιστες παρενθέσεις, ( ) μέσα, [ ] έξω, { } πιο έξω. groups: οι τιμές των παρενθέσεων για την εξήγηση */
+  const render = (root, full, decMode) => {
+    const groups = [];
+    const br = (x, nd) => { const b = BR[Math.min(x.d, 2)]; if (nd && nd.k !== 'leaf' && nd.k !== '^') { const v = ev(nd); groups.push(T(x.t + ' = ' + (decMode && 1000 % v[1] === 0 ? decT(v) : rT(v)))); } return { t: b[0] + x.t + b[1], d: x.d + 1, p: 4 }; };
+    const go = (nd) => {
+      if (nd.k === 'leaf') return { t: nd.t, d: 0, p: 4 };
+      if (nd.k === '^') { let b = go(nd.b); if (nd.b.k !== 'leaf' || (nd.b.v[1] !== 1 && nd.b.v[0] > 0)) b = br(b, nd.b.k === 'leaf' ? null : nd.b); return { t: b.t + '^{' + nd.e + '}', d: b.d, p: 3 }; }
+      const p = PR[nd.k]; let l = go(nd.l), r = go(nd.r);
+      if (l.p < p || (full && l.p < 3)) l = br(l, nd.l);
+      if (r.p < p || (full && r.p < 3) || (r.p === p && (nd.k === '-' || nd.k === ':' || (nd.k === '*' && nd.r.k === ':')))) r = br(r, nd.r);
+      return { t: l.t + ' ' + OPT[nd.k] + ' ' + r.t, d: Math.max(l.d, r.d), p };
+    };
+    const out = go(root); return { t: out.t, groups };
+  };
+  const build = (n, ops, leaf) => {
+    if (n === 1) return leaf();
+    const k = ri(1, n - 1); return { k: pick(ops), l: build(k, ops, leaf), r: build(n - k, ops, leaf) };
+  };
+  /* φύλλα ανά είδος */
+  const LEAF = {
+    nat: (p) => () => (p.pow && M.chance(0.18) ? { k: '^', b: leafN(R(ri(2, 5)), null), e: ri(2, 3) } : leafN(R(ri(1, p.max || 20)), null)),
+    int: (p) => () => { if (!p.noPow && M.chance(0.2)) { const b = pick([-3, -2, -1, 2, 3, -4, -5]); const e = b === -1 ? ri(3, 9) : ri(2, 3); return { k: '^', b: leafN(R(b), null), e }; } return leafN(R(rnz(-12, 12)), null); },
+    dec: (p) => () => { const dp = pick(p.dps || [1, 1, 1, 2]); const f = Math.pow(10, dp); if (M.chance(0.35)) return leafN(R(ri(2, 12)), null); let n = ri(1, 9 * f); if (dp === 2 && M.chance(0.6)) n = 5 * ri(1, (9 * f) / 5); return leafN(R(n, f), null); },
+    frac: (p) => () => { if (M.chance(0.25)) return leafN(R(ri(2, 9)), null); const d = pick(p.dens || [2, 3, 4, 6, 2, 3, 4, 5, 6, 8, 12]); let n = ri(1, 2 * d); while (M.gcd(n, d) > 1) n = ri(1, 2 * d); return leafN(R(n, d), null, { frac: true }); },
+  };
+  const leafTex = (nd, mode) => {
+    if (nd.k === '^') { leafTex(nd.b, mode); return; }
+    if (nd.k !== 'leaf') { leafTex(nd.l, mode); leafTex(nd.r, mode); return; }
+    if (nd.t != null) return;
+    const v = nd.v; let t;
+    if (mode === 'dec') t = decT(v); else if (v[1] !== 1) t = rT([Math.abs(v[0]), v[1]]); else t = String(Math.abs(v[0]));
+    if (v[0] < 0) t = v[1] === 1 ? '(-' + t + ')' : '\\left(-' + t + '\\right)';
+    nd.t = t;
+  };
+  const minusGroup = (nd) => nd.k !== 'leaf' && nd.k !== '^' && ((nd.k === '-' && nd.r.k !== 'leaf' && nd.r.k !== '^') || minusGroup(nd.l) || minusGroup(nd.r));
+  /* γενική παράσταση με ακέραιο αποτέλεσμα */
+  G.chExpr = (p = {}) => {
+    const mode = p.mode || 'nat'; const ops = p.ops || ['+', '-', '*', ':']; const lim = p.lim || (mode === 'int' ? 400 : 1000);
+    const chk = (v) => {
+      if (Math.abs(v[0] / v[1]) > lim) return false;
+      if (mode === 'nat') return v[1] === 1 && v[0] >= 0;
+      if (mode === 'int') return v[1] === 1;
+      if (mode === 'dec') return v[0] >= 0 && 1000 % v[1] === 0;
+      return v[0] >= 0 && v[1] <= (p.maxDen || 36);
+    };
+    const n0 = p.n || [5, 6];
+    for (let g = 0; g < 6000; g++) {
+      const n = ri(n0[0], n0[1]);
+      let tree = build(n, ops, LEAF[mode](p));
+      if (!allOk(tree, chk)) continue;
+      let v = ev(tree); if (!v) continue;
+      if (v[1] !== 1) {
+        /* αν δεν βγαίνει ακέραιο, επί τον κατάλληλο αριθμό μόνο όταν η παράσταση είναι άθροισμα ή διαφορά (διαβάζεται φυσικά: [ ... ] επί 12) */
+        if (mode === 'nat' || mode === 'int' || !(tree.k === '+' || tree.k === '-') || v[1] > 12 || M.chance(0.6)) continue;
+        tree = { k: '*', l: tree, r: leafN(R(v[1] * (v[0] / v[1] < 4 ? ri(1, 2) : 1)), null) };
+        v = ev(tree); if (!v || v[1] !== 1 || !chk(v)) continue;
+      }
+      if (p.minAbs && Math.abs(v[0]) < p.minAbs) continue;
+      if (!p.allowZero && v[0] === 0) continue;
+      /* τουλάχιστον μία πράξη πολλαπλασιασμού ή διαίρεσης και μία πρόσθεσης ή αφαίρεσης */
+      const txt = JSON.stringify(tree); if (ops.includes('*') && !/"k":"[*:]"/.test(txt)) continue; if (!/"k":"[+-]"/.test(txt)) continue;
+      /* μόνο με πρόσθεση και αφαίρεση: να υπάρχει μείον μπροστά από παρένθεση, αλλιώς οι παρενθέσεις δεν έχουν νόημα */
+      if (!ops.includes('*') && !minusGroup(tree)) continue;
+      leafTex(tree, mode);
+      const { t, groups } = render(tree, p.full, mode === 'dec');
+      const steps = groups.length ? 'Πρώτα οι παρενθέσεις: ' + groups.slice(0, 4).join(', ') + '. ' : '';
+      return Q('Υπολόγισε την παράσταση: ' + T((mode === 'frac' ? '\\displaystyle ' : '') + t), v[0], { ex: steps + 'Μετά ' + (/\^/.test(t) ? 'οι δυνάμεις, ' : '') + 'οι πολλαπλασιασμοί και οι διαιρέσεις από αριστερά προς τα δεξιά και στο τέλος οι προσθέσεις και οι αφαιρέσεις. Αποτέλεσμα: ' + T(String(v[0])) + '.' });
+    }
+    return G.chExpr(Object.assign({}, p, { n: [3, 4] }));
+  };
+
+  /* ================= εξισώσεις ================= */
+  /* Δημοτικό: εξίσωση με παρενθέσεις και φυσική λύση */
+  G.chEqNat = () => {
+    const x0 = ri(2, 25), a = ri(2, 9), b = ri(1, 15), c = ri(1, 30);
+    const F = [
+      () => { const d = a * (x0 + b) - c; return d > 0 ? [a + ' \\times (x + ' + b + ') - ' + c + ' = ' + d, T(a + ' \\times (x + ' + b + ') = ' + (d + c)) + ', άρα ' + T('x + ' + b + ' = ' + (x0 + b)) + ' και ' + T('x = ' + x0)] : null; },
+      () => { const m = x0 * a; const d = (m + b) / a; if (!Number.isInteger(d)) return null; return ['(' + m + ' + ' + b + ') : ' + a + ' + x = ' + (d + x0), T('(' + m + ' + ' + b + ') : ' + a + ' = ' + d) + ', άρα ' + T('x = ' + (d + x0) + ' - ' + d + ' = ' + x0)]; },
+      () => { const d = (x0 - b) * a + c; return x0 > b ? [a + ' \\times (x - ' + b + ') + ' + c + ' = ' + d, T(a + ' \\times (x - ' + b + ') = ' + (d - c)) + ', άρα ' + T('x - ' + b + ' = ' + (x0 - b)) + ' και ' + T('x = ' + x0)] : null; },
+      () => { const k = ri(2, 6); const X = x0 * k; const d = X / k + b; return ['x : ' + k + ' + ' + b + ' = ' + d, T('x : ' + k + ' = ' + (d - b)) + ', άρα ' + T('x = ' + (d - b) + ' \\times ' + k + ' = ' + X), X]; },
+      () => { const d = a * x0 + b * x0; return [a + ' \\times x + ' + b + ' \\times x = ' + d, T('(' + a + ' + ' + b + ') \\times x = ' + d) + ', άρα ' + T((a + b) + ' \\times x = ' + d) + ' και ' + T('x = ' + x0)]; },
+    ];
+    for (let g = 0; g < 50; g++) { const r = pick(F)(); if (r) return Q('Βρες τον άγνωστο x: ' + T(r[0]), r[2] != null ? r[2] : x0, { ex: r[1] + '.' }); }
+    return G.chEqNat();
+  };
+  /* Α΄ Γυμνασίου: εξίσωση με παρενθέσεις στα δύο μέλη */
+  G.chEqLin = () => {
+    for (let g = 0; g < 300; g++) {
+      const x0 = rnz(-7, 9); const k1 = rnz(-5, 6), a1 = pick([1, 2, 3]), b1 = rnz(-8, 8), k2 = rnz(-5, 5), a2 = pick([1, 2]), b2 = rnz(-8, 8), f = rnz(-4, 5), h = rnz(-9, 9);
+      const A = k1 * a1 + k2 * a2, B = k1 * b1 + k2 * b2; const coef = A - f; if (!coef || Math.abs(k1) === 1) continue;
+      const c = coef * x0 + B + h; if (Math.abs(c) > 60) continue;
+      const lhs = k1 + '(' + lin(a1, b1) + ')' + (k2 < 0 ? ' - ' : ' + ') + (Math.abs(k2) === 1 ? '' : Math.abs(k2)) + '(' + lin(a2, b2) + ')';
+      const rhs = c + ' - (' + lin(-f, h) + ')';
+      return Q('Λύσε την εξίσωση: ' + T(lhs + ' = ' + rhs), x0, { ex: 'Επιμεριστική: ' + T(lin(A, B) + ' = ' + lin(f, c - h)) + '. Χωρίζω γνωστούς από αγνώστους: ' + T(cx(coef) + ' = ' + (coef * x0)) + ', άρα ' + T('x = ' + x0) + '.' });
+    }
+    return G.chEqLin();
+  };
+  /* Γ΄ Γυμνασίου: εξίσωση με κλάσματα που καταλήγει σε 2ου βαθμού με ακέραιες ρίζες */
+  G.chQuadFrac = () => {
+    for (let g = 0; g < 2000; g++) {
+      const r1 = rnz(-6, 6), r2 = rnz(-6, 6); if (r1 === r2) continue;
+      const [p, q] = pick([[2, 3], [3, 2], [2, 4], [4, 2], [3, 6], [6, 3], [2, 6], [4, 3]]); const L = M.lcm(p, q);
+      const A = pick([1, 1, 2]); const k = (L / p) * A; const s = r1 + r2, pr = r1 * r2;
+      const E = rnz(-2, 2); const Cn = L * E - k * s; if (Cn % (L / q)) continue; const C = Cn / (L / q); if (!C || Math.abs(C) > 12) continue;
+      const B = ri(-6, 6), D = ri(-9, 9); const Fn = (L / p) * B + (L / q) * D - k * pr; if (Fn % L) continue; const F = Fn / L; if (Math.abs(F) > 15) continue;
+      const n1 = M.tpoly([A, 0, B]), n2 = lin(C, D); const sec = C < 0 ? ' - ' + fr(lin(-C, -D), q) : ' + ' + fr(n2, q);
+      const rhs = lin(E, F) || '0';
+      return Q('Λύσε την εξίσωση: ' + T(fr(n1, p) + sec + ' = ' + rhs) + SET, [r1, r2], { at: 'set', show: setShow([r1, r2]), ex: 'Ε.Κ.Π. ' + L + ': ' + T(par(L / p, n1) + ' + ' + par(L / q, n2) + ' = ' + par(L, rhs)) + ', που γίνεται ' + T(M.tpoly([k, -k * s, k * pr]) + ' = 0') + '. Οι ρίζες είναι ' + T('x = ' + r1) + ' και ' + T('x = ' + r2) + '.' });
+    }
+    return G.chQuadFrac();
+  };
+  /* Α΄ Λυκείου: διτετράγωνη ή με αντικατάσταση */
+  G.chBiquad = () => {
+    if (M.chance(0.5)) {
+      const a = ri(1, 5); let b = ri(1, 6); while (b === a) b = ri(1, 6);
+      return Q('Λύσε την εξίσωση: ' + T('x^4 - ' + (a * a + b * b) + 'x^2 + ' + a * a * b * b + ' = 0') + SET, [a, -a, b, -b], { at: 'set', show: setShow([a, -a, b, -b]), ex: 'Θέτω ' + T('x^2 = ω \\ge 0') + ': ' + T('ω^2 - ' + (a * a + b * b) + 'ω + ' + a * a * b * b + ' = 0') + ', άρα ' + T('ω = ' + a * a) + ' ή ' + T('ω = ' + b * b) + '. Τότε ' + T('x = \\pm ' + a) + ' ή ' + T('x = \\pm ' + b) + '.' });
+    }
+    for (let g = 0; g < 300; g++) {
+      const k = ri(1, 3); const r1 = ri(-5, 4), r2 = ri(-5, 4); const u1 = r1 * (r1 + k), u2 = r2 * (r2 + k); if (u1 === u2) continue;
+      const roots = [...new Set([r1, -k - r1, r2, -k - r2])]; const S = u1 + u2, P = u1 * u2; if (!S) continue;
+      const u = 'x^2 + ' + (k === 1 ? '' : k) + 'x';
+      return Q('Λύσε την εξίσωση: ' + T('(' + u + ')^2' + (S > 0 ? ' - ' : ' + ') + (Math.abs(S) === 1 ? '' : Math.abs(S)) + '(' + u + ')' + (P ? sgn(P) : '') + ' = 0') + SET, roots, { at: 'set', show: setShow(roots), ex: 'Θέτω ' + T('ω = ' + u) + ': ' + T('ω^2' + (S > 0 ? ' - ' : ' + ') + (Math.abs(S) === 1 ? '' : Math.abs(S)) + 'ω' + (P ? sgn(P) : '') + ' = 0') + ', άρα ' + T('ω = ' + u1) + ' ή ' + T('ω = ' + u2) + '. Λύνω τις ' + T(u + ' = ' + u1) + ' και ' + T(u + ' = ' + u2) + '.' });
+    }
+    return G.chBiquad();
+  };
+  /* πλήθος ακέραιων κοινών λύσεων δύο ανισώσεων */
+  G.chIneqCount = () => {
+    for (let g = 0; g < 2000; g++) {
+      const [p, q] = pick([[2, 3], [3, 4], [2, 5], [4, 6], [3, 6], [2, 4]]); const L = M.lcm(p, q); const m = rnz(-5, 5), n = rnz(-5, 5);
+      const cp = L / p - L / q; if (!cp) continue; const lo = ri(-8, 3), up = lo + ri(3, 9);
+      /* (x + m)/p - (x + n)/q ≤ c  με όριο το up (αν cp > 0) ή το lo (αν cp < 0) */
+      const bnd = cp > 0 ? up : lo; const cn = cp * bnd + (L / p) * m - (L / q) * n; if (cn % L) continue; const c = cn / L;
+      /* δεύτερη: a(x - b) - (x + d) > e  με όριο το άλλο άκρο (γνήσια ανισότητα) */
+      const a = pick([2, 3, -2, -3, 4]); const ca = a - 1; if (!ca) continue; const b = rnz(-4, 4), d = rnz(-5, 5); const other = cp > 0 ? lo : up;
+      const e = ca * other - a * b - d;
+      /* κοινές λύσεις: */
+      const s1 = cp > 0 ? (x) => x <= up : (x) => x >= lo; const s2 = ca > 0 ? (x) => x > other : (x) => x < other;
+      let cnt = 0; const list = []; for (let x = -40; x <= 40; x++) if (s1(x) && s2(x)) { cnt++; list.push(x); }
+      if (!cnt || cnt > 12) continue;
+      const i1 = fr(lin(1, m), p) + ' - ' + fr(lin(1, n), q) + ' \\le ' + c; const i2 = a + '(' + lin(1, -b) + ') - (' + lin(1, d) + ') > ' + e;
+      const sol1 = cp > 0 ? 'x \\le ' + up : 'x \\ge ' + lo; const sol2 = ca > 0 ? 'x > ' + other : 'x < ' + other;
+      return Q('Πόσοι ακέραιοι ικανοποιούν ταυτόχρονα τις ανισώσεις ' + T(i1) + ' και ' + T(i2) + ';', cnt, { ex: 'Η πρώτη δίνει ' + T(sol1) + ' και η δεύτερη ' + T(sol2) + '. Κοινοί ακέραιοι: ' + list.join(', ') + ', δηλαδή ' + cnt + '.' });
+    }
+    return G.chIneqCount();
+  };
+  /* σύστημα με κλάσματα και ακέραια λύση */
+  G.chSysFrac = () => {
+    for (let g = 0; g < 2000; g++) {
+      const a = pick([2, 3, 4]), b = pick([2, 3, 5, 6]); if (a === b) continue; const x0 = a * rnz(-3, 4), y0 = b * rnz(-3, 3); const c = x0 / a + y0 / b;
+      const p = pick([2, 3, 4]), q = pick([2, 3, 5]); if (p === q) continue; const m = ri(-5, 5), n = ri(-5, 5); if ((x0 + m) % p || (y0 + n) % q) continue;
+      const r = (x0 + m) / p - (y0 + n) / q; const det = (1 / a) * (-1 / q) - (1 / b) * (1 / p); if (Math.abs(det) < 1e-9) continue;
+      return Q('Λύσε το σύστημα ' + T('\\begin{cases} ' + fr('x', a) + ' + ' + fr('y', b) + ' = ' + c + ' \\\\ ' + fr(lin(1, m), p) + ' - ' + fr(M.tlin([[1, 'y'], [n, '']]), q) + ' = ' + r + ' \\end{cases}') + '. Γράψε (x, y).', [x0, y0], { at: 'pair', ex: 'Απαλείφω τους παρονομαστές: ' + T(b + 'x + ' + a + 'y = ' + a * b * c) + ' και ' + T(q + '(' + lin(1, m) + ') - ' + p + '(' + M.tlin([[1, 'y'], [n, '']]) + ') = ' + p * q * r) + '. Λύνω και βρίσκω ' + T('(x, y) = (' + x0 + ', ' + y0 + ')') + '.' });
+    }
+    return G.chSysFrac();
+  };
+
+  /* ================= δυνάμεις και ρίζες ================= */
+  const TERMS_POW = [
+    () => { const k = ri(2, 4); return ['\\left(' + fr(1, 2) + '\\right)^{-' + k + '}', Math.pow(2, k)]; },
+    () => { const k = 2; return ['\\left(' + fr(1, 3) + '\\right)^{-' + k + '}', 9]; },
+    () => { const [a, b] = pick([[2, 3], [3, 2], [2, 5], [3, 4]]); const m = b * b; return [m + ' \\times \\left(' + fr(a, b) + '\\right)^{2}', a * a]; },
+    () => { const [a, b] = pick([[2, 3], [3, 2], [4, 3], [2, 5]]); const m = a * a; return [m + ' \\times \\left(' + fr(a, b) + '\\right)^{-2}', b * b]; },
+    () => { const k = ri(2, 3); const m = Math.pow(2, k) * ri(1, 5); return [m + ' \\times 2^{-' + k + '}', m / Math.pow(2, k)]; },
+    () => { const b = pick([-2, -3]); const e = pick([2, 3]); return ['(' + b + ')^{' + e + '}', Math.pow(b, e)]; },
+    () => { const e = ri(4, 11); return ['(-1)^{' + e + '}', e % 2 ? -1 : 1]; },
+    () => { const b = ri(2, 9); return [b + '^{0}', 1]; },
+    () => { const k = ri(1, 2); const m = Math.pow(10, k) * ri(1, 9); return [m + ' \\times 10^{-' + k + '}', m / Math.pow(10, k)]; },
+    () => { const b = pick([2, 3]); return ['\\left(-' + fr(1, b) + '\\right)^{-2}', b * b]; },
+  ];
+  G.chPowNeg = () => {
+    for (let g = 0; g < 200; g++) {
+      const ts = shuffle(TERMS_POW.slice()).slice(0, ri(3, 4)).map((f) => f()); const sg = ts.map((_, i) => (i === 0 ? 1 : pick([1, -1])));
+      const v = ts.reduce((u, t, i) => u + sg[i] * t[1], 0); if (!Number.isInteger(v) || v === 0) continue;
+      const tex = ts.map((t, i) => (i === 0 ? '' : sg[i] < 0 ? ' - ' : ' + ') + t[0]).join('');
+      return Q('Υπολόγισε την παράσταση: ' + T(tex), v, { ex: 'Υπολογίζω κάθε όρο: ' + ts.map((t) => T(t[0] + ' = ' + t[1])).join(', ') + '. Θυμάμαι ότι ' + T('α^{-ν} = ' + fr(1, 'α^{ν}')) + ' και ' + T('\\left(' + fr('α', 'β') + '\\right)^{-ν} = \\left(' + fr('β', 'α') + '\\right)^{ν}') + '. Αποτέλεσμα: ' + T(String(v)) + '.' });
+    }
+    return G.chPowNeg();
+  };
+  const TERMS_ROOT = [
+    () => { const k = ri(2, 4), a = pick([2, 3, 5]); return ['\\left(' + k + '\\sqrt{' + a + '}\\right)^{2}', k * k * a]; },
+    () => { const [p, q, v] = pick([[12, 3, 6], [8, 2, 4], [50, 2, 10], [18, 8, 12], [27, 3, 9], [20, 5, 10], [32, 2, 8], [45, 5, 15]]); return ['\\sqrt{' + p + '} \\times \\sqrt{' + q + '}', v]; },
+    () => { const [p, q, v] = pick([[75, 3, 5], [72, 2, 6], [98, 2, 7], [48, 3, 4], [80, 5, 4], [200, 2, 10]]); return ['\\sqrt{' + p + '} : \\sqrt{' + q + '}', v]; },
+    () => { const a = pick([5, 7, 3, 6]); let b = pick([2, 3, 5]); while (b === a) b = 2; return ['\\left(\\sqrt{' + a + '} + \\sqrt{' + b + '}\\right)\\left(\\sqrt{' + a + '} - \\sqrt{' + b + '}\\right)', a - b]; },
+    () => { const a = pick([11, 13, 17, 19, 10]); const k = ri(1, 3); return ['\\left(\\sqrt{' + a + '} - ' + k + '\\right)\\left(\\sqrt{' + a + '} + ' + k + '\\right)', a - k * k]; },
+    () => { const [x, y] = pick([[9, 16], [36, 64], [4, 9], [25, 144]]); return ['\\sqrt{' + x + ' \\times ' + y + '}', Math.sqrt(x * y)]; },
+    () => { const [x, y] = pick([[16, 9], [64, 36], [144, 25]]); return ['\\sqrt{' + x + ' + ' + y + '}', Math.sqrt(x + y)]; },
+  ];
+  const TERMS_RAT = [
+    () => { const [b, e, v] = pick([[8, '2/3', 4], [27, '2/3', 9], [16, '3/4', 8], [32, '2/5', 4], [9, '3/2', 27], [4, '5/2', 32], [125, '1/3', 5], [64, '5/6', 32]]); const [n, d] = e.split('/'); return [b + '^{' + fr(n, d) + '}', v]; },
+    () => { const [b, k, v] = pick([[8, 3, 2], [27, 3, 3], [16, 4, 2], [81, 4, 3], [32, 5, 2]]); return ['\\sqrt[' + k + ']{' + b + '}', v]; },
+    () => { const [b, v] = pick([[8, 4], [27, 9], [64, 16]]); return ['\\sqrt[3]{' + b + '^{2}}', v]; },
+  ];
+  G.chRoots = (p = {}) => {
+    const pool = TERMS_ROOT.concat(p.rat ? TERMS_RAT.concat(TERMS_RAT) : []);
+    for (let g = 0; g < 200; g++) {
+      const ts = shuffle(pool.slice()).slice(0, ri(3, 4)).map((f) => f()); const sg = ts.map((_, i) => (i === 0 ? 1 : pick([1, -1])));
+      const v = ts.reduce((u, t, i) => u + sg[i] * t[1], 0); if (!Number.isInteger(v) || v === 0) continue;
+      return Q('Υπολόγισε την παράσταση: ' + T(ts.map((t, i) => (i === 0 ? '' : sg[i] < 0 ? ' - ' : ' + ') + t[0]).join('')), v, { ex: 'Υπολογίζω κάθε όρο: ' + ts.map((t) => T(t[0] + ' = ' + t[1])).join(', ') + '. Αποτέλεσμα: ' + T(String(v)) + '.' });
+    }
+    return G.chRoots(p);
+  };
+
+  /* ================= Γ΄ Γυμνασίου: ταυτότητες και ρητές παραστάσεις ================= */
+  G.chIdentVal = () => {
+    const X = pick([2025, 2026, 2027, 999, 1001, 100, 501]);
+    for (let g = 0; g < 200; g++) {
+      const a = rnz(-6, 6), b = rnz(-6, 6); const c = 2 * a - b; if (!c || b === a) continue;
+      const k = pick([1, 1, 2]); const val = k === 1 ? a * a - b * c : 0;
+      if (k === 1) return Q('Απλοποίησε την παράσταση ' + T('Α = (' + lin(1, a) + ')^2 - (' + lin(1, b) + ')(' + lin(1, c) + ')') + ' και βρες την τιμή της για ' + T('x = ' + X) + '.', val, { ex: T('(' + lin(1, a) + ')^2 = ' + M.tpoly([1, 2 * a, a * a])) + ' και ' + T('(' + lin(1, b) + ')(' + lin(1, c) + ') = ' + M.tpoly([1, b + c, b * c])) + '. Στη διαφορά οι όροι με x φεύγουν, άρα ' + T('Α = ' + a * a + ' - (' + b * c + ') = ' + val) + ' για κάθε x.' });
+      const d = ri(1, 6); const v2 = 4 * d;
+      return Q('Βρες την τιμή της παράστασης ' + T('Β = (' + lin(1, d) + ')^2 - (' + lin(1, -d) + ')^2') + ' για ' + T('x = ' + X) + '.', v2 * X, { ex: 'Διαφορά τετραγώνων: ' + T('Β = [(' + lin(1, d) + ') - (' + lin(1, -d) + ')][(' + lin(1, d) + ') + (' + lin(1, -d) + ')] = ' + 2 * d + ' \\times 2x = ' + v2 + 'x') + ', άρα ' + T('Β = ' + v2 + ' \\times ' + X + ' = ' + v2 * X) + '.' });
+    }
+    return G.chIdentVal();
+  };
+  G.chRatConst = () => {
+    const a = ri(1, 6), b = ri(2, 6); const X = pick([7, 11, 13, 25, 101]);
+    const forms = [
+      () => [fr('x^2 - ' + a * a, 'x^2 + ' + (a === 1 ? '' : a) + 'x') + ' \\times ' + fr(b + 'x', lin(1, -a)), b, 'Παραγοντοποιώ: ' + T(fr('(x - ' + a + ')(x + ' + a + ')', 'x(x + ' + a + ')') + ' \\times ' + fr(b + 'x', 'x - ' + a) + ' = ' + b)],
+      () => [fr('x^2 - ' + 2 * a + 'x + ' + a * a, 'x^2 - ' + a * a) + ' : ' + fr(lin(1, -a), b + 'x + ' + b * a), b, 'Παραγοντοποιώ: ' + T(fr('(x - ' + a + ')^2', '(x - ' + a + ')(x + ' + a + ')') + ' \\times ' + fr(b + '(x + ' + a + ')', 'x - ' + a) + ' = ' + b)],
+      () => [fr(b + 'x^2 + ' + b * a + 'x', 'x^2 + ' + (2 * a) + 'x + ' + a * a) + ' \\times ' + fr(lin(1, a), 'x'), b, 'Παραγοντοποιώ: ' + T(fr(b + 'x(x + ' + a + ')', '(x + ' + a + ')^2') + ' \\times ' + fr('x + ' + a, 'x') + ' = ' + b)],
+    ];
+    const [tex, v, ex] = pick(forms)();
+    return Q('Απλοποίησε την παράσταση ' + T('Α = ' + tex) + ' και βρες την τιμή της για ' + T('x = ' + X) + '.', v, { ex: ex + '. Η παράσταση είναι σταθερή, άρα για ' + T('x = ' + X) + ' είναι ' + T('Α = ' + v) + '.' });
+  };
+
+  /* ================= Λύκειο ================= */
+  G.chProg = () => {
+    for (let g = 0; g < 300; g++) {
+      const a1 = rnz(-10, 12), d = rnz(-4, 5); const a = (n) => a1 + (n - 1) * d; const i = ri(2, 5), j = ri(6, 10), k = ri(3, 9); if (k === i || k === j || i + j === 2 * k) continue;
+      const s = a(i) + a(j), t = a(k); const n = ri(8, 15); const Sn = (n * (2 * a1 + (n - 1) * d)) / 2;
+      return Q('Σε μια αριθμητική πρόοδο είναι ' + T('α_{' + i + '} + α_{' + j + '} = ' + s) + ' και ' + T('α_{' + k + '} = ' + t) + '. Βρες το άθροισμα ' + T('S_{' + n + '}') + ' των ' + n + ' πρώτων όρων.', Sn, { ex: T('2α_1 + ' + (i + j - 2) + 'ω = ' + s) + ' και ' + T('α_1 + ' + (k - 1) + 'ω = ' + t) + ', άρα ' + T('α_1 = ' + a1) + ' και ' + T('ω = ' + d) + '. Τότε ' + T('S_{' + n + '} = ' + fr(n, 2) + '[2 \\times ' + (a1 < 0 ? '(' + a1 + ')' : a1) + ' + ' + (n - 1) + ' \\times ' + (d < 0 ? '(' + d + ')' : d) + '] = ' + Sn) + '.' });
+    }
+    return G.chProg();
+  };
+  const TRIG = { s: { 0: [0, 1], 30: [1, 4], 45: [1, 2], 60: [3, 4], 90: [1, 1] }, t: { 30: [1, 3], 45: [1, 1], 60: [3, 1] } };
+  G.chTrig = () => {
+    for (let g = 0; g < 300; g++) {
+      const terms = []; const n = ri(3, 4); const used = new Set();
+      for (let i = 0; i < n; i++) {
+        const kind = pick(['sin', 'cos', 'tan']); const ang = kind === 'tan' ? pick([30, 45, 60]) : pick([30, 45, 60, 90]);
+        if (used.has(kind + ang)) { i--; continue; } used.add(kind + ang);
+        const sq = kind === 'tan' ? TRIG.t[ang] : TRIG.s[kind === 'sin' ? ang : 90 - ang]; const c = sq[1] * ri(1, 3) * pick([1, 1, -1]);
+        const fn = kind === 'sin' ? '\\text{ημ}' : kind === 'cos' ? '\\text{συν}' : '\\text{εφ}';
+        terms.push([c, fn + '^{2}' + ang + '^{\\circ}', (c * sq[0]) / sq[1]]);
+      }
+      const v = terms.reduce((u, t) => u + t[2], 0); if (!Number.isInteger(v) || v === 0) continue;
+      const tex = terms.map(([c, t], i) => (i === 0 ? (c < 0 ? '-' : '') : c < 0 ? ' - ' : ' + ') + (Math.abs(c) === 1 ? '' : Math.abs(c)) + t).join('');
+      return Q('Υπολόγισε την παράσταση: ' + T(tex), v, { ex: 'Χρησιμοποιώ ' + T('\\text{ημ}30^{\\circ} = \\text{συν}60^{\\circ} = ' + fr(1, 2)) + ', ' + T('\\text{ημ}45^{\\circ} = \\text{συν}45^{\\circ} = ' + fr('\\sqrt{2}', 2)) + ', ' + T('\\text{ημ}60^{\\circ} = \\text{συν}30^{\\circ} = ' + fr('\\sqrt{3}', 2)) + ', ' + T('\\text{εφ}30^{\\circ} = ' + fr('\\sqrt{3}', 3) + ', \\text{εφ}60^{\\circ} = \\sqrt{3}') + '. Οι όροι δίνουν ' + terms.map((t) => (t[2] < 0 ? '(' + t[2] + ')' : t[2])).join(' + ') + ' = ' + v + '.' });
+    }
+    return G.chTrig();
+  };
+  G.chPolyEq = () => {
+    if (M.chance(0.5)) {
+      const a = rnz(-5, 5), b = ri(1, 5); if (Math.abs(a) === b) return G.chPolyEq();
+      const roots = [-a, b, -b];
+      return Q('Λύσε την εξίσωση: ' + T(M.tpoly([1, a, -b * b, -a * b * b]) + ' = 0') + SET, roots, { at: 'set', show: setShow(roots), ex: 'Ομαδοποίηση: ' + T('x^2(' + lin(1, a) + ') - ' + b * b + '(' + lin(1, a) + ') = (' + lin(1, a) + ')(x^2 - ' + b * b + ')') + ', άρα ' + T('x = ' + -a) + ' ή ' + T('x = \\pm ' + b) + '.' });
+    }
+    for (let g = 0; g < 200; g++) {
+      const r = [rnz(-4, 4), rnz(-4, 4), rnz(-4, 4), rnz(-3, 3)]; if (new Set(r).size < 4) continue;
+      let co;
+      co = [1]; for (const x of r) { const nc = new Array(co.length + 1).fill(0); co.forEach((c, i) => { nc[i] += c; nc[i + 1] -= x * c; }); co = nc; }
+      if (co.some((c) => Math.abs(c) > 120)) continue;
+      return Q('Λύσε την εξίσωση: ' + T(M.tpoly(co) + ' = 0') + '. Οι ρίζες είναι ακέραιες.' + SET, r, { at: 'set', show: setShow(r), ex: 'Δοκιμάζω διαιρέτες του σταθερού όρου ' + co[4] + ' με σχήμα Horner. Βρίσκω τις ρίζες ' + setShow(r) + '.' });
+    }
+    return G.chPolyEq();
+  };
+  G.chExpLog = () => {
+    const kind = pick(['exp', 'exp', 'log']);
+    if (kind === 'exp') {
+      const a = pick([2, 3]); let r1 = ri(0, 3), r2 = ri(0, 3); while (r2 === r1) r2 = ri(0, 3); const S = Math.pow(a, r1) + Math.pow(a, r2), P = Math.pow(a, r1 + r2);
+      const shift = a === 3 && S % 3 === 0 && M.chance(0.5);
+      const mid = shift ? (S / 3 === 1 ? '' : S / 3 + ' \\times ') + '3^{x + 1}' : S + ' \\times ' + a + '^{x}';
+      return Q('Λύσε την εξίσωση: ' + T(a * a + '^{x} - ' + mid + ' + ' + P + ' = 0') + SET, [r1, r2], { at: 'set', show: setShow([r1, r2]), ex: 'Θέτω ' + T('ω = ' + a + '^{x} > 0') + ': ' + T('ω^2 - ' + S + 'ω + ' + P + ' = 0') + ', άρα ' + T('ω = ' + Math.pow(a, r1)) + ' ή ' + T('ω = ' + Math.pow(a, r2)) + ', δηλαδή ' + T('x = ' + r1) + ' ή ' + T('x = ' + r2) + '.' });
+    }
+    for (let g = 0; g < 200; g++) {
+      const a = pick([2, 3]); const k = ri(2, a === 2 ? 5 : 3); const N = Math.pow(a, k); const divs = []; for (let u = 1; u <= N; u++) if (N % u === 0) divs.push(u);
+      const u = pick(divs), v = N / u; if (u === v) continue; const x0 = ri(-3, 8); const m = u - x0, n = v - x0; if (m === n || !m || !n) continue;
+      return Q('Λύσε την εξίσωση: ' + T('\\log_{' + a + '}(' + lin(1, m) + ') + \\log_{' + a + '}(' + lin(1, n) + ') = ' + k), x0, { ex: 'Πρέπει ' + T('x > ' + Math.max(-m, -n)) + '. Τότε ' + T('(' + lin(1, m) + ')(' + lin(1, n) + ') = ' + a + '^{' + k + '} = ' + N) + '. Από τις δύο ρίζες δεκτή είναι μόνο η ' + T('x = ' + x0) + ', γιατί η άλλη δεν ανήκει στο πεδίο ορισμού.' });
+    }
+    return G.chExpLog();
+  };
+  G.chLimit = () => {
+    const F = [
+      () => { const a = rnz(-5, 6); let b = rnz(-5, 6); if (b === a) b = a + 1; return ['\\lim_{x \\to ' + a + '} ' + fr(M.tpoly([1, -(a + b), a * b]), lin(1, -a)), a - b, 'Παραγοντοποιώ: ' + T(fr('(' + lin(1, -a) + ')(' + lin(1, -b) + ')', lin(1, -a)) + ' = ' + lin(1, -b)) + ', άρα το όριο είναι ' + T(String(a - b))]; },
+      () => { const a = rnz(-3, 3); return ['\\lim_{x \\to ' + a + '} ' + fr('x^3 ' + (a * a * a < 0 ? '+ ' + -(a * a * a) : '- ' + a * a * a), lin(1, -a)), 3 * a * a, 'Διαφορά κύβων: ' + T(fr('x^3 - α^3', 'x - α') + ' = x^2 + αx + α^2') + ', άρα το όριο είναι ' + T('3α^2 = ' + 3 * a * a)]; },
+      () => { const k = ri(1, 4); const a = k * k; return ['\\lim_{x \\to ' + a + '} ' + fr('x - ' + a, '\\sqrt{x} - ' + k), 2 * k, 'Πολλαπλασιάζω με τη συζυγή: ' + T(fr('x - ' + a, '\\sqrt{x} - ' + k) + ' = \\sqrt{x} + ' + k) + ', άρα το όριο είναι ' + T(String(2 * k))]; },
+      () => { const a = ri(2, 6), b = ri(2, 9); return ['\\lim_{x \\to 0} ' + fr('\\text{ημ}(' + a * b + 'x)', a + 'x'), b, T('\\lim_{x \\to 0} ' + fr('\\text{ημ}(κx)', 'κx') + ' = 1') + ', άρα το όριο είναι ' + T(fr(a * b, a) + ' = ' + b)]; },
+    ];
+    for (let g = 0; g < 100; g++) {
+      const f = pick(F)();
+      return Q('Υπολόγισε το όριο: ' + T(f[0]), f[1], { ex: f[2] + '.' });
+    }
+    return G.chLimit();
+  };
+  G.chDeriv = () => {
+    const F = [
+      () => { const a = rnz(-4, 4), b = rnz(-4, 4), x0 = rnz(-3, 3); const f = (x) => (x * x + a) * (x - b); const d = 2 * x0 * (x0 - b) + (x0 * x0 + a); return ['f(x) = (' + M.tpoly([1, 0, a]) + ')(' + lin(1, -b) + ')', x0, d, 'Κανόνας γινομένου: ' + T("f'(x) = 2x(" + lin(1, -b) + ') + (' + M.tpoly([1, 0, a]) + ')')]; },
+      () => { const a = rnz(-3, 3), b = rnz(-3, 3), n = pick([2, 3]); const x0 = rnz(-2, 2); const inner = a * x0 + b; if (!a) return null; const d = n * Math.pow(inner, n - 1) * a; return ['f(x) = (' + lin(a, b) + ')^{' + n + '}', x0, d, 'Κανόνας αλυσίδας: ' + T("f'(x) = " + n + '(' + lin(a, b) + ')^{' + (n - 1) + '} \\times ' + (a < 0 ? '(' + a + ')' : a))]; },
+      () => { const a = ri(1, 4), b = rnz(-4, 4); const x0 = ri(0, 3); const d = (2 * x0 * (x0 + a) - (x0 * x0 + b)) / ((x0 + a) * (x0 + a)); if (!Number.isInteger(d)) return null; return ['f(x) = ' + fr(M.tpoly([1, 0, b]), lin(1, a)), x0, d, 'Κανόνας πηλίκου: ' + T("f'(x) = " + fr('2x(' + lin(1, a) + ') - (' + M.tpoly([1, 0, b]) + ')', '(' + lin(1, a) + ')^2'))]; },
+      () => { const a = ri(1, 3), c = rnz(-4, 4); const x0 = 0; const d = 2 * a + c; const ax = (a === 1 ? '' : a) + 'x'; return ['f(x) = 2e^{' + ax + '}' + (c < 0 ? ' - ' : ' + ') + (Math.abs(c) === 1 ? '' : Math.abs(c)) + 'x', x0, d, T("f'(x) = " + 2 * a + 'e^{' + ax + '}' + (c < 0 ? ' - ' + -c : ' + ' + c))]; },
+    ];
+    for (let g = 0; g < 100; g++) { const f = pick(F)(); if (!f) continue; return Q('Αν ' + T(f[0]) + ', υπολόγισε το ' + T("f'(" + f[1] + ')') + '.', f[2], { ex: f[3] + ', άρα ' + T("f'(" + f[1] + ') = ' + f[2]) + '.' }); }
+    return G.chDeriv();
+  };
+  G.chInteg = () => {
+    for (let g = 0; g < 200; g++) {
+      const a = rnz(-2, 2), b = ri(-3, 3), c = ri(-5, 5); const lo = ri(-2, 1), hi = lo + ri(1, 3);
+      const F = (x) => a * x * x * x + b * x * x + c * x; const v = F(hi) - F(lo); if (!v) continue;
+      const poly = M.tpoly([3 * a, 2 * b, c]); if (!poly || poly === '0') continue;
+      return Q('Υπολόγισε το ολοκλήρωμα ' + T('\\int_{' + lo + '}^{' + hi + '} (' + poly + ')\\,dx') + '.', v, { ex: 'Μια αρχική είναι ' + T('F(x) = ' + M.tpoly([a, b, c, 0])) + '. Άρα ' + T('F(' + hi + ') - F(' + lo + ') = ' + F(hi) + ' - ' + (F(lo) < 0 ? '(' + F(lo) + ')' : F(lo)) + ' = ' + v) + '.' });
+    }
+    return G.chInteg();
+  };
 })();
 
 </script>
@@ -5895,6 +6336,42 @@ SOLVED Μια οικογένεια με εισόδημα 2.000 € ξοδεύε�
     return h;
   };
 
+  /* ===================== Β΄ Γυμνασίου: εξισώσεις με κλάσματα και παραστάσεις ===================== */
+  D.eqfrac = function () {
+    const cls = 'Β΄ Γυμνασίου', sub = 'Κεφ. 1: Εξισώσεις και ανισώσεις 1ου βαθμού';
+    let h = sheet(cls, 'Εξισώσεις με κλάσματα και παραστάσεις', sub + ' (θεωρία και μέθοδος)', K(R`
+## Εξισώσεις με κλάσματα
+METH Βήματα επίλυσης :: Βρίσκω το Ε.Κ.Π. των παρονομαστών. :: Πολλαπλασιάζω κάθε όρο και των δύο μελών με το Ε.Κ.Π. και απλοποιώ. Πολλαπλασιάζονται και οι όροι που δεν έχουν παρονομαστή. :: Κάνω τις επιμεριστικές (απαλοιφή παρενθέσεων). :: Χωρίζω γνωστούς από αγνώστους, κάνω αναγωγή ομοίων όρων και διαιρώ με τον συντελεστή του x.
+WARN Μείον μπροστά από κλάσμα: ο αριθμητής μπαίνει σε παρένθεση. Με Ε.Κ.Π. 6 ο όρος $-\frac{x - 1}{2}$ γίνεται $-3(x - 1) = -3x + 3$ και όχι $-3x - 3$.
+SOLVED Λύσε την $4 - \frac{x - 2}{3} = \frac{x + 1}{2} - \frac{x - 5}{6}$. :: Ε.Κ.Π. 6: $24 - 2(x - 2) = 3(x + 1) - (x - 5)$. :: $24 - 2x + 4 = 3x + 3 - x + 5$, άρα $28 - 2x = 2x + 8$, $-4x = -20$ και $x = 5$.
+## Αγκύλες και σύνθετα κλάσματα
+METH Εξίσωση με αγκύλες :: Κάνω τις πράξεις από μέσα προς τα έξω: πρώτα την παρένθεση, μετά την αγκύλη. :: Όταν το πρώτο μέλος γίνει απλό (π.χ. $\frac{x}{6} - 2$), συνεχίζω με απαλοιφή παρονομαστών.
+METH Εξίσωση με σύνθετο κλάσμα :: Κάνω ένα κλάσμα τον αριθμητή (και τον παρονομαστή) του σύνθετου. :: Άκρους με άκρους και μέσους με μέσους: $\dfrac{\frac{α}{β}}{γ} = \dfrac{α}{β \times γ}$. :: Συνεχίζω σαν απλή εξίσωση με κλάσματα.
+SOLVED Λύσε την $\frac{1}{3}\left[\frac{1}{2}(x - 4) + 2\right] = x - 5$. :: $\frac{1}{2}(x - 4) + 2 = \frac{x}{2} - 2 + 2 = \frac{x}{2}$, άρα $\frac{x}{6} = x - 5$. :: Επί 6: $x = 6x - 30$, άρα $-5x = -30$ και $x = 6$.
+SOLVED Λύσε την $\dfrac{\frac{x}{2} - 1}{3} = \frac{x - 4}{4}$. :: Αριθμητής: $\frac{x}{2} - 1 = \frac{x - 2}{2}$, άρα το πρώτο μέλος είναι $\frac{x - 2}{6}$. :: Ε.Κ.Π. 12: $2(x - 2) = 3(x - 4)$, άρα $2x - 4 = 3x - 12$ και $x = 8$.
+## Παραστάσεις
+METH Όταν δίνονται παραστάσεις Α και Β :: Απλοποιώ πρώτα την Α και τη Β. :: Τις βάζω στην εξίσωση μέσα σε παρενθέσεις και τη λύνω. :: Για την τιμή μιας παράστασης βάζω τη λύση στη θέση του x, με παρένθεση όταν είναι αρνητική.
+SOLVED Αν $Α = 3(x - 2) - x$ και $Β = 5 - (x - 1)$, λύσε την $Α = Β$ και βρες την $Π = 2Α - Β$. :: $Α = 2x - 6$ και $Β = 6 - x$. Η $2x - 6 = 6 - x$ δίνει $3x = 12$, άρα $x = 4$. :: Τότε $Α = 2$, $Β = 2$ και $Π = 2 \times 2 - 2 = 2$.
+TIP Αρνητικός εκθέτης: $2^{-x} = \frac{1}{2^{x}}$. Για $x = 2$ είναι $2^{-2} = \frac{1}{4}$ και $3^{-2} = \frac{1}{9}$.
+`));
+    h += sheet(cls, 'Φύλλο εργασίας: εξισώσεις με κλάσματα και παραστάσεις', sub,
+      ex(1, 'Έστω $Α = 2x - 5 + 4(-3x + 2)$ και $Β = -8 - 2x - (-5x + 9)$. α) Να λυθεί η εξίσωση $Α = 2Β - 4x + 13$. β) Για την τιμή του x που βρήκες, να υπολογιστεί η παράσταση $Π = Α - 3Β$.' + lines(3)) +
+      ex(2, 'Να λυθούν οι εξισώσεις:<div style="margin-top:.3rem;display:grid;gap:.35rem">' + [
+        'α) $(-2x + 3 + x)3 + 5x - 4 = 3x - (4x - 14)$',
+        'β) $\\displaystyle 4 - \\frac{x + 1}{2} - \\frac{x + 4}{3} + \\frac{x + 3}{6} = 0$',
+        'γ) $\\displaystyle 3x - \\frac{4(x - 1) - 8}{6} = 5 + \\frac{5x}{6}$',
+        'δ) $\\displaystyle 2x - \\frac{x - 3}{4} = 2(x - 1) - \\frac{5 - 3(x - 1)}{8}$',
+        'ε) $\\displaystyle \\frac{x - 2}{4} - \\frac{x - 3}{8} = 2\\left(x - \\frac{3}{2}\\right) - 14$'].map((e) => '<div>' + e + '</div>').join('') + '</div>' + lines(5)) +
+      ex(3, 'Να λυθούν οι εξισώσεις:<div style="margin-top:.3rem;display:grid;gap:.45rem"><div>α) $\\displaystyle \\frac{1}{2}\\left[\\frac{1}{2}\\left(\\frac{1}{2}x - 1\\right)\\right] - 1 = x + \\frac{1}{2}$</div><div>β) $\\displaystyle x - \\dfrac{\\frac{x}{3} - \\frac{x + 3}{6}}{2} = 4 - \\dfrac{\\frac{1}{3}\\left(2 - \\frac{x - 1}{2}\\right)}{2}$</div></div>' + lines(3)) +
+      ex(4, 'α) Να λυθεί η εξίσωση $\\displaystyle \\frac{2}{3}\\left(3 + \\frac{3x}{2}\\right) - 4\\left(\\frac{1}{2} - \\frac{x}{8}\\right) = \\frac{2(3x - 1) - 1}{3}$ και να δειχθεί ότι έχει μοναδική λύση την $x = 2$. β) Για αυτό το x να υπολογιστεί η παράσταση $Α = 12 \\times 2^{-x} - 9 \\times 3^{-x} + \\frac{20}{2^{x}}$.' + lines(3)), true);
+    h += sheet(cls, 'Λύσεις', sub + ' (εξισώσεις με κλάσματα και παραστάσεις)',
+      ex(1, '$Α = -10x + 3$ και $Β = 3x - 17$. α) $-10x + 3 = 2(3x - 17) - 4x + 13$, δηλαδή $-10x + 3 = 2x - 21$, άρα $-12x = -24$ και $x = 2$. β) $Α = -17$, $Β = -11$, άρα $Π = -17 - 3(-11) = 16$.') +
+      ex(2, 'α) $-3x + 9 + 5x - 4 = -x + 14$, δηλαδή $2x + 5 = -x + 14$, άρα $3x = 9$ και $x = 3$.<br>β) Ε.Κ.Π. 6: $24 - 3(x + 1) - 2(x + 4) + (x + 3) = 0$, δηλαδή $-4x + 16 = 0$, άρα $x = 4$.<br>γ) Ε.Κ.Π. 6: $18x - (4x - 12) = 30 + 5x$, δηλαδή $14x + 12 = 30 + 5x$, άρα $9x = 18$ και $x = 2$.<br>δ) Ε.Κ.Π. 8: $16x - 2(x - 3) = 16(x - 1) - (8 - 3x)$, δηλαδή $14x + 6 = 19x - 24$, άρα $5x = 30$ και $x = 6$.<br>ε) Το δεύτερο μέλος είναι $2x - 17$. Ε.Κ.Π. 8: $2(x - 2) - (x - 3) = 16x - 136$, δηλαδή $x - 1 = 16x - 136$, άρα $15x = 135$ και $x = 9$.') +
+      ex(3, 'α) $\\frac{1}{2}\\left(\\frac{x}{2} - 1\\right) = \\frac{x}{4} - \\frac{1}{2}$, άρα το πρώτο μέλος είναι $\\frac{x}{8} - \\frac{1}{4} - 1 = \\frac{x}{8} - \\frac{5}{4}$. Επί 8: $x - 10 = 8x + 4$, άρα $-7x = 14$ και $x = -2$.<br>β) Αριστερά: $\\frac{x}{3} - \\frac{x + 3}{6} = \\frac{x - 3}{6}$, άρα $\\dfrac{\\frac{x - 3}{6}}{2} = \\frac{x - 3}{12}$. Δεξιά: $2 - \\frac{x - 1}{2} = \\frac{5 - x}{2}$, άρα $\\dfrac{\\frac{5 - x}{6}}{2} = \\frac{5 - x}{12}$. Επί 12: $12x - (x - 3) = 48 - (5 - x)$, δηλαδή $11x + 3 = 43 + x$, άρα $10x = 40$ και $x = 4$.') +
+      ex(4, 'α) Πρώτο μέλος: $2 + x - 2 + \\frac{x}{2} = \\frac{3x}{2}$. Δεύτερο μέλος: $\\frac{6x - 3}{3} = 2x - 1$. Άρα $\\frac{3x}{2} = 2x - 1$, επί 2: $3x = 4x - 2$, άρα $x = 2$ (μοναδική λύση). β) $Α = 12 \\times \\frac{1}{4} - 9 \\times \\frac{1}{9} + \\frac{20}{4} = 3 - 1 + 5 = 7$.'));
+    return h;
+  };
+
   /* ===================== Α΄ Γυμνασίου: γωνίες ===================== */
   D.angles = function () {
     const cls = 'Α΄ Γυμνασίου', sub = 'Κεφ. 1: Βασικές γεωμετρικές έννοιες';
@@ -7005,6 +7482,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'subBorrowSteps', 2, 'Τα βήματα της αφαίρεσης', {}, 2],
       ['input', 'add', 3, 'Πενταψήφιοι', { min: 10000, max: 20000 }, 4],
       ['input', 'wordBig', 3, 'Προβλήματα', { max: 20000 }, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: πρόσθεση και αφαίρεση με παρενθέσεις', { mode: 'nat', ops: ['+', '-'], max: 3000, lim: 10000, full: true, n: [4, 5] }, 3],
     ],
   };
   C.dd04 = {
@@ -7026,6 +7504,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'mulTwoOne', 2, 'Τριψήφιος επί μονοψήφιο', { minA: 100, maxA: 999, maxB: 9 }, 5],
       ['match', 'mulDiv10', 3, 'Πολλαπλασιάζω με 10, 100, 1.000', { ops: ['×'], max: 99 }, 5],
       ['input', 'mulWord', 3, 'Προβλήματα', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με πολλαπλασιασμό', { mode: 'nat', ops: ['+', '-', '*'], max: 25, lim: 2000, full: true, n: [4, 5] }, 3],
     ],
   };
   C.dd06 = {
@@ -7036,6 +7515,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'divShare', 2, 'Μοιράζω σε ίσα μέρη', { maxG: 9, maxK: 12 }, 4],
       ['input', 'divLong', 3, 'Διαίρεση διψήφιου ή τριψήφιου', { dd: 1, minQ: 11, maxQ: 99, exact: true }, 5],
       ['order', 'divAlgoSteps', 3, 'Τα βήματα της διαίρεσης', {}, 2],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με διαίρεση', { mode: 'nat', ops: ['+', '-', '*', ':'], max: 40, lim: 2000, full: true, n: [4, 5] }, 3],
     ],
   };
   C.dd07 = {
@@ -7055,6 +7535,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'mulLong', 2, 'Τριψήφιος επί διψήφιο', { d1: 3, d2: 2 }, 4],
       ['input', 'mulLong', 3, 'Τριψήφιος επί τριψήφιο', { d1: 3, d2: 3 }, 3],
       ['input', 'mulWord', 3, 'Προβλήματα', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: μεγάλοι πολλαπλασιασμοί σε παράσταση', { mode: 'nat', ops: ['+', '-', '*'], max: 150, lim: 30000, full: true, n: [3, 4] }, 3],
     ],
   };
   C.dd09 = {
@@ -7064,6 +7545,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'divLong', 2, 'Διψήφιο πηλίκο', { dd: 2, minQ: 11, maxQ: 40, exact: true }, 4],
       ['input', 'divCheck', 2, 'Βρες τον διαιρετέο', {}, 4],
       ['input', 'divLong', 3, 'Με υπόλοιπο', { dd: 2, minQ: 11, maxQ: 60 }, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: διαιρέσεις σε παράσταση', { mode: 'nat', ops: ['+', '-', '*', ':'], max: 99, lim: 5000, full: true, n: [4, 5] }, 3],
     ],
   };
   C.dd10 = {
@@ -7093,6 +7575,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['color', 'decAdd', 2, 'Χρωμάτισε την πεταλούδα', { dp: 1, max: 6, ops: ['+'], pic: 'butterfly' }],
       ['input', 'decAdd', 2, 'Δύο δεκαδικά ψηφία', { dp: 2, max: 50 }, 5],
       ['input', 'moneyChange', 3, 'Ψώνια και ρέστα', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: δεκαδικοί που δίνουν ακέραιο', { mode: 'dec', ops: ['+', '-'], dps: [1, 2], full: true, n: [4, 5], lim: 200 }, 3],
     ],
   };
   C.dd13 = {
@@ -7216,6 +7699,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'problemSteps', 2, 'Οργανώνω τη λύση', {}, 1],
       ['input', 'reverseOp', 2, 'Σκέφτηκα έναν αριθμό', {}, 4],
       ['input', 'reverseOp', 3, 'Αντίστροφα προβλήματα', {}, 5],
+      ['input', 'chEqNat', 3, 'Πρόκληση: βρες τον άγνωστο', {}, 3],
     ],
   };
   C.dd26 = {
@@ -7310,6 +7794,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['match', 'natProps', 2, 'Ιδιότητες πράξεων', {}, 4],
       ['mcq', 'estimate', 2, 'Εκτίμηση', { to: 1000, min: 1000, max: 99999 }, 4],
       ['input', 'wordBig', 3, 'Προβλήματα', { max: 1000000 }, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: πρόσθεση και αφαίρεση με παρενθέσεις', { mode: 'nat', ops: ['+', '-'], max: 9000, lim: 50000, full: true, n: [4, 5] }, 3],
     ],
   };
   C.de05 = {
@@ -7320,6 +7805,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'multAlgoSteps', 2, 'Ο αλγόριθμος του πολλαπλασιασμού', {}, 2],
       ['input', 'mulLong', 3, 'Πολυψήφιοι αριθμοί', { d1: 3, d2: 3 }, 4],
       ['match', 'natProps', 3, 'Ιδιότητες', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με πολλαπλασιασμό', { mode: 'nat', ops: ['+', '-', '*'], max: 40, lim: 5000, n: [4, 5] }, 3],
     ],
   };
   C.de06 = {
@@ -7351,6 +7837,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'euclid', 2, 'Η ταυτότητα της διαίρεσης', {}, 4],
       ['order', 'divAlgoSteps', 3, 'Τα βήματα της διαίρεσης', {}, 2],
       ['input', 'divLong', 3, 'Τριψήφιος διαιρέτης', { dd: 3, minQ: 11, maxQ: 60 }, 3],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με όλες τις πράξεις', { mode: 'nat', ops: ['+', '-', '*', ':'], max: 60, lim: 5000, n: [4, 6] }, 3],
     ],
   };
   C.de09 = {
@@ -7405,6 +7892,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'fracAddSteps', 2, 'Τα βήματα της πρόσθεσης', {}, 2],
       ['input', 'fracAdd', 2, 'Ετερώνυμα κλάσματα', { same: false, maxD: 6 }, 5],
       ['input', 'fracMixedAdd', 3, 'Μεικτοί αριθμοί', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: κλάσματα που δίνουν ακέραιο', { mode: 'frac', ops: ['+', '-'], dens: [2, 3, 4, 6, 8, 12], n: [4, 5], lim: 40 }, 3],
     ],
   };
   C.de15 = {
@@ -7414,6 +7902,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'fracMul', 2, 'Κλάσμα επί κλάσμα', { kinds: ['ff'] }, 5],
       ['input', 'reciprocal', 2, 'Ο αντίστροφος', {}, 5],
       ['input', 'fracOf', 3, 'Κλάσμα ποσότητας', { dens: [3, 4, 5, 6, 8, 10], maxK: 15 }, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με πολλαπλασιασμό κλασμάτων', { mode: 'frac', ops: ['+', '-', '*'], dens: [2, 3, 4, 5, 6], n: [4, 5], lim: 60 }, 3],
     ],
   };
   C.de16 = {
@@ -7423,6 +7912,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'fracDiv', 2, 'Κλάσμα διά φυσικό', { withNat: true }, 5],
       ['input', 'fracDiv', 3, 'Κλάσμα διά κλάσμα', {}, 5],
       ['match', 'fracMul', 3, 'Αντιστοίχισε γινόμενα', { kinds: ['ff'] }, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με διαίρεση κλασμάτων', { mode: 'frac', ops: ['+', '-', '*', ':'], dens: [2, 3, 4, 5, 6], n: [4, 5], lim: 60 }, 3],
     ],
   };
   C.de17 = {
@@ -7452,6 +7942,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'decMul', 2, 'Πολλαπλασιασμός δεκαδικών', {}, 5],
       ['input', 'mulDiv10', 2, 'Με 10, 100, 1.000', { dec: true }, 5],
       ['input', 'decDiv', 3, 'Διαίρεση δεκαδικών', {}, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με δεκαδικούς', { mode: 'dec', n: [4, 5], lim: 300 }, 3],
     ],
   };
   C.de20 = {
@@ -7571,6 +8062,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'decDiv', 2, 'Διαίρεση', {}, 5],
       ['input', 'mulLong', 3, 'Πολυψήφιοι', { d1: 4, d2: 2 }, 3],
       ['input', 'divLong', 3, 'Διαίρεση με διψήφιο', { dd: 2, minQ: 20, maxQ: 300 }, 3],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με δεκαδικούς', { mode: 'dec', n: [5, 6], lim: 500 }, 3],
     ],
   };
   C.ds04 = {
@@ -7581,6 +8073,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'orderOpsSteps', 2, 'Τα βήματα στη σειρά', {}, 2],
       ['input', 'orderOps', 2, 'Με παρενθέσεις', { level: 2 }, 5],
       ['input', 'orderOps', 3, 'Με δυνάμεις και αγκύλες', { level: 3 }, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: μεγάλη αριθμητική παράσταση', { mode: 'nat', max: 30, n: [5, 7], lim: 1000 }, 3],
     ],
   };
   C.ds05 = {
@@ -7636,6 +8129,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['color', 'power', 2, 'Χρωμάτισε με δυνάμεις', { maxB: 10, maxE: 3, pic: 'fish' }],
       ['input', 'pow10', 2, 'Δυνάμεις του 10', {}, 5],
       ['input', 'orderOps', 3, 'Παραστάσεις με δυνάμεις', { level: 3 }, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με δυνάμεις', { mode: 'nat', max: 25, pow: true, n: [5, 6], lim: 1000 }, 3],
     ],
   };
   /* Ενότητα 3 */
@@ -7682,6 +8176,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'fracAddSteps', 2, 'Τα βήματα', {}, 2],
       ['input', 'fracAdd', 2, 'Ετερώνυμα', { same: false }, 5],
       ['input', 'fracMixedAdd', 3, 'Μεικτοί', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: κλάσματα που δίνουν ακέραιο', { mode: 'frac', ops: ['+', '-'], n: [4, 6], lim: 40 }, 3],
     ],
   };
   C.ds16 = {
@@ -7692,6 +8187,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'fracDiv', 2, 'Διαίρεση κλασμάτων', { withNat: true }, 5],
       ['input', 'fracOf', 3, 'Μέρος ποσότητας', { dens: [3, 4, 5, 6, 8, 10, 12], maxK: 15 }, 4],
       ['input', 'fracUnitProblem', 3, 'Προβλήματα', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με κλάσματα', { mode: 'frac', n: [4, 6], lim: 60 }, 3],
     ],
   };
   /* Ενότητα 4 */
@@ -7720,6 +8216,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'eqSimple', 2, 'Ο άγνωστος αφαιρετέος', { kinds: ['sub'] }, 5],
       ['input', 'eqSimple', 3, 'Ανακατεμένες', { kinds: ['add', 'min', 'sub'], max: 200 }, 6],
       ['input', 'eqCheck', 3, 'Είναι λύση;', {}, 4],
+      ['input', 'chEqNat', 3, 'Πρόκληση: βρες τον άγνωστο', {}, 3],
     ],
   };
   C.ds20 = {
@@ -7738,6 +8235,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'eqSimple', 2, 'Ο άγνωστος διαιρέτης', { kinds: ['dvr'] }, 5],
       ['input', 'eqSimple', 3, 'Όλες οι περιπτώσεις', {}, 6],
       ['input', 'reverseOp', 3, 'Σκέφτηκα έναν αριθμό', {}, 4],
+      ['input', 'chEqNat', 3, 'Πρόκληση: εξισώσεις με παρενθέσεις', {}, 3],
     ],
   };
   /* Ενότητα 5 */
@@ -7985,6 +8483,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'euclidFindD', 2, 'Βρες τον διαιρετέο', {}, 4],
       ['input', 'euclidPQ', 2, 'Πηλίκο και υπόλοιπο', {}, 4],
       ['mcq', 'euclidIs', 3, 'Είναι ευκλείδεια διαίρεση;', {}, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: μεγάλη παράσταση με δυνάμεις', { mode: 'nat', max: 30, pow: true, n: [5, 7], lim: 2000 }, 3],
     ],
   };
   C.ga02 = {
@@ -8009,6 +8508,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'fracComplexSum', 3, 'Σύνθετα κλάσματα με πράξεις', {}, 4],
       ['input', 'fracWordProb', 2, 'Προβλήματα από την καθημερινότητα', {}, 4],
       ['input', 'fracIncome', 3, 'Προβλήματα με εισόδημα', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με κλάσματα', { mode: 'frac', n: [5, 6], lim: 60 }, 3],
     ],
   };
   C.ga03 = {
@@ -8021,6 +8521,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'mulDiv10', 2, 'Με δυνάμεις του 10', { dec: true }, 5],
       ['input', 'sciNot', 3, 'Τυποποιημένη μορφή', {}, 5],
       ['input', 'units', 3, 'Μονάδες μέτρησης', { pairs: ['m2-cm2', 'm3-dm3', 'km-m', 'h-min'], dec: true }, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: παράσταση με δεκαδικούς', { mode: 'dec', n: [5, 6], lim: 500 }, 3],
     ],
   };
   C.ga04 = {
@@ -8047,6 +8548,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'eqFracSteps', 3, 'Βήματα με κλάσματα', {}, 2],
       ['input', 'eqLin', 3, 'Με παρενθέσεις', { level: 3 }, 4],
       ['input', 'eqWord', 3, 'Προβλήματα με εξισώσεις', {}, 4],
+      ['input', 'chEqLin', 3, 'Πρόκληση: εξισώσεις με παρενθέσεις', {}, 3],
     ],
   };
   C.ga06 = {
@@ -8069,6 +8571,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['match', 'intSub', 2, 'Αντιστοίχισε', {}, 5],
       ['input', 'intAdd', 3, 'Πολλοί όροι', { terms: 4, compact: true }, 5],
       ['input', 'absVal', 3, 'Με απόλυτες τιμές', {}, 4],
+      ['input', 'chExpr', 3, 'Πρόκληση: πρόσθεση και αφαίρεση ρητών με αγκύλες', { mode: 'int', ops: ['+', '-'], noPow: true, n: [5, 7], lim: 100 }, 3],
     ],
   };
   C.ga08 = {
@@ -8085,6 +8588,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['mcq', 'distExpr', 3, 'Επιμεριστική με μεταβλητή', {}, 5],
       ['input', 'distReverse', 3, 'Κοινός παράγοντας', {}, 4],
       ['input', 'ratPow', 3, 'Δυνάμεις ρητών', {}, 5],
+      ['input', 'chExpr', 3, 'Πρόκληση: όλες οι πράξεις με ρητούς και δυνάμεις', { mode: 'int', n: [5, 6], lim: 400 }, 3],
     ],
   };
   C.ga09 = {
@@ -8153,6 +8657,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'negExp', 2, 'Αρνητικός εκθέτης', {}, 5],
       ['input', 'powRules', 3, 'Ιδιότητες δυνάμεων', {}, 5],
       ['input', 'sciNot', 3, 'Τυποποιημένη μορφή', {}, 4],
+      ['input', 'chPowNeg', 3, 'Πρόκληση: δυνάμεις με αρνητικό εκθέτη', {}, 3],
     ],
   };
   C.gb02 = {
@@ -8167,6 +8672,11 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'ineqSteps', 3, 'Βήματα ανίσωσης', {}, 2],
       ['mcq', 'ineqSolve', 3, 'Λύσε την ανίσωση', {}, 5],
       ['input', 'eqWord', 3, 'Προβλήματα', {}, 4],
+      ['mcq', 'eqMinusFrac', 2, 'Το μείον μπροστά από κλάσμα', {}, 4],
+      ['input', 'eqFrac3', 3, 'Εξισώσεις με τρία κλάσματα', {}, 4],
+      ['input', 'eqNested', 3, 'Εξισώσεις με αγκύλες', {}, 3],
+      ['input', 'eqComplexFr', 3, 'Εξισώσεις με σύνθετο κλάσμα', {}, 3],
+      ['input', 'eqExprAB', 3, 'Παραστάσεις Α και Β', {}, 3],
     ],
   };
   C.gb03 = {
@@ -8178,6 +8688,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['sort', 'ratIrr', 2, 'Ρητός ή άρρητος;', {}, 8],
       ['input', 'sqrtProps', 3, 'Ιδιότητες ριζών', {}, 5],
       ['input', 'pythHyp', 3, 'Εφαρμογή: υποτείνουσα', {}, 3],
+      ['input', 'chRoots', 3, 'Πρόκληση: παραστάσεις με ρίζες', {}, 3],
     ],
   };
   C.gb04 = {
@@ -8275,6 +8786,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'identSmart', 3, 'Έξυπνοι υπολογισμοί', {}, 5],
       ['input', 'identityNum', 3, 'Περισσότεροι υπολογισμοί', {}, 4],
       ['mcq', 'distExpr', 3, 'Επιμεριστική με πρόσημα', {}, 4],
+      ['input', 'chIdentVal', 3, 'Πρόκληση: έξυπνος υπολογισμός με ταυτότητες', {}, 3],
     ],
   };
   C.gg02 = {
@@ -8289,6 +8801,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'ratRestrict', 3, 'Περιορισμοί ρητής', {}, 4],
       ['mcq', 'ratSimplify', 3, 'Απλοποίηση ρητών', {}, 4],
       ['mcq', 'factorMix', 3, 'Δύσκολες παραγοντοποιήσεις', {}, 5],
+      ['input', 'chRatConst', 3, 'Πρόκληση: απλοποίηση ρητής παράστασης', {}, 3],
     ],
   };
   C.gg03 = {
@@ -8308,6 +8821,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'quadFrac', 3, 'Κλασματικές εξισώσεις', {}, 3],
       ['input', 'quadArea', 3, 'Προβλήματα με εμβαδά', {}, 3],
       ['input', 'quadWord', 3, 'Προβλήματα', {}, 3],
+      ['input', 'chQuadFrac', 3, 'Πρόκληση: εξίσωση με κλάσματα που γίνεται 2ου βαθμού', {}, 3],
     ],
   };
   C.gg04 = {
@@ -8318,6 +8832,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['mcq', 'ineqSolve', 2, 'Λύσε την ανίσωση', {}, 5],
       ['input', 'ineqInt', 3, 'Ακέραιες λύσεις', {}, 4],
       ['mcq', 'ineqDouble', 3, 'Κοινές λύσεις', {}, 3],
+      ['input', 'chIneqCount', 3, 'Πρόκληση: ακέραιες κοινές λύσεις', {}, 3],
     ],
   };
   C.gg05 = {
@@ -8328,6 +8843,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'sysSteps', 2, 'Βήματα επίλυσης', {}, 2],
       ['input', 'sysSolve', 2, 'Λύσε το σύστημα', {}, 4],
       ['input', 'sysWord', 3, 'Προβλήματα με συστήματα', {}, 3],
+      ['input', 'chSysFrac', 3, 'Πρόκληση: σύστημα με κλάσματα', {}, 3],
     ],
   };
   C.gg06 = {
@@ -8413,6 +8929,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'absSimplify', 2, 'Απαλοιφή απολύτων', {}, 4],
       ['input', 'absEq2', 2, 'Εξισώσεις με απόλυτα, 2ο μέρος', {}, 4],
       ['mcq', 'absIneq2', 3, 'Ανισώσεις |αx + β|', {}, 4],
+      ['input', 'chRoots', 3, 'Πρόκληση: ρίζες και δυνάμεις με κλασματικό εκθέτη', { rat: true }, 3],
     ],
   };
   C.la03 = {
@@ -8426,6 +8943,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'vietaSum', 3, 'Τύποι Vieta', {}, 4],
       ['mcq', 'quadForm', 3, 'Εξίσωση από S και P', {}, 4],
       ['mcq', 'spExist', 3, 'Υπάρχουν αριθμοί με αυτό το S και P;', {}, 4],
+      ['input', 'chBiquad', 3, 'Πρόκληση: εξισώσεις με αντικατάσταση', {}, 3],
     ],
   };
   C.la04 = {
@@ -8441,6 +8959,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['grid', 'signTable', 2, 'Πίνακας προσήμων', {}, 3],
       ['mcq', 'prodIneq', 2, 'Ανισώσεις γινομένου', {}, 4],
       ['mcq', 'absIneq2', 3, 'Ανισώσεις με απόλυτα, 2ο μέρος', {}, 4],
+      ['input', 'chIneqCount', 3, 'Πρόκληση: ακέραιες κοινές λύσεις', {}, 3],
     ],
   };
   C.la05 = {
@@ -8454,6 +8973,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'geomTerm', 3, 'Νιοστός όρος γεωμετρικής', {}, 4],
       ['input', 'geomSum', 3, 'Άθροισμα γεωμετρικής', {}, 3],
       ['input', 'arithMean', 3, 'Μέσοι όροι', {}, 3],
+      ['input', 'chProg', 3, 'Πρόκληση: αριθμητική πρόοδος', {}, 3],
     ],
   };
   C.la06 = {
@@ -8527,6 +9047,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'sysWord', 3, 'Προβλήματα', {}, 3],
       ['mcq', 'sysParamQ', 3, 'Παράμετρος και πλήθος λύσεων', {}, 3],
       ['input', 'sys3Q', 3, 'Σύστημα 3x3', {}, 3],
+      ['input', 'chSysFrac', 3, 'Πρόκληση: σύστημα με κλάσματα', {}, 3],
     ],
   };
   C.lb02 = {
@@ -8561,6 +9082,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'trigDouble', 3, 'Διπλάσια γωνία', {}, 4],
       ['mcq', 'trigAddVal', 3, 'Τύποι αθροίσματος', {}, 4],
       ['mcq', 'trigEqSol', 3, 'Λύσεις σε διάστημα', {}, 4],
+      ['input', 'chTrig', 3, 'Πρόκληση: τριγωνομετρική παράσταση', {}, 3],
     ],
   };
   C.lb04 = {
@@ -8574,6 +9096,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'polyParam', 2, 'Παράμετρος από παράγοντα', {}, 4],
       ['mcq', 'polyRemLin', 3, 'Υπόλοιπο με (x − α)(x − β)', {}, 3],
       ['mcq', 'polyIneq3', 3, 'Πολυωνυμικές ανισώσεις', {}, 4],
+      ['input', 'chPolyEq', 3, 'Πρόκληση: πολυωνυμικές εξισώσεις', {}, 3],
     ],
   };
   C.lb05 = {
@@ -8589,6 +9112,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'expSub', 3, 'Εκθετικές με αντικατάσταση', {}, 4],
       ['input', 'logEqQ', 3, 'Λογαριθμικές εξισώσεις', {}, 4],
       ['mcq', 'expLogIneq', 3, 'Εκθετικές και λογαριθμικές ανισώσεις', {}, 5],
+      ['input', 'chExpLog', 3, 'Πρόκληση: εκθετικές και λογαριθμικές εξισώσεις', {}, 3],
     ],
   };
   C.lb06 = {
@@ -8744,6 +9268,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'limInf', 2, 'Όριο στο άπειρο', {}, 4],
       ['input', 'continuityParam', 3, 'Συνέχεια με παράμετρο', {}, 3],
       ['mcq', 'bolzano', 3, 'Θεώρημα Bolzano', {}, 3],
+      ['input', 'chLimit', 3, 'Πρόκληση: όρια', {}, 3],
     ],
   };
   C.lg08 = {
@@ -8755,6 +9280,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['input', 'tangentSlope', 2, 'Κλίση εφαπτομένης', {}, 4],
       ['input', 'critical', 3, 'Κρίσιμα σημεία', {}, 3],
       ['mcq', 'monoDeriv', 3, 'Μονοτονία από την παράγωγο', {}, 3],
+      ['input', 'chDeriv', 3, 'Πρόκληση: τιμή παραγώγου', {}, 3],
     ],
   };
   C.lg09 = {
@@ -8764,6 +9290,7 @@ P Άρα $P(x) < 0$ για $-3 < x < 1$ και $P(x) > 0$ για $x < -3$ ή $x 
       ['order', 'intSteps', 2, 'Βήματα ολοκλήρωσης', {}, 2],
       ['input', 'defInt', 2, 'Ορισμένο ολοκλήρωμα', {}, 4],
       ['input', 'areaUnder', 3, 'Εμβαδόν χωρίου', {}, 3],
+      ['input', 'chInteg', 3, 'Πρόκληση: ορισμένα ολοκληρώματα', {}, 3],
     ],
   };
 })();
